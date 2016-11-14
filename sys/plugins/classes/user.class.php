@@ -66,10 +66,11 @@ class user {
         $users_return = array(); // пользователи, которые будут возвращены
 
         foreach ($get_users_by_id AS $id_user) {
-            if (array_key_exists($id_user, $cache))
+            if (array_key_exists($id_user, $cache)) {
                 $users_return[$id_user] = $cache[$id_user];
-            else
+            } else {
                 $users_from_mysql[] = (int) $id_user;
+            }
         }
 
         if ($users_from_mysql) {
@@ -119,8 +120,9 @@ class user {
         }
 
         $users = $this->_usersFromCache($id);
-        if (array_key_exists($id, $users))
+        if (array_key_exists($id, $users)) {
             $this->_data = $users[$id];
+        }
     }
 
     /**
@@ -244,7 +246,7 @@ class user {
      */
     function nick($html = true) {
         if ($this->id === false) {
-            return '[' . __('Пользователь удален') . ']';
+            return '<span style="color: grey;">' . __('удален') . '</span>';
         }
 
         if ($this->vk_id) {
@@ -413,8 +415,9 @@ class user {
      * @param string $v значение
      */
     function __set($n, $v) {
-        if (empty($this->_data ['id']))
+        if (empty($this->_data ['id'])) {
             return;
+        }
         global $dcms;
         switch ($n) {
             case 'theme' :
@@ -424,8 +427,9 @@ class user {
                 $n .= '_' . $dcms->browser_type;
                 break;
             case 'login':
-                if ($this->vk_id && $this->vk_first_name && $this->vk_last_name)
+                if ($this->vk_id && $this->vk_first_name && $this->vk_last_name) {
                     return;
+                }
                 break;
         }
 

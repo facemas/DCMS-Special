@@ -171,12 +171,13 @@ a:hover {color: #1e70bf; text-decoration: none;}
 .listing .post {margin: 0; padding: 10px 5px; border: none; color: #383838; display: block; font-size: 100%; overflow: hidden; position: relative; border-bottom: 1px solid #e1e8ed;}
 .listing .post.highlight {background-color: rgb(246, 247, 249);}
 .listing .post.image {min-height: 50px;}
-.listing .comment:not([data-post-url=""]) {transition: all 500ms;}
-.listing .comment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
 .listing .post:not([data-post-url=""]) {transition: all 500ms;}
 .listing .post:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
 .listing .post.selection:hover:not([data-post-url=""]) {cursor: text;}
 .listing .post .post_content img:not([data-origin=""]) {cursor: pointer;}
+
+.comment:not([data-post-url=""]) {transition: all 500ms;}
+.comment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
 
 .post:first-child {border-top-left-radius: 3px; border-top-right-radius: 3px;}
 .post:last-child {border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;}
