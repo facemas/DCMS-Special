@@ -26,6 +26,11 @@ if ($ui_feed) {
     <link rel="stylesheet" href="<?= $path ?>/css/feed.css" type="text/css" />
     <?php
 }
+if ($ui_segment) {
+    ?>
+    <link rel="stylesheet" href="<?= $path ?>/css/segment.css" type="text/css" />
+    <?php
+}
 
 $classes = array('ui');
 if ($class) {
