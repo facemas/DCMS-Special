@@ -1,15 +1,14 @@
 
-/*--------------Comments
----------------*/
+/******** Comments *********/
 
 .ui.comments:first-child {margin-top: 0em;}
 .ui.comments:last-child {margin-bottom: 0em;}
 
 .ui.comments .comment.ng-enter {-webkit-animation: fadeIn 1s; animation: fadeIn 1s;}
 .ui.comments .comment.ng-leave {-webkit-animation: fadeOut 1s; animation: fadeOut 1s;}
-.ui.comments .comment {position: relative; background: none; margin: 0.2em 0em 0em; padding: 0.5em 0.3em 0.5em; border: none; border-top: none; line-height: 1.2; display: block;}
+.ui.comments .comment {position: relative; background: #fff; margin: 0.2em 0em 0em; padding: 0.5em 0.3em 0.5em; border: none; border-top: none; line-height: 1.2; display: block;}
 .ui.comments .comment:first-child {margin-top: 1em; padding-top: 0em;}
-.ui.comments .comment:hover {background: rgba(0, 0, 0, 0.05);}
+.ui.comments .comment:hover {background: rgba(0, 0, 0, 0.01);}
 
 /* Nested Comments */
 
