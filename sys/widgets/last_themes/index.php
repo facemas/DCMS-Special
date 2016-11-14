@@ -54,19 +54,20 @@ $pages = new pages($count_themes);
 $start = $pages->my_start();
 $end = $pages->end();
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_comment = true; //подключаем css comments
+$listing->ui_segment = true; //подключаем css segment
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal comments' : 'segments small comments';
 
 $res = $db->query("SELECT COUNT(*) FROM `users_online` WHERE `request` LIKE '/forum/%'");
 $users = $res->fetchColumn();
+$userForum = null;
 
-$post = $listing->post();
-$post->title = __('Форум');
-$post->highlight = true;
-$post->icon('clipboard');
-$post->url = '/forum/';
 if ($users) {
-    $post->counter = __('%s ' . misc::number($users, 'человек', 'человека', 'человек'), $users);
+    $userForum = "<i class='fa fa-user fa-fw'></i> $users";
 }
+$post = $listing->post();
+$post->head = "<h5 class='ui secondary segment'><a href='/forum/'><i class='fa fa-clipboard fa-fw'></i> " . __('Форум') . "</a> <span style='float: right'>$userForum</span></h5>";
 
 for ($z = $start; $z < $end && $z < $pages->posts; $z++) {
     $theme = $themes_for_view[$z];
@@ -83,20 +84,25 @@ for ($z = $start; $z < $end && $z < $pages->posts; $z++) {
 
 
     $post = $listing->post();
+    $post->class = 'ui segment comment';
+    $post->comments = true;
 
     $is_open = (int) ($theme['group_write'] <= $theme['topic_group_write']);
 
-    $post->img = "/sys/images/icons/forum.theme.{$theme['top']}.$is_open.png";
 
     $post->time = misc::timek($theme['time_last']);
     $post->title = text::toValue($theme['name']);
     $post->url = '/forum/theme.php?id=' . $theme['id'] . '&amp;page=end';
+    $post->id = 'forum_theme_' . $theme['id'];
+    $post->image = "/sys/images/icons/forum.theme.{$theme['top']}.$is_open.png";
     $autor = new user($theme['id_autor']);
     $last_msg = new user($theme['id_last']);
-    $post->content .= ' <a class="btn btn-secondary btn-sm" style="float: right;"><i class="fa fa-comments-o fa-fw"></i> ' . (isset($new_messages[$theme['id']]) ? $all_messages[$theme['id']] . ' +' . $new_messages[$theme['id']] : $all_messages[$theme['id']]) . '</a>';
-    $post->content .= ' <a class="btn btn-secondary btn-sm">' . ($autor->id != $last_msg->id ? $autor->nick . '/' . $last_msg->nick : $autor->nick) . '</a>';
-    $post->content .= ' <a class="btn btn-secondary btn-sm"><i class="fa fa-eye fa-fw"></i> ' . $views_counters[$theme['id']] . '</a>';
-
+    $AutorAvatar = $autor->getAvatar();
+    $post->content .= '<div class="ui labels">';
+    $post->content .= '<span class="ui basic image label"><img src="' . $AutorAvatar . '" alt="" />' . ($autor->id != $last_msg->id ? $autor->nick . '/' . $last_msg->nick : $autor->nick) . '</span>';
+    $post->content .= '<span class="ui basic image label"><i class="fa fa-eye fa-fw"></i> ' . $views_counters[$theme['id']] . '</span>';
+    $post->content .= '<span class="ui basic image label"><i class="fa fa-comments-o fa-fw"></i> ' . (isset($new_messages[$theme['id']]) ? $all_messages[$theme['id']] . ' +' . $new_messages[$theme['id']] : $all_messages[$theme['id']]) . '</span>';
+    $post->content .= '</div>';
 }
 
 
