@@ -186,7 +186,7 @@ if (!$user->is_writeable) {
     $can_write = false;
 }
 
-
+# Доступ к написанию сообщений
 if ($can_write && $user->group) { #
     if (isset($_POST['message']) && $user->group) { #
         $message = (string) $_POST['message'];
