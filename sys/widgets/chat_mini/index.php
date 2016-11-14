@@ -38,7 +38,7 @@ if ($arr = $q->fetchAll()) {
         $ank = new user($message['id_user']);
         $post = $listing->post();
 
-        $post->class = 'segment comment';
+        $post->class = 'ui segment comment';
         $post->comments = true;
         $post->id = 'chat_post_' . $message['id'];
         $post->url = '/chat_mini/actions.php?id=' . $message['id'];
