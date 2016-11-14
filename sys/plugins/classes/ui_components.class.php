@@ -12,6 +12,7 @@ class ui_components extends ui_contaner {
     public $ui_list = false;
     public $ui_feed = false;
     public $ui_segment = false;
+    public $ui_divider = false;
     public $class = false;
 
     public function __construct() {
@@ -57,6 +58,7 @@ class ui_components extends ui_contaner {
         $this->_data['ui_feed'] = $this->ui_feed;
         $this->_data['ui_list'] = $this->ui_list;
         $this->_data['ui_segment'] = $this->ui_segment;
+        $this->_data['ui_divider'] = $this->ui_divider;
 
         if ($text_if_empty && !$this->count()) {
             $post = $this->add(new ui_compost($text_if_empty));
