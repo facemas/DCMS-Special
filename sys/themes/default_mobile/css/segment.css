@@ -234,6 +234,7 @@
 .ui.tiny.segments .segment,.ui.tiny.segment {font-size: 0.85714286rem;}
 .ui.small.segments .segment,.ui.small.segment {font-size: 0.92857143rem;}
 .ui.segments .segment,.ui.segment {font-size: 1rem;}
+.ui.segment.horizontal.divider {font-size: 0.75714286rem;}
 .ui.large.segments .segment,.ui.large.segment {font-size: 1.14285714rem;}
 .ui.big.segments .segment,.ui.big.segment {font-size: 1.28571429rem;}
 .ui.huge.segments .segment,.ui.huge.segment {font-size: 1.42857143rem;}
