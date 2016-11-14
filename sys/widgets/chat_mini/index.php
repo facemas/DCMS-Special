@@ -15,7 +15,7 @@ $users = $res->fetchColumn();
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
 $listing->ui_segment = true; //подключаем css segment
-$listing->class = 'segments minimal small comments';
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments small comments';
 
 $post = $listing->post();
 
