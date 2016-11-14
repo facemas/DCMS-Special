@@ -16,7 +16,7 @@ function _theme_pages_helper($page, $current, $url) {
     return "<a href='{$url->setParam('page', $page)}' class='{$class}'>{$page}</a>";
 }
 ?>
-
+<!-- Загружаем css для отображения постраничной навигации -->
 <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
 
 <div class="ui pagination menu">
