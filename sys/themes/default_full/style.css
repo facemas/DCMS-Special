@@ -6,7 +6,7 @@
 
 html {box-sizing: border-box;}
 input[type="text"], input[type="email"], input[type="search"], input[type="password"] {-webkit-appearance: none; -moz-appearance: none;}
-html {font-family: sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;}
+html {font-family: 'Raleway', sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #636b6f;}
 
 body {margin: 0;}
 
@@ -76,7 +76,7 @@ td, th {padding: 0;}
 
 html, body, #main {height: 100%;}
 html {font-size: 15px;}
-body {margin: 0px; padding: 0px; overflow-x: hidden; min-width: 320px; background: #FFFFFF; font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.4285em; color: rgba(0, 0, 0, 0.87); font-smoothing: antialiased;}
+body {margin: 0px; padding: 0px; overflow-x: hidden; min-width: 320px; background-color: #fafafa; color: #636b6f; font-family: 'Raleway', sans-serif; font-size: 14px; line-height: 1.4285em;}
 
 /* Headers */
 
@@ -102,10 +102,6 @@ p:last-child {margin-bottom: 0em;}
 a {color: #4183C4; text-decoration: none;}
 a:hover {color: #1e70bf; text-decoration: none;}
 
-::-webkit-selection {background-color: #CCE2FF; color: rgba(0, 0, 0, 0.87);}
-::-moz-selection {background-color: #CCE2FF; color: rgba(0, 0, 0, 0.87);}
-::selection {background-color: #CCE2FF; color: rgba(0, 0, 0, 0.87);}
-
 /* Form */
 
 .form {position: relative; background: #FFF; padding: 5px; border-radius: 2px; margin: 5px 0 10px; box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.04); font-size: 12px;}
@@ -128,7 +124,7 @@ a:hover {color: #1e70bf; text-decoration: none;}
 
 .clearfix:after {content: ""; display: table; clear: both;}
 
-#top_part {min-height: 100%; margin: 0 auto; background: #f5f8fa!important;}
+#top_part {min-height: 100%; margin: 0 auto;}
 
 .body_width_limit {min-width: 600px; max-width: 1000px; margin: 0 auto; position: relative;}
 .grey {color: grey;}
