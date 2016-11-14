@@ -103,16 +103,6 @@ p:last-child {margin-bottom: 0em;}
 a {color: #4183C4; text-decoration: none;}
 a:hover {color: #1e70bf; text-decoration: none;}
 
-::-webkit-selection {background-color: #CCE2FF; color: rgba(0, 0, 0, 0.87);}
-::-moz-selection {background-color: #CCE2FF; color: rgba(0, 0, 0, 0.87);}
-::selection {background-color: #CCE2FF; color: rgba(0, 0, 0, 0.87);}
-
-/* Form */
-
-textarea::-webkit-selection, input::-webkit-selection {background-color: rgba(100, 100, 100, 0.4); color: rgba(0, 0, 0, 0.87);}
-textarea::-moz-selection, input::-moz-selection {background-color: rgba(100, 100, 100, 0.4); color: rgba(0, 0, 0, 0.87);}
-textarea::selection, input::selection {background-color: rgba(100, 100, 100, 0.4); color: rgba(0, 0, 0, 0.87);}
-
 #title {margin-bottom: 5px; text-align: center; overflow: hidden; white-space: nowrap; padding: 10px 5px; background-color: #fff; border-bottom: 1px solid #e1e8ed; color: #969696; font-size: 1em;}
 
 #tabs {margin: 0 0.3em; margin-top: 0.5em; text-align: center; background: #fff;}
