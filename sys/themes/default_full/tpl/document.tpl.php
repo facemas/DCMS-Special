@@ -114,9 +114,10 @@
                         <?php $this->displaySection('left_column'); ?>
                     </div>
                     <div id="content">
-                        <div id="messages">
-                            <link rel="stylesheet" href="<?= $path ?>/css/message.css" type="text/css"/>
+                        <link rel="stylesheet" href="<?= $path ?>/css/message.css" type="text/css"/>
+                        <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
 
+                        <div id="messages">
                             <?= $this->section($err, '<div class="ui red message">{text}</div>'); ?>
                             <?= $this->section($msg, '<div class="ui green message">{text}</div>'); ?>
                         </div>
