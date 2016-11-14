@@ -44,6 +44,7 @@
         <div id="container_content">
             <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
             <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
+            <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
             <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
 
             <header id='title' class="<?= $returns ? 'ui pointing fluid menu returns' : 'ui pointing fluid menu' ?>">
@@ -90,8 +91,8 @@
             <?php $this->displaySection('before_content') ?>
             <section id="content">
 
+                <link rel="stylesheet" href="<?= $path ?>/css/message.css" type="text/css"/>
                 <div id="messages">
-                    <link rel="stylesheet" href="<?= $path ?>/css/message.css" type="text/css"/>
                     <?= $this->section($err, '<div class="ui red message">{text}</div>'); ?>
                     <?= $this->section($msg, '<div class="ui green message">{text}</div>'); ?>
                 </div>
