@@ -15,7 +15,7 @@ $users = $res->fetchColumn();
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
 $listing->ui_segment = true; //подключаем css segment
-$listing->class = 'segments minimal comments small listing';
+$listing->class = 'segments minimal small comments';
 
 $post = $listing->post();
 
@@ -28,7 +28,7 @@ if ($new_posts) {
 if ($users) {
     $userOnlineChat = " <i class='fa fa-user fa-fw'></i> " . __('%s', $users);
 }
-$post->head = "<h4 class='ui secondary segment'><a href='/chat_mini/'><i class='fa fa-comments-o'></i> " . __('Чат') . "</a> <span style='float: right'>$userOnlineChat $newComments</span></h4>";
+$post->head = "<h4 class='ui secondary segment'><a href='/chat_mini/'><i class='fa fa-comments-o fa-fw'></i> " . __('Чат') . "</a> <span style='float: right'>$userOnlineChat $newComments</span></h4>";
 
 $q = $db->query("SELECT * FROM `chat_mini` ORDER BY `id` DESC LIMIT 5");
 
