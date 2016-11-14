@@ -314,11 +314,6 @@ a:hover {color: #1e70bf; text-decoration: none;}
 .spoiler.collapsed > .spoiler_content {height: 0;}
 .spoiler > .spoiler_content {overflow-y: hidden;}
 
-.title_text {border-bottom: 1px solid #dddfe2; width: 100%; line-height: 26px; word-wrap: break-word; text-transform: uppercase; float: left; font-size: 14px; color: #90949c; font-weight: bold;}
-.center_text {background: #f5f7fa; padding-right: 5px; padding-left: 5px; margin-left: -50px; font-weight: bold; position: absolute; text-transform: uppercase; color: #90949c; font-size: 11px; line-height: 12px; text-overflow: ellipsis; white-space: nowrap;}
-.left_text {background: #fff; padding-right: 5px; font-weight: bold; float: left; text-transform: uppercase; color: #90949c; font-size: 11px; line-height: 12px; text-overflow: ellipsis; white-space: nowrap;}
-.right_text {background: #fff; padding-left: 5px; font-weight: bold; float: right; text-transform: uppercase; color: #90949c; font-size: 11px; line-height: 12px; text-overflow: ellipsis; white-space: nowrap;}
-.list-preg {clear: both; color: #4b4f56; padding-bottom: 12px; padding-top: 12px;}
 .hr {margin: 5px 0 5px 0; border-bottom: 1px #e5e5e5 solid;}
 
 .theme_light {}
