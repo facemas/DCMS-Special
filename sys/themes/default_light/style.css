@@ -77,7 +77,7 @@ td, th {padding: 0;}
 
 html, body, #main {height: 100%;}
 html {font-size: 15px;}
-body {margin: auto; padding: 0px; overflow-x: hidden; min-width: 300px; background: #f5f8fa; max-width: 600px; font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.4285em; color: rgba(0, 0, 0, 0.87); font-smoothing: antialiased;}
+body {margin: auto; padding: 0px; overflow-x: hidden; min-width: 300px; background-color: #fafafa; color: #636b6f; font-family: 'Raleway', sans-serif; max-width: 600px; font-size: 15px; line-height: 1.4285em; font-smoothing: antialiased;}
 
 /* Headers */
 
