@@ -80,7 +80,7 @@ if ($can_write && $pages->this_page == 1) {
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
 $listing->ui_segment = true; //подключаем css comments
-$listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments large comments';
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments small comments';
 
 // привязываем форму к листингу, чтобы листинг мог обновиться при отправке формы через AJAX
 if (!empty($form)) {
