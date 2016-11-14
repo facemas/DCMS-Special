@@ -14,10 +14,10 @@ a.ui.label {cursor: pointer}
 
 /* Image */
 .ui.label > img {width: 2.1666em !important; vertical-align: middle; height: 2.1666em !important}
-.ui.label > i.fa {width: auto !important; vertical-align: middle; height: 1em !important}
+.ui.label > i.fa {width: auto !important; vertical-align: baseline; height: 1em !important}
 
 /* Icon */
-.ui.label > .fa {width: auto; vertical-align: middle;}
+.ui.label > .fa {width: auto; vertical-align: baseline;}
 
 /* Detail */
 .ui.label > .detail {display: inline-block;vertical-align: top;font-weight: bold;margin-left: 1em;opacity: 0.8;}
@@ -159,8 +159,7 @@ a.ui.labels .active.label:hover,a.ui.active.label:hover {background-color: #C8C8
 
 /* Basic */
 .ui.basic.red.label {background-color: #FFFFFF !important;color: #DB2828 !important;border-color: #DB2828 !important;}
-.ui.basic.red.labels a.label:hover,
-a.ui.basic.red.label:hover {background-color: #FFFFFF !important;color: #d01919 !important;border-color: #d01919 !important;}
+.ui.basic.red.labels a.label:hover,a.ui.basic.red.label:hover {background-color: #FFFFFF !important;color: #d01919 !important;border-color: #d01919 !important;}
 
 /*--- Orange ---*/
 
@@ -177,8 +176,7 @@ a.ui.basic.red.label:hover {background-color: #FFFFFF !important;color: #d01919 
 
 /* Basic */
 .ui.basic.orange.label {background-color: #FFFFFF !important;color: #F2711C !important;border-color: #F2711C !important;}
-.ui.basic.orange.labels a.label:hover,
-a.ui.basic.orange.label:hover {background-color: #FFFFFF !important;color: #f26202 !important;border-color: #f26202 !important;}
+.ui.basic.orange.labels a.label:hover,a.ui.basic.orange.label:hover {background-color: #FFFFFF !important;color: #f26202 !important;border-color: #f26202 !important;}
 
 /*--- Yellow ---*/
 
@@ -195,8 +193,7 @@ a.ui.basic.orange.label:hover {background-color: #FFFFFF !important;color: #f262
 
 /* Basic */
 .ui.basic.yellow.label {background-color: #FFFFFF !important;color: #FBBD08 !important;border-color: #FBBD08 !important;}
-.ui.basic.yellow.labels a.label:hover,
-a.ui.basic.yellow.label:hover {background-color: #FFFFFF !important;color: #eaae00 !important;border-color: #eaae00 !important;}
+.ui.basic.yellow.labels a.label:hover,a.ui.basic.yellow.label:hover {background-color: #FFFFFF !important;color: #eaae00 !important;border-color: #eaae00 !important;}
 
 /*--- Olive ---*/
 
@@ -213,8 +210,7 @@ a.ui.basic.yellow.label:hover {background-color: #FFFFFF !important;color: #eaae
 
 /* Basic */
 .ui.basic.olive.label {background-color: #FFFFFF !important;color: #B5CC18 !important;border-color: #B5CC18 !important;}
-.ui.basic.olive.labels a.label:hover,
-a.ui.basic.olive.label:hover {background-color: #FFFFFF !important;color: #a7bd0d !important;border-color: #a7bd0d !important;}
+.ui.basic.olive.labels a.label:hover,a.ui.basic.olive.label:hover {background-color: #FFFFFF !important;color: #a7bd0d !important;border-color: #a7bd0d !important;}
 
 /*--- Green ---*/
 
@@ -231,8 +227,7 @@ a.ui.basic.olive.label:hover {background-color: #FFFFFF !important;color: #a7bd0
 
 /* Basic */
 .ui.basic.green.label {background-color: #FFFFFF !important;color: #21BA45 !important;border-color: #21BA45 !important;}
-.ui.basic.green.labels a.label:hover,
-a.ui.basic.green.label:hover {background-color: #FFFFFF !important;color: #16ab39 !important;border-color: #16ab39 !important;}
+.ui.basic.green.labels a.label:hover,a.ui.basic.green.label:hover {background-color: #FFFFFF !important;color: #16ab39 !important;border-color: #16ab39 !important;}
 
 /*--- Teal ---*/
 
@@ -249,8 +244,7 @@ a.ui.basic.green.label:hover {background-color: #FFFFFF !important;color: #16ab3
 
 /* Basic */
 .ui.basic.teal.label {background-color: #FFFFFF !important;color: #00B5AD !important;border-color: #00B5AD !important;}
-.ui.basic.teal.labels a.label:hover,
-a.ui.basic.teal.label:hover {background-color: #FFFFFF !important;color: #009c95 !important;border-color: #009c95 !important;}
+.ui.basic.teal.labels a.label:hover,a.ui.basic.teal.label:hover {background-color: #FFFFFF !important;color: #009c95 !important;border-color: #009c95 !important;}
 
 /*--- Blue ---*/
 
@@ -267,8 +261,7 @@ a.ui.basic.teal.label:hover {background-color: #FFFFFF !important;color: #009c95
 
 /* Basic */
 .ui.basic.blue.label {background-color: #FFFFFF !important;color: #2185D0 !important;border-color: #2185D0 !important;}
-.ui.basic.blue.labels a.label:hover,
-a.ui.basic.blue.label:hover {background-color: #FFFFFF !important;color: #1678c2 !important;border-color: #1678c2 !important;}
+.ui.basic.blue.labels a.label:hover,a.ui.basic.blue.label:hover {background-color: #FFFFFF !important;color: #1678c2 !important;border-color: #1678c2 !important;}
 
 /*--- Violet ---*/
 
@@ -285,16 +278,14 @@ a.ui.basic.blue.label:hover {background-color: #FFFFFF !important;color: #1678c2
 
 /* Basic */
 .ui.basic.violet.label {background-color: #FFFFFF !important;color: #6435C9 !important;border-color: #6435C9 !important;}
-.ui.basic.violet.labels a.label:hover,
-a.ui.basic.violet.label:hover {background-color: #FFFFFF !important;color: #5829bb !important;border-color: #5829bb !important;}
+.ui.basic.violet.labels a.label:hover,a.ui.basic.violet.label:hover {background-color: #FFFFFF !important;color: #5829bb !important;border-color: #5829bb !important;}
 
 /*--- Purple ---*/
 
 .ui.purple.labels .label, .ui.purple.label {background-color: #A333C8 !important;border-color: #A333C8 !important;color: #FFFFFF !important;}
 
 /* Link */
-.ui.purple.labels .label:hover,
-a.ui.purple.label:hover {background-color: #9627ba !important;border-color: #9627ba !important;color: #FFFFFF !important;}
+.ui.purple.labels .label:hover,a.ui.purple.label:hover {background-color: #9627ba !important;border-color: #9627ba !important;color: #FFFFFF !important;}
 
 /* Corner */
 .ui.purple.corner.label, .ui.purple.corner.label:hover {background-color: transparent !important;}
@@ -304,8 +295,7 @@ a.ui.purple.label:hover {background-color: #9627ba !important;border-color: #962
 
 /* Basic */
 .ui.basic.purple.label {background-color: #FFFFFF !important;color: #A333C8 !important;border-color: #A333C8 !important;}
-.ui.basic.purple.labels a.label:hover,
-a.ui.basic.purple.label:hover {background-color: #FFFFFF !important;color: #9627ba !important;border-color: #9627ba !important;}
+.ui.basic.purple.labels a.label:hover,a.ui.basic.purple.label:hover {background-color: #FFFFFF !important;color: #9627ba !important;border-color: #9627ba !important;}
 
 /*--- Pink ---*/
 
@@ -322,8 +312,7 @@ a.ui.basic.purple.label:hover {background-color: #FFFFFF !important;color: #9627
 
 /* Basic */
 .ui.basic.pink.label {background-color: #FFFFFF !important;color: #E03997 !important;border-color: #E03997 !important;}
-.ui.basic.pink.labels a.label:hover,
-a.ui.basic.pink.label:hover {background-color: #FFFFFF !important;color: #e61a8d !important;border-color: #e61a8d !important;}
+.ui.basic.pink.labels a.label:hover,a.ui.basic.pink.label:hover {background-color: #FFFFFF !important;color: #e61a8d !important;border-color: #e61a8d !important;}
 
 /*--- Brown ---*/
 
@@ -340,8 +329,7 @@ a.ui.basic.pink.label:hover {background-color: #FFFFFF !important;color: #e61a8d
 
 /* Basic */
 .ui.basic.brown.label {background-color: #FFFFFF !important;color: #A5673F !important;border-color: #A5673F !important;}
-.ui.basic.brown.labels a.label:hover,
-a.ui.basic.brown.label:hover {background-color: #FFFFFF !important;color: #975b33 !important;border-color: #975b33 !important;}
+.ui.basic.brown.labels a.label:hover,a.ui.basic.brown.label:hover {background-color: #FFFFFF !important;color: #975b33 !important;border-color: #975b33 !important;}
 
 /*--- Grey ---*/
 
@@ -358,8 +346,7 @@ a.ui.basic.brown.label:hover {background-color: #FFFFFF !important;color: #975b3
 
 /* Basic */
 .ui.basic.grey.label {background-color: #FFFFFF !important;color: #767676 !important;border-color: #767676 !important;}
-.ui.basic.grey.labels a.label:hover,
-a.ui.basic.grey.label:hover {background-color: #FFFFFF !important;color: #838383 !important;border-color: #838383 !important;}
+.ui.basic.grey.labels a.label:hover,a.ui.basic.grey.label:hover {background-color: #FFFFFF !important;color: #838383 !important;border-color: #838383 !important;}
 
 /* Black */
 
@@ -376,8 +363,7 @@ a.ui.basic.grey.label:hover {background-color: #FFFFFF !important;color: #838383
 
 /* Basic */
 .ui.basic.black.label {background-color: #FFFFFF !important;color: #1B1C1D !important;border-color: #1B1C1D !important;}
-.ui.basic.black.labels a.label:hover,
-a.ui.basic.black.label:hover {background-color: #FFFFFF !important;color: #27292a !important;border-color: #27292a !important;}
+.ui.basic.black.labels a.label:hover,a.ui.basic.black.label:hover {background-color: #FFFFFF !important;color: #27292a !important;border-color: #27292a !important;}
 
 /***** Basic ******/
 
@@ -418,8 +404,7 @@ a.ui.basic.label:hover {text-decoration: none;background: none #FFFFFF;color: #1
 
 /*--- Below ---*/
 
-.ui[class*="bottom pointing"].label,
-.ui[class*="pointing below"].label {margin-top: 0em;margin-bottom: 1em;}
+.ui[class*="bottom pointing"].label,.ui[class*="pointing below"].label {margin-top: 0em;margin-bottom: 1em;}
 .ui[class*="bottom pointing"].label:before,
 .ui[class*="pointing below"].label:before {border-width: 0px 1px 1px 0px;top: auto;right: auto;-webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);transform: translateX(-50%) translateY(-50%) rotate(45deg);top: 100%;left: 50%;}
 
@@ -457,20 +442,12 @@ a.ui.basic.label:hover {text-decoration: none;background: none #FFFFFF;color: #1
 
 /* Sizes */
 
-.ui.mini.labels .label,
-.ui.mini.label {font-size: 0.64285714rem;}
-.ui.tiny.labels .label,
-.ui.tiny.label {font-size: 0.71428571rem;}
-.ui.small.labels .label,
-.ui.small.label {font-size: 0.78571429rem;}
-.ui.labels .label,
-.ui.label {font-size: 0.85714286rem;}
-.ui.large.labels .label,
-.ui.large.label {font-size: 1rem;}
-.ui.big.labels .label,
-.ui.big.label {font-size: 1.28571429rem;}
-.ui.huge.labels .label,
-.ui.huge.label {font-size: 1.42857143rem;}
-.ui.massive.labels .label,
-.ui.massive.label {font-size: 1.71428571rem;}
+.ui.mini.labels .label,.ui.mini.label {font-size: 0.64285714rem;}
+.ui.tiny.labels .label,.ui.tiny.label {font-size: 0.71428571rem;}
+.ui.small.labels .label,.ui.small.label {font-size: 0.78571429rem;}
+.ui.labels .label,.ui.label {font-size: 0.85714286rem;}
+.ui.large.labels .label,.ui.large.label {font-size: 1rem;}
+.ui.big.labels .label,.ui.big.label {font-size: 1.28571429rem;}
+.ui.huge.labels .label,.ui.huge.label {font-size: 1.42857143rem;}
+.ui.massive.labels .label,.ui.massive.label {font-size: 1.71428571rem;}
 
