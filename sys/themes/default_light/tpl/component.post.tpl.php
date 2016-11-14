@@ -32,25 +32,47 @@ if ($head) {
         ?>
         <div class="content">
             <?php
-            if ($img) {
-                $i = "<img src='$img' alt=''>";
+            if ($image) {
+                $i = "<img src='$image' alt='' />";
             } elseif ($icon) {
                 $i = "<i class='fa fa-$icon fa-fw'></i>";
             } else {
                 $i = null;
             }
 
-            $t = ($time ? " <div class='metadata'><span class='date'>$time</span></div> " : null);
-
-
             if ($url) {
-                echo "<a class='author' href='$url'>$i $login</a>$t";
+                if ($comments) {
+                    echo "<a class='author' href='$url'>$i $login $title</a>";
+                }
+                if ($feed) {
+                    echo "<div class='summary'><a class='user' href='$url'>$i $login</a> $content </div>";
+                }
             } else {
-                echo "<a class='author'>$i $login</a>$t";
+                if ($comments) {
+                    echo "<a class='author'>$i $login</a>";
+                }
+                if ($feed) {
+                    echo "<div class='summary'><a class='user'>$i $login</a> $content </div>";
+                }
+                # Обычно используется в пустых значениях
+                if ($icon && $title) {
+                    echo "<div class='text' style='padding: 5px;'>$i $title</div>";
+                }
+            }
+
+            if ($time) {
+                if ($comments) {
+                    echo " <div class='metadata'><span class='date'>$time</span></div> ";
+                }
+                if ($feed) {
+                    echo " <div class='meta'><span class='date'>$time</span></div> ";
+                }
             }
 
             if ($content) {
-                echo "<div class='text'><p>$content</p></div>";
+                if ($comments) {
+                    echo "<div class='text'><p>$content</p></div>";
+                }
             }
             if ($actions) {
                 ?>
@@ -58,6 +80,10 @@ if ($head) {
                     <?= $this->section($actions, '<a class="reply" href="{url}">{icon} {text}</a>') ?>
                 </div>
                 <?php
+            }
+
+            if ($bottom) {
+                echo $bottom;
             }
             ?>
         </div>
