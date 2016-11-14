@@ -36,8 +36,8 @@ if ($head) {
     ?>
     <div class="content">
         <?php
-        if ($img) {
-            $i = "<img src='$img' alt=''>";
+        if ($image) {
+            $i = "<img src='$image' alt='' />";
         } elseif ($icon) {
             $i = "<i class='fa fa-$icon fa-fw'></i>";
         } else {
@@ -46,7 +46,7 @@ if ($head) {
 
         if ($url) {
             if ($comments) {
-                echo "<a class='author' href='$url'>$i $login</a>";
+                echo "<a class='author' href='$url'>$i $login $title</a>";
             }
             if ($feed) {
                 echo "<div class='summary'><a class='user' href='$url'>$i $login</a> $content </div>";
