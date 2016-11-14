@@ -122,9 +122,9 @@
                             <?= $this->section($msg, '<div class="ui green message">{text}</div>'); ?>
                         </div>
                         <div class="listing" style="padding: 5px;">
-                            <a class="btn btn-secondary btn-sm" href="/"> <i class="fa fa-home fa-fw"></i> </a> 
-                            <?= $this->section($returns, ' <a class="btn btn-secondary btn-sm" href="{url}">{icon}{name}</a>', true); ?>
-                            <?= $this->section($options, ' <a class="btn btn-grey btn-sm" href="{url}">{icon}{name}</a>', true); ?>
+                            <a class="ui basic label" href="/"> <i class="fa fa-home fa-fw"></i> </a> 
+                            <?= $this->section($returns, ' <a class="ui basic label" href="{url}">{icon}{name}</a>', true); ?>
+                            <?= $this->section($options, ' <a class="ui blue basic label" href="{url}">{icon}{name}</a>', true); ?>
                         </div>
                         <div id="tabs" class="<?= !$tabs ? 'ng-hide' : '' ?>">
                             <?= $this->section($tabs, '<a class="tab sel{selected}" href="{url}">{name}</a>', true); ?>
