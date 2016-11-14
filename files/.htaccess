@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /files/
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteRule (.*) index.php?path=$1 [L,QSA]
+</IfModule>

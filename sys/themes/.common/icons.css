@@ -1,0 +1,10 @@
+.DCMS_icon{
+display: inline-block;
+overflow: hidden;
+background-image: url(/sys/themes/.common/icons.png);
+}
+.DCMS_icon.special{
+width: 16px;
+height: 16px;
+background-position: -0px -0px;
+}

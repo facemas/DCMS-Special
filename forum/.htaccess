@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^download/([0-9]+)/ file.get.php?id=$1 [L,QSA]
+</IfModule>

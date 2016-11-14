@@ -1,0 +1,17 @@
+/sys/logs/system.update.log
+/sys/logs/http_client.log
+/sys/logs/cron_2016.11.13_08.33.zip
+/sys/logs/cron.log
+/sys/logs/cron_2016.11.14_14.27.zip
+/sys/tmp/cache.widgets_content.ser
+/sys/tmp/cache.language.russian.ser
+/sys/tmp/cache.counters.ser
+/sys/tmp/cache.log_of_visits.ser
+/sys/logs/
+/sys/tmp/cache.themes_obj.ser
+/sys/tmp/cache.sprite_icons.ser
+/sys/tmp/cache.languages.ser
+/sys/tmp/cache.events.ser
+/sys/ini/settings.ini
+/sys/ini/iv.dat
+/build/
