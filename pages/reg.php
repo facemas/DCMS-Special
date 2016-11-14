@@ -239,6 +239,7 @@ if ($step == 3) {
     }
 
     unset($_SESSION['reg']);
+    header('Refresh: 1; url=/login.php');
     exit;
 }
 
@@ -265,9 +266,11 @@ if ($step == 2) {
     }
 
     $form->bbcode(__('Дата рождения') . ':');
+    $form->block('<div class="fields">');
     $form->select('ank_d_r', false, $d_r, false);
     $form->select('ank_m_r', false, $m_r, false);
     $form->select('ank_g_r', false, $g_r, true);
+    $form->block('</div>');
 
     $form->select('sex', __('Ваш пол'), array(array(1, __('Мужской')), array(0, __('Женский'))));
 
@@ -298,15 +301,15 @@ if ($step == 0) {
     $doc->title = __('Соглашение'); // заголовок страницы
     $form = new form(new url(null, array('step' => 'rules')));
     $form->bbcode(@file_get_contents(H . '/sys/docs/rules.txt'));
-    $form->button(__('Принимаю'), 'ok', false);
-    $form->button(__('Не принимаю'), 'no');
+    $form->block('<input type="submit" name="ok" value="' . __('Принимаю') . '" class="tiny ui blue button" />');
+    $form->block('<input type="submit" name="no" value="' . __('Не принимаю') . '" class="tiny ui blue button" />');
     $form->display();
 
 
     if ($dcms->vk_auth_enable && $dcms->vk_app_id && $dcms->vk_app_secret) {
         $vk = new vk($dcms->vk_app_id, $dcms->vk_app_secret);
         $form = new form($vk->getAuthorizationUri('http://' . $_SERVER['HTTP_HOST'] . '/vk.php', 'email'));
-        $form->button(__('Авторизация через VK'));
+        $form->button(__('Регистрация через VK'));
         $form->display();
     }
     exit;
