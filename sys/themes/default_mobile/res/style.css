@@ -208,10 +208,11 @@ span.vote_name {font-weight: bold; display: block; text-align: center; padding: 
 .listing .comment {margin: 0; padding: 10px 5px; border: none; color: #383838; display: block; font-size: 100%; overflow: hidden; position: relative; border-bottom: 1px solid #e1e8ed;}
 .listing .post:hover:not([data-post-url=""]) {background-color: #f5f8fa; cursor: pointer;}
 .listing .post:not([data-post-url=""]) {transition: all 500ms;}
-.listing .comment:hover:not([data-post-url=""]) {cursor: pointer; background-color: #f5f8fa;}
-.listing .comment:not([data-post-url=""]) {transition: all 500ms;}
 .listing .post.highlight {background-color: rgb(246, 247, 249);}
 .listing .post.icon {display: inline-block; vertical-align: middle; margin-top: -2px;}
+
+.comment:not([data-post-url=""]) {transition: all 500ms;}
+.comment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
 
 .post {display: block; padding: 1em 0;}
 .post.highlight td.title {font-weight: bold; color: #383838;}
