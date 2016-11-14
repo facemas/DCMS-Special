@@ -1,9 +1,10 @@
 
 /****** Segment ******/
 
-.ui.segment {position: relative;background: #FFFFFF;box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);margin: 1rem 0em;padding: 1em 1em;border-radius: 0.28571429rem;border: 1px solid rgba(34, 36, 38, 0.15);}
+.ui.segment {position: relative;background: #FFFFFF;box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);margin: 1rem 0em;padding: 0.5em 0.5em;border-radius: 0.28571429rem;border: 1px solid rgba(34, 36, 38, 0.15);}
 .ui.segment:first-child {margin-top: 0em;}
 .ui.segment:last-child {margin-bottom: 0em;}
+.ui.segment .fa {vertical-align: middle;}
 
 /* Vertical */
 .ui.vertical.segment {margin: 0em;padding-left: 0em;padding-right: 0em;background: none transparent;border-radius: 0px;box-shadow: none;border: none;border-bottom: 1px solid rgba(34, 36, 38, 0.15);}
@@ -43,8 +44,7 @@
 .ui.piled.segment[class*="bottom attached"] {margin-top: 0em;margin-bottom: 3em;}
 .ui.piled.segment[class*="bottom attached"]:last-child {margin-bottom: 0em;}
 
-/*-------------------   Stacked
---------------------*/
+/* Stacked */
 
 .ui.stacked.segment {padding-bottom: 1.4em;}
 .ui.stacked.segments:before,.ui.stacked.segments:after,.ui.stacked.segment:before,.ui.stacked.segment:after {content: '';position: absolute;bottom: -3px;left: 0%;border-top: 1px solid rgba(34, 36, 38, 0.15);background: rgba(0, 0, 0, 0.03);width: 100%;height: 6px;visibility: visible;}
