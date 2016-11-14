@@ -13,26 +13,25 @@ a.ui.label {cursor: pointer}
 .ui.label > a:hover {opacity: 1}
 
 /* Image */
-.ui.label > img {width: auto !important; vertical-align: middle; height: 2.1666em !important}
+.ui.label > img {width: 2.5em !important; vertical-align: middle; height: 2.1666em !important}
+.ui.label > i.fa {width: auto !important; vertical-align: middle; height: 1em !important}
 
 /* Icon */
-.ui.label > .fa {width: auto; margin: 0em 0.75em 0em 0em}
+.ui.label > i.fa {width: auto; vertical-align: middle;}
 
 /* Detail */
 .ui.label > .detail {display: inline-block;vertical-align: top;font-weight: bold;margin-left: 1em;opacity: 0.8;}
-.ui.label > .detail .fa {margin: 0em 0.25em 0em 0em;}
+.ui.label > .detail i.fa {margin: 0em 0.25em 0em 0em;}
 
 /* Removable label */
 .ui.label > .close.fa,.ui.label > .delete.fa {cursor: pointer;margin-right: 0em;margin-left: 0.5em;font-size: 0.92857143em;opacity: 0.5;-webkit-transition: background 0.1s ease;transition: background 0.1s ease;}
 .ui.label > .delete.fa:hover {opacity: 1;}
 
-/*-------------------   Group
---------------------*/
+/* Group */
 
 .ui.labels > .label {margin: 0em 0.5em 0.5em 0em;}
 
-/*-------------------   Coupling
---------------------*/
+/* Coupling */
 
 .ui.header > .ui.label {margin-top: -0.29165em;}
 
