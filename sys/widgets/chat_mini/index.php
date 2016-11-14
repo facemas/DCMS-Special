@@ -14,7 +14,6 @@ $users = $res->fetchColumn();
 
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
-$listing->ui_header = true; //подключаем css header
 $listing->ui_segment = true; //подключаем css segment
 $listing->class = 'segments minimal comments small listing';
 
