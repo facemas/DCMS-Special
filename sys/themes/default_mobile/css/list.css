@@ -50,7 +50,7 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item {padding: 0.14285714e
 .ui.list .list > a.item i.fa,.ui.list > a.item i.fa {color: rgba(0, 0, 0, 0.4);}
 
 /* Header Link */
-.ui.list .list > .item a.header,.ui.list > .item a.header {cursor: pointer;color: #4183C4 !important;}
+.ui.list .list > .item a.header,.ui.list > .item a.header {cursor: pointer; color: #636b6f !important;}
 .ui.list .list > .item a.header:hover,.ui.list > .item a.header:hover {color: #1e70bf !important;}
 
 /* Floated Content */
