@@ -131,7 +131,7 @@ a:hover {color: #1e70bf; text-decoration: none;}
 
 #header {margin-bottom: 60px; color: grey;}
 
-#navigation_user {padding-top: 10px; padding-bottom: 10px; background: #fff; box-shadow: 0 2px 5px -3px #000 inset; border-bottom: 1px solid #e1e8ed; border-bottom: 1px solid rgba(0,0,0,0.05); position: fixed; top: 0; right: 0; left: 0; z-index: 1000; -webkit-backface-visibility: hidden; backface-visibility: hidden;}
+#navigation_user {padding-top: 10px; padding-bottom: 10px; background: #0084B4; box-shadow: 0 2px 5px -3px #000 inset; border-bottom: 1px solid rgba(0,0,0,0.05); position: fixed; top: 0; right: 0; left: 0; z-index: 1000; -webkit-backface-visibility: hidden; backface-visibility: hidden;}
 #navigation_user .body_width_limit {height: 100%;}
 #navigation_user a {float: right; display: inline-block; background-color: #f6f7f9; border: 1px solid #ccc; text-decoration: none; padding: 5px; color: #66757f; text-shadow: none; border-radius: 2px; margin-left: 2px; transition: all 500ms;}
 #navigation_user a.action {opacity: 0.8;}
