@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="<?= $path ?>/css/progress.css" type="text/css" />
-<script charset="utf-8" src="<?= $path ?>/js/progress.min.js" type="text/javascript"></script>
+<script charset="utf-8" src="<?= $path ?>/res/progress.min.js" type="text/javascript"></script>
 
 <div class="ui segment">
     <span class="votes_name"><?= $name ?></span>
