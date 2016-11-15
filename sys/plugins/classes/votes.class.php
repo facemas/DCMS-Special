@@ -2,10 +2,9 @@
 
 /**
  * Класс для шаблона "голосование".
- * Используется в темах форума, но можно прикрутить куда угодно
+ * Используется в темах форума, новостях, блогах. Но можно прикрутить куда угодно
  */
-class votes
-{
+class votes {
 
     protected $_list = array();
     public $description;
@@ -15,8 +14,7 @@ class votes
      * Инициализация голосования
      * @param string $description Описание голосования
      */
-    public function __construct($description = '')
-    {
+    public function __construct($description = '') {
         $this->description = $description;
     }
 
@@ -26,15 +24,13 @@ class votes
      * @param int $count Кол-во голосов за данный вариант ответа
      * @param string $url Ссылка на голосование за данный вариант
      */
-    public function vote($name, $count, $url)
-    {
+    public function vote($name, $count, $url) {
         //$this->_count_max = max($this->_count_max, $count);
         $this->_count_max += $count;
         $this->_list[] = array('name' => $name, 'count' => $count, 'url' => $url);
     }
 
-    public function display($is_add = false)
-    {
+    public function display($is_add = false) {
         if (!$this->_list) {
             return;
         }
