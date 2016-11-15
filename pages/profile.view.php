@@ -190,7 +190,7 @@ if ($ank->avatar == 1) {
     $likeCount = $db->query("SELECT COUNT(*) FROM `avatar_like` WHERE `id_avatar` = '$ank->id' ")->fetchColumn();
     $like = $db->query("SELECT * FROM `avatar_like` WHERE `id_user` = '$user->id' AND `id_avatar` = '$ank->id' LIMIT 1")->fetch();
     if ($user->id && $user->id != $ank->id && !$like) {
-        $d->assign('like_avatar', array('?id=' . $ank->id . '&amp;like', '<i class="fa fa-heart-o fa-fw"></i>' . __('%s', $likeCount)));
+        $d->assign('like_avatar', array('?id=' . $ank->id . '&amp;like_avatar', '<i class="fa fa-heart-o fa-fw"></i>' . __('%s', $likeCount)));
     } elseif ($user->id) {
         $d->assign('like_all_avatar', array('/avatar.like.php?id=' . $ank->id . '', '<i class="fa fa-heart fa-fw"></i>' . __('%s', $likeCount)));
     }
