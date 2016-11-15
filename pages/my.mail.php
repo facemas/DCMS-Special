@@ -16,6 +16,7 @@ if (isset($_GET ['id'])) {
     $ank = new user($id_kont);
     $res = $db->prepare("SELECT COUNT(*) FROM `mail` WHERE `id_user` = ? AND `id_sender` = ?");
     $res->execute(Array($user->id, $id_kont));
+
     if (!$ank->group && !$res->fetch()) {
         $doc->err(__('Пользователь не найден'));
         $doc->ret(__('К почте'), '?');
@@ -41,16 +42,16 @@ if (isset($_GET ['id'])) {
         $doc->err(__('Пользователь не сможет Вам ответить'));
     }
 
-    if ($accept_send && isset($_POST ['post']) && isset($_POST ['mess']) && isset($_POST ['token'])) {
-        $mess = (string) $_POST ['mess'];
+    if ($accept_send && isset($_POST['post']) && isset($_POST['mess']) && isset($_POST['token']) && $user->group) {
+        $mess = (string) $_POST['mess'];
         text::nickSearch($mess); // поиск и преобразование @nick
         $mess = text::input_text($mess);
 
         if (!antiflood::useToken($_POST['token'], 'mail')) {
             
-        } elseif (!$mess)
+        } elseif (!$mess) {
             $doc->err(__('Сообщение пусто'));
-        else {
+        } else {
             $ank->mess($mess, $user->id);
 
             if ($doc instanceof document_json) {
@@ -124,7 +125,7 @@ if (isset($_GET ['id'])) {
     }
     $listing->setAjaxUrl('?id=' . $ank->id . '&amp;page=' . $pages->this_page);
 
-    if ($doc instanceof document_json && !$arr) {
+    if ($doc instanceof document_json && !$arr && $user->group) {
         $post = new listing_post(__('Нет результатов'));
         $post->icon('clone');
         $doc->add_post($post);
