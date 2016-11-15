@@ -7,23 +7,35 @@ $doc->title = __('Новости');
 
 $pages = new pages;
 $res = $db->query("SELECT COUNT(*) FROM `news`");
-$pages->posts = $res->fetchColumn(); // количество сообщений
+$pages->posts = $res->fetchColumn();
+
+$res = $db->query("SELECT COUNT(*) FROM `news`");
+$newsCount = $res->fetchColumn();
 
 $q = $db->query("SELECT * FROM `news` ORDER BY `id` DESC LIMIT " . $pages->limit);
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_comment = true; //подключаем css comments
+$listing->ui_segment = true; //подключаем css segment
+$listing->ui_list = true; //подключаем css segment
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal comments' : 'segments comments';
+
+$post = $listing->post();
+$post->head = "<h5 class='ui secondary segment'><i class='fa fa-feed fa-fw'></i> " . __('Все новости') . " <span style='float: right'>$newsCount</span></h5>";
+
 if ($arr = $q->fetchAll()) {
     foreach ($arr AS $news) {
         $post = $listing->post();
+
+        $post->class = 'ui segment comment';
+        $post->comments = true;
         $ank = new user((int) $news['id_user']);
 
         $post->icon('feed');
-        $post->content = text::toOutput($news['text']);
         $post->title = text::toValue($news['title']);
+        $post->content = text::toOutput($news['text']);
         $post->url = 'comments.php?id=' . $news['id'];
         $post->time = misc::times($news['time']);
-
-        $post = $listing->post();
 
         # Счетчик комментариев
         $res = $db->prepare("SELECT COUNT(*) FROM `news_comments` WHERE `id_news` = ?");
@@ -38,21 +50,24 @@ if ($arr = $q->fetchAll()) {
         $res->execute(Array(intval($news['id'])));
         $like = $res->fetchColumn();
 
+        $post->bottom .= '<div class="ui very relaxed horizontal list"> ';
+
         # Комментарии
-        $post->title .= ' <a href="comments.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-comments-o fa-fw"></i> ' . __('%s', $comments) . '</a> ';
+        $post->bottom .= '<div class="item"><div class="content"><a href="comments.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Комментариев %s', $comments) . '" data-position="top left"><i class="fa fa-comments fa-fw"></i> ' . __('%s', $comments) . '</a></div></div> ';
         # Просмотры
-        $post->title .= ' <a href="news.views.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-eye fa-fw"></i> ' . __('%s', $views) . '</a> ';
+        $post->bottom .= '<div class="item"><div class="content"><a href="news.views.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Просмотров %s', $views) . '" data-position="top center"><i class="fa fa-eye fa-fw"></i> ' . __('%s', $views) . '</a></div></div> ';
         # Мне нравится
         $stt = $db->query("SELECT * FROM `news_like` WHERE `id_user` = '$user->id' AND `id_news` = '" . intval($news['id']) . "' LIMIT 1")->fetch();
 
         if ($user->id && $user->id != $ank->id && !$stt) {
-            $post->title .= '<a href="?id=' . $news['id'] . '&amp;like" class="btn btn-secondary btn-sm">' . __('Мне нравится') . '</a> <a href="news.like.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+            $post->bottom .= '<div class="item"><div class="content"><a href="comments.php?id=' . $news['id'] . '&amp;likes" data-tooltip="' . __('Мне нравится') . '" data-position="top center" class="header"><i class="fa fa-heart-o fa-fw"></i> ' . __('%s', $like) . '</a></div></div>';
         } elseif ($user->id && $user->id != $ank->id) {
-            $post->title .= '<a href="news.like.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+            $post->bottom .= '<div class="item"><div class="content"><a href="news.like.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Вам понравилось') . '" data-position="top center"><span style="color: #e81c4f"><i class="fa fa-heart fa-fw"></i> ' . __('%s', $like) . '</span></a></div></div>';
         } else {
-            $post->title .= '<a href="news.like.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+            $post->bottom .= '<div class="item"><div class="content"><a href="news.like.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Посмотреть кому понравилось') . '" data-position="top center"><i class="fa fa-heart fa-fw"></i> ' . __('%s', $like) . '</a></div></div>';
         }
-        $post->title .= ' <a href="/profile.view.php?id=' . $news['id_user'] . '" class="btn btn-secondary btn-sm" style="float: right;">' . $ank->nick() . '</a>';
+        $post->bottom .= '<div class="item"><div class="content"><a href="/profile.view.php?id=' . $news['id_user'] . '" class="header" data-tooltip="' . __('Автор') . '" data-position="top center">' . $ank->nick() . '</a></div></a></div>';
+        $post->bottom .= '</div>';
     }
 }
 
