@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="SocCMS">
     <head>
+        <meta charset="utf-8">
         <title><?= $title ?></title>
         <link rel="shortcut icon" href="/sys/images/icons/special.png"/>
         <link rel="stylesheet" href="/sys/themes/.common/animate.css" type="text/css"/>
         <link rel="stylesheet" href="/sys/themes/.common/font-awesome.min.css" type="text/css"/>
-        <link rel="stylesheet" href="<?= $path ?>/style.css" type="text/css"/>
+        <link rel="stylesheet" href="<?= $path ?>/style.css" type="text/css" charset="utf-8"/>
         <noscript>
         <meta http-equiv="refresh" content="0; URL=/pages/bad_browser.html"/>
         </noscript>
@@ -89,7 +90,7 @@
         </audio>
         <div id="main">
             <div id="top_part">
-                <nav id="header" class="navbar navbar-light" style="background-color: #fff;border-bottom: #e1e2e3 1px solid;">
+                <nav id="header" class="navbar navbar-light">
                     <div id="navigation_user">
                         <div class="body_width_limit clearfix">
                             <a ng-show="+ user.group" class="<?= $user->group ? '' : 'ng-hide' ?>" href="/profile.view.php" ng-bind="user.nick"><?= $user->nick ?></a>
