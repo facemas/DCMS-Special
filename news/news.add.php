@@ -55,11 +55,11 @@ if (isset($_POST['next'])) {
 }
 
 $form = new form('?' . passgen());
-$form->text('title', __('Заголовок новости'), $news['title'], true, false, $news['checked']);
-$form->textarea('text', __('Текст новости'), $news['text'], true, $news['checked']);
+$form->text('title', __('Заголовок новости'), $news['title'], false, false, $news['checked']);
+$form->textarea('text', __('Текст новости'), $news['text'], false, $news['checked']);
 
 if ($news['checked']) {
-    $form->button(__('Сохранить изменения'), 'edit', false);
+    $form->button(__('Вернуться'), 'edit', false);
     $form->button(__('Опубликовать'), 'send', false);
 } else {
     $form->button(__('Очистить'), 'clear', false);
