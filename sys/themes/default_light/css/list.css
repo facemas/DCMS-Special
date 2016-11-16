@@ -239,6 +239,15 @@ ol.ui.horizontal.list li:before,.ui.ordered.horizontal.list .list > .item:before
 .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {padding-left: 1.5rem;}
 .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {padding-right: 1.5rem;}
 
+@media only screen and (max-width: 360px) {
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {padding-left: 1.2rem;}
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {padding-right: 1.2rem;}
+}
+
+@media only screen and (max-width: 330px) {
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {padding-left: 1rem;}
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {padding-right: 1rem;}
+}
 /* Sizes */
 
 .ui.mini.list {font-size: 0.78571429em;}
