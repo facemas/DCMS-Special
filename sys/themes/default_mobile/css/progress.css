@@ -11,7 +11,7 @@
 .ui.progress .bar > .progress {white-space: nowrap;position: absolute;width: auto;font-size: 0.92857143em;top: 50%;right: 0.5em;left: auto;bottom: auto;color: rgba(255, 255, 255, 0.7);text-shadow: none;margin-top: -0.5em;font-weight: bold;text-align: left;}
 
 /* Label */
-.ui.progress > .label {position: absolute;width: 100%;font-size: 1em;top: auto;right: auto;left: 0%;bottom: 100%;color: rgba(0, 0, 0, 0.87);font-weight: bold;text-shadow: none;margin-top: 0.2em;text-align: center;-webkit-transition: color 0.4s ease;transition: color 0.4s ease;}
+.ui.progress > .label {position: absolute;width: 100%;font-size: 1em;top: auto;right: auto;left: 0%;bottom: 100%;color: grey;text-shadow: none;margin-top: 0.2em;text-align: center;-webkit-transition: color 0.4s ease;transition: color 0.4s ease;}
 
 /* Indicating */
 .ui.indicating.progress[data-percent^="1"] .bar,

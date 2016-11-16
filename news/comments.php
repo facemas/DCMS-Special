@@ -74,29 +74,24 @@ if (isset($_GET['likes']) && $user->id) {
     }
 }
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_comment = true; //подключаем css comments
+$listing->ui_segment = true; //подключаем css segment
+$listing->ui_list = true; //подключаем css segment
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal comments' : 'segments comments';
+
+$ank = new user((int) $news['id_user']);
 $post = $listing->post();
+
+$post->class = 'ui segment comment';
+$post->comments = true;
 $ank = new user((int) $news['id_user']);
 
 $post->icon('feed');
-$post->content = text::toOutput($news['text']);
 $post->title = text::toValue($news['title']);
-$post->time = misc::when($news['time']);
-
-if ($user->group >= max($ank->group, 4)) {
-    if (!$news['sended']) {
-        $doc->opt(__('Рассылка'), 'news.send.php?id=' . $news['id']);
-    }
-    if ($news['id_vote']) {
-        $doc->opt(__('Ред. голосование'), 'vote.edit.php?id=' . $news['id']);
-    } else {
-        $doc->opt(__('Создать голосование'), 'vote.new.php?id=' . $news['id']);
-    }
-    $doc->opt(__('Редактировать'), 'news.edit.php?id=' . $news['id']);
-    $doc->opt(__('Удалить'), 'news.delete.php?id=' . $news['id']);
-}
-
-$post = $listing->post();
+$post->content = text::toOutput($news['text']);
+$post->url = 'comments.php?id=' . $news['id'];
+$post->time = misc::times($news['time']);
 
 # Счетчик комментариев
 $res = $db->prepare("SELECT COUNT(*) FROM `news_comments` WHERE `id_news` = ?");
@@ -111,21 +106,40 @@ $res = $db->prepare("SELECT COUNT(*) FROM `news_like` WHERE `id_news` = ?");
 $res->execute(Array(intval($news['id'])));
 $like = $res->fetchColumn();
 
+$post = $listing->post();
+
+$post->class = 'ui segment comment';
+$post->bottom .= '<div class="ui very relaxed horizontal list"> ';
+
 # Комментарии
-$post->title .= ' <a class="btn btn-secondary btn-sm"><i class="fa fa-comments-o fa-fw"></i> ' . __('%s', $comments) . '</a> ';
+$post->bottom .= '<div class="item"><div class="content"><a href="comments.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Комментариев %s', $comments) . '" data-position="top left"><i class="fa fa-comments fa-fw"></i> ' . __('%s', $comments) . '</a></div></div> ';
 # Просмотры
-$post->title .= ' <a href="news.views.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-eye fa-fw"></i> ' . __('%s', $views) . '</a> ';
+$post->bottom .= '<div class="item"><div class="content"><a href="news.views.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Просмотров %s', $views) . '" data-position="top center"><i class="fa fa-eye fa-fw"></i> ' . __('%s', $views) . '</a></div></div> ';
 # Мне нравится
 $stt = $db->query("SELECT * FROM `news_like` WHERE `id_user` = '$user->id' AND `id_news` = '" . intval($news['id']) . "' LIMIT 1")->fetch();
 
 if ($user->id && $user->id != $ank->id && !$stt) {
-    $post->title .= '<a href="?id=' . $news['id'] . '&amp;like" class="btn btn-secondary btn-sm">' . __('Мне нравится') . '</a> <a href="news.like.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+    $post->bottom .= '<div class="item"><div class="content"><a href="comments.php?id=' . $news['id'] . '&amp;likes" data-tooltip="' . __('Мне нравится') . '" data-position="top center" class="header"><i class="fa fa-heart-o fa-fw"></i> ' . __('%s', $like) . '</a></div></div>';
 } elseif ($user->id && $user->id != $ank->id) {
-    $post->title .= '<a href="news.like.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+    $post->bottom .= '<div class="item"><div class="content"><a href="news.like.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Вам понравилось') . '" data-position="top center"><span style="color: #e81c4f"><i class="fa fa-heart fa-fw"></i> ' . __('%s', $like) . '</span></a></div></div>';
 } else {
-    $post->title .= '<a href="news.like.php?id=' . $news['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+    $post->bottom .= '<div class="item"><div class="content"><a href="news.like.php?id=' . $news['id'] . '" class="header" data-tooltip="' . __('Оценили %s', $like) . '" data-position="top center"><i class="fa fa-heart fa-fw"></i> ' . __('%s', $like) . '</a></div></div>';
 }
-$post->title .= ' <a href="/profile.view.php?id=' . $news['id_user'] . '" class="btn btn-secondary btn-sm" style="float: right;">' . $ank->nick() . '</a>';
+$post->bottom .= '<div class="item"><div class="content"><a href="/profile.view.php?id=' . $news['id_user'] . '" class="header" data-tooltip="' . __('Автор') . '" data-position="top center">' . $ank->nick() . '</a></div></a></div>';
+$post->bottom .= '</div>';
+
+if ($user->group >= max($ank->group, 4)) {
+    if (!$news['sended']) {
+        $doc->opt(__('Рассылка'), 'news.send.php?id=' . $news['id']);
+    }
+    if ($news['id_vote']) {
+        $doc->opt(__('Ред. голосование'), 'vote.edit.php?id=' . $news['id']);
+    } else {
+        $doc->opt(__('Создать голосование'), 'vote.new.php?id=' . $news['id']);
+    }
+    $doc->opt(__('Редактировать'), 'news.edit.php?id=' . $news['id']);
+    $doc->opt(__('Удалить'), 'news.delete.php?id=' . $news['id']);
+}
 
 $listing->display();
 
@@ -174,7 +188,7 @@ if ($can_write && $pages->this_page == 1) {
                     }
                     $ank_in_message = new user($user_id_in_message);
                     if ($ank_in_message->notice_mention) {
-                        $ank_in_message->not("Упомянул" . ($user->sex ? '' : 'а') . " о Вас в комментарии к новости [url=/news/comments.php?id={$news['id']}#comment{$id_message}]$news[title][/url]", $user->id);
+                        $ank_in_message->not(($user->sex ? 'упомянул' : 'упомянула') . " о вас в комментарии к новости [url=/news/comments.php?id={$news['id']}#comment{$id_message}]$news[title][/url]", $user->id);
                     }
                 }
             }
@@ -189,7 +203,7 @@ if ($can_write && $pages->this_page == 1) {
             $doc->err(__('Сообщение пусто'));
         }
 
-        if ($doc instanceof document_json) {
+        if ($doc instanceof document_json && $user->group) {
             $doc->form_value('token', antiflood::getToken('news'));
         }
     }
@@ -222,10 +236,10 @@ if ($can_write && $pages->this_page == 1) {
     }
 }
 
-
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
-$listing->class = $dcms->browser_type == 'full' ? 'minimal comments large listing' : 'comments large listing';
+$listing->ui_segment = true; //подключаем css segment
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal comments' : 'segments comments';
 
 
 if (!empty($form)) {
@@ -240,7 +254,7 @@ if ($arr = $q->fetchAll()) {
     foreach ($arr AS $message) {
         $ank = new user($message['id_user']);
         $post = $listing->post();
-        $post->class = 'comment';
+        $post->class = 'ui segment comment';
         $post->comments = true;
         $post->id = 'news_' . $message['id'];
         $post->url = "actions.php?id=$news[id]&amp;comment=" . $message['id'];
@@ -273,13 +287,13 @@ if ($arr = $q->fetchAll()) {
 }
 
 if ($doc instanceof document_json && !$arr) {
-    $post = new listing_post(__('Нет результатов'));
+    $post = new ui_compost(__('Комментарии отсутствуют'));
     $post->icon('clone');
     $doc->add_post($post);
 }
 
 $listing->setAjaxUrl('?id=' . $id . '&amp;page=' . $pages->this_page);
-$listing->display(__('Нет результатов'));
+$listing->display(__('Комментарии отсутствуют'));
 $pages->display('?id=' . $id . '&amp;'); // вывод страниц
 
 if ($doc instanceof document_json) {

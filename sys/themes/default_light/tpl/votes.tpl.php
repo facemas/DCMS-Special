@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="<?= $path ?>/css/progress.css" type="text/css" />
 <script charset="utf-8" src="<?= $path ?>/res/progress.min.js" type="text/javascript"></script>
 
-<div class="ui segment">
-    <span class="votes_name"><?= $name ?></span>
+<div class="ui center aligned segment">
+    <b><?= $name ?></b><br /><br />
     <script type="text/javascript">
         $('#votes')
                 .progress({
@@ -18,7 +18,7 @@
         <div class="ui indicating progress" data-value="<?= $vote['pc'] ?>" data-total="100">
 
             <?php if ($is_add) { ?>
-                <a class="vote_plus" href="<?= $vote['url'] ?>">
+                <a href="<?= $vote['url'] ?>">
                     <div class="bar" style="<?= 'width: ' . max($vote['pc'], 6) . '%' ?>">
                         <div class="progress"></div>
                     </div>
