@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="<?= $path ?>/style.css" type="text/css" charset="utf-8"/>
         <noscript>
         <meta http-equiv="refresh" content="0; URL=/pages/bad_browser.html"/>
+        <meta name="theme-color" content="#0084B4" />
         </noscript>
         <script>
             (function () {
