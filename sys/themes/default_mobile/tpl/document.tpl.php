@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="<?= $path ?>/res/style.css" type="text/css"/>
         <meta name="viewport" content="minimum-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
         <meta name="generator" content="SocCMS <?= $dcms->version ?>"/>
+        <meta name="theme-color" content="#0084B4" />
 
         <? if ($description) { ?>
         <meta name="description" content="<?= $description ?>" /><? } ?>
@@ -41,42 +42,42 @@
             <source src="/sys/themes/.common/notify.mp3"/>
             <source src="/sys/themes/.common/notify.ogg"/>
         </audio>
-        <div id="container_content">
-            <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
-            <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
-            <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
-            <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
 
-            <header id='title' class="<?= $returns ? 'ui pointing fluid menu returns' : 'ui pointing fluid menu' ?>">
+        <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
+        <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
+        <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
+        <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
 
-                <a class="<?= ($head == 'home' ? 'item active' : 'item') ?>" href="/"><i class="fa fa-home fa-lg"></i></a>
-                <span class="tIcon left"><div class="ui dropdown item"><i class="fa fa-chevron-left fa-lg"></i> 
-                        <div class="menu">
-                            <?= $this->section($returns, '<a href="{url}" class="item"><i class="fa fa-chevron-left fa-lg"></i> {name}</a>', true); ?>
-                        </div>
+        <header id='title' class="<?= $returns ? 'ui secondary pointing fluid menu returns' : 'ui secondary pointing fluid menu' ?>">
+
+            <a class="<?= ($head == 'home' ? 'item active' : 'item') ?>" href="/"><i class="fa fa-home fa-lg"></i></a>
+            <span class="tIcon left"><div class="ui dropdown item"><i class="fa fa-chevron-left fa-lg"></i> 
+                    <div class="menu">
+                        <?= $this->section($returns, '<a href="{url}" class="item"><i class="fa fa-chevron-left fa-lg"></i> {name}</a>', true); ?>
                     </div>
-                </span>
-
-                <?php if ($user->group) { ?>
-                    <span class="tIcon mail"><a class="<?= ($head == 'mail' ? 'item active' : 'item') ?>" href="/my.mail.php"><i class="fa fa-envelope fa-lg" style="color: orange"></i></a></span>
-                    <span class="tIcon notification"><a class="<?= ($head == 'notification' ? 'item active' : 'item') ?>" href="/my.notification.php"><i class="fa fa-bell fa-lg" style="color: orange"></i></a></span>
-                    <span class="tIcon friend"><a class="<?= ($head == 'friends' ? 'item active' : 'item') ?>" href="/my.friends.php"><i class="fa fa-user-plus fa-lg" style="color: orange"></i></a></span>
-
-                <?php } ?>
-
-                <div class="itemtext"><?= $title ?></div>
-
-                <div class="right menu">
-                    <?php if ($user->group) { ?>
-                        <a class="<?= ($head == 'profile' ? 'item active' : 'item') ?>" href="/profile.view.php"><i class="fa fa-user-circle-o fa-lg"></i></a>
-                    <?php } else { ?>
-                        <a class="item" href="/login.php?return=<?= URL ?>"><i class="fa fa-sign-in fa-lg"></i></a>
-                        <a class="item" href="/reg.php?return=<?= URL ?>"><i class="fa fa-user-plus fa-lg"></i></a>
-                    <?php } ?>
                 </div>
-            </header>
+            </span>
 
+            <?php if ($user->group) { ?>
+                <span class="tIcon mail"><a class="<?= ($head == 'mail' ? 'item active' : 'item') ?>" href="/my.mail.php"><span class="blink"><i class="fa fa-envelope fa-lg"></i></span></a></span>
+                <span class="tIcon notification" id="blink"><a class="<?= ($head == 'notification' ? 'item active' : 'item') ?>" href="/my.notification.php"><span class="blink"><i class="fa fa-bell fa-lg"></i></span></a></span>
+                <span class="tIcon friend"><a class="<?= ($head == 'friends' ? 'item active' : 'item') ?>" href="/my.friends.php"><span class="blink"><i class="fa fa-user-plus fa-lg"></i></span></a></span>
 
+            <?php } ?>
+
+            <div class="itemtext"><?= $title ?></div>
+
+            <div class="right menu">
+                <?php if ($user->group) { ?>
+                    <a class="<?= ($head == 'profile' ? 'item active' : 'item') ?>" href="/profile.view.php"><i class="fa fa-user-circle-o fa-lg"></i></a>
+                <?php } else { ?>
+                    <a class="item" href="/login.php?return=<?= URL ?>"><i class="fa fa-sign-in fa-lg"></i></a>
+                    <a class="item" href="/reg.php?return=<?= URL ?>"><i class="fa fa-user-plus fa-lg"></i></a>
+                <?php } ?>
+            </div>
+        </header>
+
+        <div id="container_content">
             <?php $this->displaySection('after_title') ?>
             <?php if ($options) { ?>
                 <div id="options">
