@@ -238,7 +238,7 @@ a:hover {color: #1e70bf; text-decoration: none;}
 /* Точка возле ника online/offline, цвет торта, цвет монеты */
 .nick_on:after {content: '●'; margin-left: 2px; color: #07BE07;}
 .nick_off:after {content: '●'; margin-left: 2px; color: grey;}
-.nick_on, .nick_off, .nick_donate, .nick_birthday {vertical-align: middle;}
+.nick_on, .nick_off, .nick_donate, .nick_birthday {vertical-align: baseline;}
 .nick_birthday i {color: orange;}
 .nick_donate i {color: green;}
 
