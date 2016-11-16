@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?= $path ?>/css/segment.css" type="text/css" />
 <link rel="stylesheet" href="<?= $path ?>/css/progress.css" type="text/css" />
 <script charset="utf-8" src="<?= $path ?>/res/progress.min.js" type="text/javascript"></script>
 
