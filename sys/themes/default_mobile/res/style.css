@@ -104,12 +104,8 @@ a {color: #4183C4; text-decoration: none;}
 a:hover {color: #1e70bf; text-decoration: none;}
 
 @-webkit-keyframes blink {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0.1;
-    }
+    from {opacity: 1;}
+    to {opacity: 0.1;}
 }
 
 #title {margin: 0em 0em 0.5em 0em;}
@@ -190,7 +186,7 @@ span.vote_name {font-weight: bold; display: block; text-align: center; padding: 
 
 .nick_on:after {content: '●'; margin-left: 2px; color: #07BE07;}
 .nick_off:after {content: '●'; margin-left: 2px; color: grey;}
-.nick_on, .nick_off, .nick_donate, .nick_birthday {vertical-align: middle;}
+.nick_on, .nick_off, .nick_donate, .nick_birthday {vertical-align: baseline;}
 .nick_birthday i {color: orange;}
 .nick_donate i {color: green;}
 
