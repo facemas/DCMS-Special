@@ -72,7 +72,7 @@ if ($user->group && $anks->id && $user->id != $anks->id && isset($_GET['friend']
                 $res->execute(Array($anks->id, $user->id, TIME));
 
                 # Уведомляем об подтверждении
-                $anks->not("" . ($user->sex ? 'Принял' : 'Приняла') . " Ваше предложение в друзья", $user->id);
+                $anks->not("" . ($user->sex ? 'принял' : 'приняла') . " ваше предложение в друзья", $user->id);
 
                 $doc->msg(__('Предложение дружбы принято'));
             }
