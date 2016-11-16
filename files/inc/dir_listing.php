@@ -50,8 +50,8 @@ if ($search) {
 
 $content = $dir->getList($order, $search);
 
-$dirs = & $content ['dirs'];
-$files = & $content ['files'];
+$dirs = & $content['dirs'];
+$files = & $content['files'];
 
 
 if ($description = $dir->description) {
@@ -151,7 +151,7 @@ for ($i = $start; $i < $end && $i < $pages->posts; $i++) {
             $post2 = __('Файл скачан') . ': ' . intval($files [$i]->downloads) . ' ' . __(misc::number($files [$i]->downloads, 'раз', 'раза', 'раз')) . "\n";
             break;
         case 'id_user' :
-            $ank = new user($files [$i]->id_user);
+            $ank = new user($files[$i]->id_user);
             $post2 = __('Добавил' . ($ank->sex ? '' : 'а')) . ': ' . $ank->login . "\n";
             break;
         default :
@@ -159,28 +159,28 @@ for ($i = $start; $i < $end && $i < $pages->posts; $i++) {
             break;
     }
 
-    if ($properties = $files [$i]->properties) {
+    if ($properties = $files[$i]->properties) {
         // Параметры файла (только основное)
         $post2 .= $properties . "\n";
     }
 
-    if ($description = $files [$i]->description_small) {
+    if ($description = $files[$i]->description_small) {
         // краткое описание
         $post2 .= $description . "\n";
     }
 
     $post = $listing->post();
-    $post->title = text::toValue($files [$i]->runame);
+    $post->title = text::toValue($files[$i]->runame);
     $post->post = text::toOutput($post2);
-    $post->highlight = $files [$i]->time_add > $time_new;
-    $post->url = "/files" . $files [$i]->getPath() . ".htm?order=$order";
-    $post->icon($files [$i]->icon());
-    $post->image = $files [$i]->image();
-    $post->time = misc::times($files [$i]->time_add);
+    $post->highlight = $files[$i]->time_add > $time_new;
+    $post->url = "/files" . $files[$i]->getPath() . ".htm?order=$order";
+    $post->icon($files[$i]->icon());
+    $post->image = $files[$i]->image();
+    $post->time = misc::times($files[$i]->time_add);
 }
 
 
-if (empty($_GET ['act'])) {
+if (empty($_GET['act'])) {
     $listing->display(__('Папка пуста'));
     $pages->display('?order=' . $order . '&amp;' . (!empty($search) ? 'search=' . urlencode($search) . '&amp;' : '')); // вывод страниц
 } else {
@@ -191,7 +191,7 @@ $return = $dir->ret(5); // последние 5 ссылок пути
 
 
 for ($i = 0; $i < count($return); $i++) {
-    $doc->act($return [$i] ['runame'], '/files' . $return [$i] ['path']);
+    $doc->act($return[$i]['runame'], '/files' . $return[$i]['path']);
 }
 if ($access_write || $access_edit) {
     include H . '/files/inc/dir_form.php';
