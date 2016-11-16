@@ -81,17 +81,8 @@ if ($ank->reg_mail) {
         $post->url = 'mailto:' . $ank->reg_mail;
     }
 }
-//endregion
-//region Webmoney
-if ($ank->wmid) {
-    $post = $listing->post();
-    $post->title = 'WMID';
-    $post->content = $ank->wmid;
-    $post->url = '//passport.webmoney.ru/asp/certview.asp?wmid=' . $ank->wmid;
-    $post->image = '//bl.wmtransfer.com/img/bl/' . $ank->wmid . '?w=50&h=18&bg=0XDBE2E9';
-}
 
-//region О себе
+// О себе
 if ($ank->description) {
     $post = $listing->post();
     $post->title = __('О себе');
