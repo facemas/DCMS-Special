@@ -9,7 +9,7 @@
         <img class="profile" style="background: #1d2129 url(<?= $fon ?>) no-repeat center; background-size: 100% 100%; -webkit-background-size: 100% 100%; padding-bottom: 56.25%;" />
     </div>
 
-    <div style="display: inline-block;position: relative;vertical-align: bottom;text-align: center;">
+    <div style="display: inline-block;position: relative;vertical-align: bottom;text-align: left; margin-left: 2em;">
         <!-- Выводим аватар -->
         <img class="avatar_img" src="<?= $avatar[0] ?>" style="width: 100px; height: 100px; vertical-align: top;" />
         <!-- Выводим кнопту комментариев аватара -->
