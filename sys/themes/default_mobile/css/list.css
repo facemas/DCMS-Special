@@ -60,8 +60,7 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item {padding: 0.14285714e
 .ui.list .list > .item [class*="right floated"],.ui.list > .item [class*="right floated"] {float: right;margin: 0em 0em 0em 1em;}
 
 
-/*******************************Coupling
-*******************************/
+/* Coupling */
 
 .ui.menu .ui.list > .item,.ui.menu .ui.list .list > .item {display: list-item;table-layout: fixed;background-color: transparent;list-style-type: none;list-style-position: outside;padding: 0.21428571em 0em;line-height: 1.14285714em;}
 .ui.menu .ui.list .list > .item:before,.ui.menu .ui.list > .item:before {border: none;background: none;}
@@ -74,7 +73,8 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item {padding: 0.14285714e
 .ui.horizontal.list > .item {display: inline-block;margin-left: 1em;font-size: 1rem;}
 .ui.horizontal.list:not(.celled) > .item:first-child {margin-left: 0em !important;padding-left: 0em !important;}
 .ui.horizontal.list .list {padding-left: 0em;padding-bottom: 0em;}
-.ui.horizontal.list > .item > .image,.ui.horizontal.list .list > .item > .image,.ui.horizontal.list > .item > .fa,.ui.horizontal.list .list > .item > .fa,.ui.horizontal.list > .item > .content,.ui.horizontal.list .list > .item > .content {vertical-align: middle;}
+.ui.horizontal.list > .item > .image,.ui.horizontal.list .list > .item > .image,.ui.horizontal.list > .item > .content,.ui.horizontal.list .list > .item > .content {vertical-align: middle;}
+.ui.horizontal.list > .item > .content i.fa {vertical-align: baseline;}
 
 /* Padding on all elements */
 .ui.horizontal.list > .item:first-child,.ui.horizontal.list > .item:last-child {padding-top: 0.21428571em;padding-bottom: 0.21428571em;}
@@ -83,13 +83,7 @@ ul.ui.list ul li, ol.ui.list ol li, .ui.list .list > .item {padding: 0.14285714e
 .ui.horizontal.list > .item > i.fa {margin: 0em;padding: 0em 0.25em 0em 0em;}
 .ui.horizontal.list > .item > .fa,.ui.horizontal.list > .item > .fa + .content {float: none;display: inline-block;}
 
-
-/******************************* States
-*******************************/
-
-
-/*-------------------   Disabled
---------------------*/
+/* Disabled */
 
 .ui.list .list > .disabled.item,.ui.list > .disabled.item {pointer-events: none;color: rgba(40, 40, 40, 0.3) !important;}
 .ui.inverted.list .list > .disabled.item,.ui.inverted.list > .disabled.item {color: rgba(225, 225, 225, 0.3) !important;}
@@ -167,8 +161,7 @@ ol.ui.list ol li:before,.ui.ordered.list .list > .item:before {margin-left: -2em
 ol.ui.horizontal.list,.ui.ordered.horizontal.list {margin-left: 0em;}
 ol.ui.horizontal.list li:before,.ui.ordered.horizontal.list .list > .item:before,.ui.ordered.horizontal.list > .item:before {position: static;margin: 0em 0.5em 0em 0em;}
 
-/*-------------------   Divided
---------------------*/
+/* Divided */
 
 .ui.divided.list > .item {border-top: 1px solid rgba(34, 36, 38, 0.15);}
 .ui.divided.list .list > .item {border-top: none;}
@@ -239,6 +232,15 @@ ol.ui.horizontal.list li:before,.ui.ordered.horizontal.list .list > .item:before
 .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {padding-left: 1.5rem;}
 .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {padding-right: 1.5rem;}
 
+@media only screen and (max-width: 360px) {
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {padding-left: 1.2rem;}
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {padding-right: 1.2rem;}
+}
+
+@media only screen and (max-width: 330px) {
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {padding-left: 1rem;}
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),.ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {padding-right: 1rem;}
+}
 /* Sizes */
 
 .ui.mini.list {font-size: 0.78571429em;}
