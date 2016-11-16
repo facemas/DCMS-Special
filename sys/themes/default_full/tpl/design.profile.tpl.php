@@ -9,7 +9,7 @@
         <img class="profile" style="background: #1d2129 url(<?= $fon ?>) no-repeat center; background-size: 100% 100%; -webkit-background-size: 100% 100%; padding-bottom: 56.25%;" />
     </div>
 
-    <div style="display: inline-block;position: relative;vertical-align: bottom;text-align: center;">
+    <div style="display: inline-block;position: relative;vertical-align: bottom;text-align: center;margin-left: 2em;">
         <?php
         if ($avatar[0]) {
             # Выводим кнопку - изменить аватар
