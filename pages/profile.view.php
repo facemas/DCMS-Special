@@ -180,7 +180,32 @@ $listing = new listing();
 $fon = new user_fon($ank->id);
 $d = new design();
 $d->assign('fon', $fon->image());
-$d->assign('avatar', array($ank->getAvatar($dcms->browser_type == 'full' ? '150' : '100'), null));
+$d->assign('avatar', $ank->getAvatar($dcms->browser_type == 'full' ? '150' : '100'));
+
+if ($ank->realname && $ank->lastname || $ank->realname) {
+    $d->assign('realname', $ank->realname);
+    $d->assign('lastname', $ank->lastname);
+} else {
+    $d->assign('realname', $ank->nick);
+}
+
+if ($ank->description) {
+    $d->assign('description', text::for_opis($ank->description));
+}
+
+# Кол-во друзей
+if ($ank->is_friend($user) || $ank->vis_friends) {
+    $res = $db->prepare("SELECT COUNT(*) FROM `friends` WHERE `id_user` = ? AND `confirm` = '1'");
+    $res->execute(Array($ank->id));
+    $k_friends = $res->fetchColumn();
+    $url_friends = $ank->id == $user->id ? "/my.friends.php" : "/profile.friends.php?id={$ank->id}";
+
+    $d->assign('f_count', array($url_friends, $k_friends, __(misc::number($k_friends, 'друг', 'друга', 'друзей'))));
+} else {
+    $url_friends = '/faq.php?info=hide&amp;return=' . URL;
+    $d->assign('f_count', array($url_friends, __('друзья скрыты')));
+}
+
 if ($user->id == $ank->id) {
     $d->assign('fon_create', array('/my.fon.php', '<i class="fa fa-camera"></i>')); // Кнопка добавить фон
     //$d->assign('avatar_create', array('/my.avatar.php', '<i class="fa fa-refresh"></i>'));
@@ -190,26 +215,29 @@ if ($ank->avatar == 1) {
     $likeCount = $db->query("SELECT COUNT(*) FROM `avatar_like` WHERE `id_avatar` = '$ank->id' ")->fetchColumn();
     $like = $db->query("SELECT * FROM `avatar_like` WHERE `id_user` = '$user->id' AND `id_avatar` = '$ank->id' LIMIT 1")->fetch();
     if ($user->id && $user->id != $ank->id && !$like) {
-        $d->assign('like_avatar', array('?id=' . $ank->id . '&amp;like_avatar', '<i class="fa fa-heart-o fa-fw"></i>' . __('%s', $likeCount)));
+        $d->assign('like_avatar', array('?id=' . $ank->id . '&amp;like_avatar', $likeCount, '<i class="fa fa-heart-o fa-fw"></i>', __('Мне нравится')));
+    } elseif ($user->id && $user->id == $ank->id) {
+        $d->assign('like_avatar', array('/avatar.like.php?id=' . $ank->id, $likeCount, '<i class="fa fa-heart fa-fw"></i>', __('Понравилось %s ' . misc::number($likeCount, 'пользователю', 'пользователям', 'пользователям'), $likeCount)));
     } elseif ($user->id) {
-        $d->assign('like_all_avatar', array('/avatar.like.php?id=' . $ank->id . '', '<i class="fa fa-heart fa-fw"></i>' . __('%s', $likeCount)));
+        $d->assign('like_avatar', array('/avatar.like.php?id=' . $ank->id, $likeCount, '<i class="fa fa-heart fa-fw" style="color: #e81c4f"></i>', __('Понравилось %s ' . misc::number($likeCount, 'пользователю', 'пользователям', 'пользователям'), $likeCount)));
     }
     $res = $db->query("SELECT COUNT(*) FROM `avatar_komm` WHERE `id_avatar` = '$ank->id'");
-    $cca = $res->fetchColumn();
-    $d->assign('comments_avatar', array('/avatar.comments.php?id=' . $ank->id . '', '<i class="fa fa-comments-o fa-fw"></i>' . __('%s', $cca)));
+    $comments = $res->fetchColumn();
+    $d->assign('comments_avatar', array('/avatar.comments.php?id=' . $ank->id, $comments, '<i class="fa fa-comments-o fa-fw"></i>', __('Прокомментировали %s ' . misc::number($comments, 'пользователь', 'пользователя', 'пользователей'), $comments)));
 }
 
 if ($user->group > 0 & ($ank->id != $user->id)) {
-    $d->assign('gifts', array('/presents/?user=' . $ank->id . '', '<i class="fa fa-gift fa-fw"></i>' . __('Подарить подарок')));
-    $d->assign('mess', array('my.mail.php?id=' . $ank->id . '', '<i class="fa fa-envelope-o fa-fw"></i>' . __('Сообщение')));
-    $d->assign('balls', array('transfer.points.php?id=' . $ank->id . '', '<i class="fa fa-gg-circle fa-fw"></i>' . __('Передать баллы')));
+    $d->assign('gifts', array('/presents/?user=' . $ank->id . '', '<i class="fa fa-gift fa-fw"></i>'));
+    $d->assign('mess', array('my.mail.php?id=' . $ank->id . '', '<i class="fa fa-envelope fa-fw"></i>'));
+    $d->assign('balls', array('transfer.points.php?id=' . $ank->id . '', '<i class="fa fa-gg-circle fa-fw"></i>'));
     if (!$friend['confirm']) {
-        $d->assign('friend', array('?id=' . $ank->id . '&amp;friend=add', '<i class="fa fa-user-plus fa-fw"></i>' . __('Добавить в друзья')));
+        $d->assign('friend_add', array('?id=' . $ank->id . '&amp;friend=add', '<i class="fa fa-user-plus fa-fw"></i>'));
     } else {
-        $d->assign('friend', array('?id=' . $ank->id . '&amp;friend=delete', '<i class="fa fa-user-times fa-fw"></i>' . __('Удалить из друзей')));
+        $d->assign('friend_del', array('?id=' . $ank->id . '&amp;friend=delete', '<i class="fa fa-user-times fa-fw"></i>'));
     }
-} elseif ($user->group > 0 & ($ank->id == $user->id)) {
-    $d->assign('profile_edit', array('/profile.edit.php', '<i class="fa fa-edit fa-fw"></i>' . __('Редактировать анкету')));
+} elseif ($user->group && ($ank->id == $user->id)) {
+    $d->assign('profile_edit', array('/profile.edit.php', '<i class="fa fa-edit fa-fw"></i>'));
+    $d->assign('settings', array('/menu.user.php', '<i class="fa fa-cogs fa-fw"></i>'));
 }
 
 if (!$user->vk_id) {
@@ -218,10 +246,13 @@ if (!$user->vk_id) {
     $d->assign('login', $ank->nick . ' ' . $ank->patronymic . '');
 }
 if ($ank->online) {
-    $d->assign('online', array('on', '<i class="fa fa-circle fa-fw"></i>'));
+    $d->assign('online', 'nick_on');
 } else {
-    $d->assign('online', array('off', '<i class="fa fa-circle fa-fw"></i>'));
+    $d->assign('online', 'nick_off');
 }
+
+$d->assign('rating', array('/profile.reviews.php?id=' . $ank->id, $ank->rating));
+
 if ($ank->group > 1) {
     $d->assign('group_name', $ank->group_name);
 } elseif ($ank->is_vip) {
@@ -255,9 +286,9 @@ if ($row = $q->fetch()) {
     $post = $listing->post();
     $post->title = text::toOutput(__('По приглашению от %s', '[user]' . $inv->id . '[/user]'));
 }
-//endregion
+
 $listing->display();
-//endregion
+
 
 if ($user->group && $ank->id != $user->id) {
     if ($user->group > $ank->group) {
@@ -265,6 +296,3 @@ if ($user->group && $ank->id != $user->id) {
     }
 }
 
-if ($user->group) {
-    $doc->ret(__('Личное меню'), '/menu.user.php');
-}    
