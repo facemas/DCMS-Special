@@ -240,16 +240,6 @@ table.links {font-weight: bold; background-color: #DCEDFF; width: 100%; text-ali
 .quote_title {font-weight: bold;}
 .quote {border-left: 2px solid grey; padding: 4px; color: #838383; margin: 3px; font-size: 90%; background-color: white;}
 
-
-/* Голосования */
-div.vote {margin: 3px; padding: 3px; background-color: #fff; border: 1px solid #B4B4B4; border-radius: 5px; font-size: medium;}
-div.vote a:hover {text-decoration: none;}
-div.vote_name {font-weight: bold; padding-bottom: 4px; text-align: center;}
-div.votes {background-color: #3CA1FF; border-radius: 2px; color: white; text-align: right; padding: 1px 3px; box-sizing: border-box;}
-td.votes {height: 16px; border: 1px #CCC solid; border-radius: 2px; background-color: #EBEBEB;}
-td.votes_add{ padding-left: 3px; width: 19px;}
-td.votes_add a {width: 16px; height: 100%; text-align: center; display: block; padding: 1px 3px; border: 1px solid #CCC; border-radius: 2px;}
-
 .theme_light {color: #4F5155;}
 .theme_light.theme_light_light a {color: #38599E;}
 .theme_light .form_title {padding-bottom:5px; display:block; font-weight: 700;}
