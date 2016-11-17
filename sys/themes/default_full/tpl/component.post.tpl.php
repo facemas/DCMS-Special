@@ -23,6 +23,8 @@ if ($head) {
     <?php
     $img_class = ($image_class ? "class='$image_class'" : null);
     $img_a_class = ($image_a_class ? "<a class='$image_a_class'>" : null);
+    $post_counter = $counter ? '<span class="ui basic label" style="float: right;margin-left: 10px;">' . $counter . '</span>' : '';
+
     # Если активирован comments, то строим для него отдельную структуру
 
     if ($avatar) {
@@ -42,6 +44,12 @@ if ($head) {
             $i = "<i class='fa fa-$icon fa-fw'></i>";
         } else {
             $i = null;
+        }
+
+        if ($counter) {
+            echo '<span class="ui basic label" style="float: right;margin-left: 10px;">';
+            echo $counter;
+            echo '</span>';
         }
 
         if ($url) {
@@ -79,6 +87,7 @@ if ($head) {
                 echo "<div class='text'><p>$content</p></div>";
             }
         }
+
         if ($actions) {
             ?>
             <div class='actions'>
