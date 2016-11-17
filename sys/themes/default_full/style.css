@@ -137,10 +137,6 @@ a:hover {color: #1e70bf; text-decoration: none;}
 #navigation_user a.action {opacity: 0.8;}
 #navigation_user a:hover {opacity: 1; color: #1678c2;}
 
-#messages > div {margin: 5px auto; padding: 5px 2%; min-width: 50%; text-align: center; border-radius: 2px;}
-#messages > .error {background-color: rgba(172, 0, 0, 0.65);}
-#messages > .info {background-color: rgba(0, 78, 172, 0.65);}
-
 #left_column {float: left; width: 30%; padding-right: 10px;}
 
 #content {float: right; width: 70%;}
