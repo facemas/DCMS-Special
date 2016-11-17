@@ -4,14 +4,14 @@ include_once '../sys/inc/start.php';
 $doc = new document(1);
 $doc->title = __('Мой логин');
 
-$doc->ret(__('Личное меню'), '/menu.user.php');
+$doc->opt(__('Личное меню'), '/menu.user.php');
 
 $change_login = true;
 $error = '';
 
 if (!$dcms->login_edit_time) {
     $change_login = false;
-    $doc->err(__('Изменение логина запрещено'));
+    $doc->info(__('Изменение логина запрещено'));
 }
 if ($dcms->login_edit_time && $dcms->login_edit_time + $user->last_time_login > TIME) {
     $change_login = false;
@@ -47,5 +47,9 @@ if ($dcms->login_edit_balls) {
         $form->bbcode(__('[notice] Не достаточно: ' . ($noBalls) . misc::number($noBalls, ' балл', ' балла', ' баллов')));
     }
 }
-$form->button(__('Изменить'), 'edit');
+if ($change_login) {
+    $form->button(__('Сохранить'), 'edit', false, 'tiny ui green labeled fa button', 'fa fa-save fa-fw');
+} else {
+    $form->button(__('Сохранить'), 'edit', false, 'tiny ui disabled labeled fa button', 'fa fa-save fa-fw');
+}
 $form->display();
