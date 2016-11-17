@@ -94,8 +94,9 @@
 
                 <link rel="stylesheet" href="<?= $path ?>/css/message.css" type="text/css"/>
                 <div id="messages">
-                    <?= $this->section($err, '<div class="ui red message">{text}</div>'); ?>
-                    <?= $this->section($msg, '<div class="ui green message">{text}</div>'); ?>
+                    <?= $this->section($err, '<div class="ui floating red message"><p>{text}</p></div>'); ?>
+                    <?= $this->section($msg, '<div class="ui floating green message"><p>{text}</p></div>'); ?>
+                    <?= $this->section($info, '<div class="ui floating info message"><p>{text}</p></div>'); ?>
                 </div>
                 <?php $this->displaySection('content') ?>
             </section>
