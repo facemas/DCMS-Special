@@ -72,14 +72,15 @@ if ($user->group) {
 
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
-$listing->class = $dcms->browser_type == 'full' ? 'minimal comments large listing' : 'comments large listing';
+$listing->ui_segment = true; //подключаем css segments
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments small comments';
 
 
 foreach ($messages AS $message) {
     $doc->description = $message['message'];
 
     $post = $listing->post();
-    $post->class = 'comment';
+    $post->class = 'segment comment';
     $post->comments = true;
 
     $post->id = 'message' . $message['id'];
