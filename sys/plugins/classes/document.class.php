@@ -11,6 +11,7 @@ class document extends design {
     public $last_modified = null;
     protected $err = array();
     protected $msg = array();
+    protected $info = array();
     protected $outputed = false;
     protected $actions = array();
     protected $options = array();
@@ -53,6 +54,10 @@ class document extends design {
 
     function err($text) {
         return $this->err[] = new document_message($text, true);
+    }
+
+    function info($text) {
+        return $this->info[] = new document_message($text);
     }
 
     /**
@@ -137,6 +142,7 @@ class document extends design {
 
         $this->assign('err', $this->err); // сообщения об ошибке
         $this->assign('msg', $this->msg); // сообщения
+        $this->assign('info', $this->info); // сообщения
         $this->assign('title', $this->title, 1); // заголовок страницы
 
         $this->_echo_content = ob_get_clean(); // то, что попало в буфер обмена при помощи echo (display())
