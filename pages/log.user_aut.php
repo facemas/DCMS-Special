@@ -24,15 +24,23 @@ $pages->posts = $res->fetchColumn();
 $q = $db->prepare("SELECT * FROM `log_of_user_aut` WHERE `id_user` = ? ORDER BY `time` DESC LIMIT " . $pages->limit . ";");
 $q->execute(Array($ank->id));
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
+$listing->class = 'segments';
+
 while ($log = $q->fetch()) {
     $post = $listing->post();
-    $post->counter = $log['count']; /* к-сть */
+    $post->class = 'ui segment';
+    $post->ui_label = true;
+    $post->list = true;
+    $post->highlight = !$log['status'];
+    $post->time = misc::when($log['time']);
+    $post->counter = $log['count'];
     $post->title = $log['method'] . ': ' . __($log['status'] ? 'Удачно' : 'Не удачно');
-    $post->content[] = "[b]IP: " . long2ip($log['iplong']) . "[/b]";
+    $post->content = "<b>IP: " . long2ip($log['iplong']) . "</b><br />";
 
     if ($log['browser']) {
-        $post->content[] = __('Браузер') . ": $log[browser]";
+        $post->content .= __('Браузер') . ": $log[browser]<br />";
     } else {
         if (!isset($browsers [$log['id_browser']]) && (int) $log['id_browser'] > 0) {
             $b = $db->prepare("SELECT * FROM `browsers` WHERE `id` = ? LIMIT 1;");
@@ -44,18 +52,15 @@ while ($log = $q->fetch()) {
             }
         }
         if ($browsers [$log['id_browser']]) {
-            $post->content[] = __('Браузер') . ": " . $browsers[$log['id_browser']];
+            $post->content .= __('Браузер') . ": " . $browsers[$log['id_browser']] . "<br />";
         }
     }
     if ($log['browser_ua']) {
-        $post->content[] = "User-Agent: $log[browser_ua]";
+        $post->content .= "User-Agent: $log[browser_ua]";
     }
-
-    $post->time = misc::when($log['time']);
-    $post->highlight = !$log['status'];
 }
 $listing->display(__('Журнал пуст'));
 
 $pages->display('?');
 
-$doc->ret(__('Личное меню'), '/menu.user.php');
+$doc->opt(__('Личное меню'), '/menu.user.php');
