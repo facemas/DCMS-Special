@@ -30,7 +30,7 @@
 
 /* Icons */
 
-.ui.menu .item > i.fa {opacity: 0.9;float: none;margin: 0em 0.35714286em 0em 0em;color: white}
+.ui.menu .item > i.fa {opacity: 0.9;float: none;margin: 0em 0.35714286em 0em 0em;}
 
 /* Button */
 
@@ -99,10 +99,6 @@
 .ui.menu .item > img:not(.ui) {display: inline-block;vertical-align: middle;margin: -0.3em 0em;width: 2.5em;}
 .ui.vertical.menu .item > img:not(.ui):only-child {display: block;max-width: 100%;width: auto;}
 
-
-/***** Coupling ********/
-
-
 /* Sidebar */
 
 
@@ -110,8 +106,7 @@
 .ui.vertical.sidebar.menu > .item:first-child:before {display: block !important;}
 .ui.vertical.sidebar.menu > .item::before {top: auto;bottom: 0px;}
 
-/*-------------- Container
----------------*/
+/* Container */
 
 @media only screen and (max-width: 767px) {
     .ui.menu > .ui.container {width: 100% !important;margin-left: 0em !important;margin-right: 0em !important;}
@@ -193,8 +188,7 @@
 .ui.vertical.menu .active.item .menu .active.item {border-left: none;}
 .ui.vertical.menu .item .menu .active.item {background-color: transparent;font-weight: bold;color: rgba(0, 0, 0, 0.95);}
 
-/*-------------- Tabular
----------------*/
+/* Tabular */
 
 .ui.tabular.menu {border-radius: 0em;box-shadow: none !important;border: none;background: none transparent;border-bottom: 1px solid #D4D4D5;}
 .ui.tabular.fluid.menu {width: calc(100% +  2px ) !important;}
@@ -229,9 +223,7 @@
 /* Dropdown */
 .ui.tabular.menu .active.dropdown.item {margin-bottom: 0px;border-left: 1px solid transparent;border-right: 1px solid transparent;border-top: 2px solid transparent;border-bottom: none;}
 
-/*--------------
-   Pagination
----------------*/
+/* Pagination */
 
 .ui.pagination.menu {margin: 0em;display: -webkit-inline-box;display: -webkit-inline-flex;display: -ms-inline-flexbox;display: inline-flex;vertical-align: middle;}
 .ui.pagination.menu .item:last-child {border-radius: 0em 0.28571429rem 0.28571429rem 0em;}
@@ -243,9 +235,7 @@
 /* Active */
 .ui.pagination.menu .active.item {border-top: none;padding-top: 0.92857143em;background-color: rgba(0, 0, 0, 0.05);color: rgba(0, 0, 0, 0.95);box-shadow: none;}
 
-/*--------------
-   Secondary
----------------*/
+/* Secondary */
 
 .ui.secondary.menu {background: none;margin-left: -0.35714286em;margin-right: -0.35714286em;border-radius: 0em;border: none;box-shadow: none;}
 
@@ -298,6 +288,7 @@
 
 .ui.secondary.pointing.menu {margin-left: 0em;margin-right: 0em;border-bottom: 2px solid rgba(34, 36, 38, 0.15); background: #0084B4;}
 .ui.secondary.pointing.menu .item {border-bottom-color: transparent;border-bottom-style: solid;border-radius: 0em;-webkit-align-self: flex-end;-ms-flex-item-align: end;align-self: flex-end;margin: 0em 0em -2px;padding: 0.85714286em 1.14285714em;border-bottom-width: 2px;-webkit-transition: color 0.1s ease;transition: color 0.1s ease;}
+.ui.secondary.pointing.menu .item > i.fa {color: white;}
 
 /* Item Types */
 .ui.secondary.pointing.menu .header.item {color: rgba(0, 0, 0, 0.85) !important;}
@@ -383,8 +374,7 @@
 /* Fluid */
 .ui.fluid.text.menu {margin-left: 0em;margin-right: 0em;}
 
-/*--------------Icon Only
----------------*/
+/* Icon Only */
 
 
 /* Vertical Menu */
@@ -404,9 +394,6 @@
 
 /* Vertical Icon */
 .ui.vertical.icon.menu .item > .icon:not(.dropdown) {display: block;opacity: 1;margin: 0em auto;float: none;}
-
-/* Inverted */
-.ui.inverted.icon.menu .item {color: #FFFFFF;}
 
 /*--------------
    Labeled Icon
@@ -470,8 +457,7 @@
 
 .ui.borderless.menu .item:before,.ui.borderless.menu .item .menu .item:before,.ui.menu .borderless.item:before {background: none !important;}
 
-/*-------------------   Compact
---------------------*/
+/* Compact */
 
 .ui.compact.menu {display: -webkit-inline-box;display: -webkit-inline-flex;display: -ms-inline-flexbox;display: inline-flex;margin: 0em;vertical-align: middle;}
 .ui.compact.vertical.menu {display: inline-block;}
@@ -480,13 +466,11 @@
 .ui.compact.vertical.menu {width: auto !important;}
 .ui.compact.vertical.menu .item:last-child::before {display: block;}
 
-/*-------------------Fluid
---------------------*/
+/* Fluid */
 
 .ui.menu.fluid,.ui.vertical.menu.fluid {width: 100% !important;}
 
-/*-------------------  Evenly Sized
---------------------*/
+/* Evenly Sized */
 
 .ui.item.menu,
 .ui.item.menu .item {width: 100%;padding-left: 0em !important;padding-right: 0em !important;margin-left: 0em !important;margin-right: 0em !important;text-align: center;-webkit-box-pack: center;-webkit-justify-content: center;-ms-flex-pack: center;justify-content: center;}
@@ -503,8 +487,7 @@
 .ui.menu.eleven.item .item {width: 9.09%;}
 .ui.menu.twelve.item .item {width: 8.333%;}
 
-/*-------------- Fixed
----------------*/
+/* Fixed */
 
 .ui.menu.fixed {position: fixed;z-index: 101;margin: 0em;width: 100%;}
 .ui.menu.fixed,.ui.menu.fixed .item:first-child,.ui.menu.fixed .item:last-child {border-radius: 0px !important;}
@@ -538,8 +521,7 @@
 .ui.vertical.pointing.menu .active.item:after {background-color: #F2F2F2;}
 .ui.vertical.pointing.menu .menu .active.item:after {background-color: #FFFFFF;}
 
-/*--------------Attached
----------------*/
+/* Attached */
 
 
 /* Middle */
