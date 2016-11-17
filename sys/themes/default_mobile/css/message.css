@@ -41,10 +41,6 @@
 
 .ui.dropdown .menu > .message {margin: 0px -1px;}
 
-
-/****** States ********/
-
-
 /* Visible */
 
 .ui.visible.visible.visible.visible.message {display: block;}
@@ -53,10 +49,6 @@
 /* Hidden */
 
 .ui.hidden.hidden.hidden.hidden.message {display: none;}
-
-
-/******* Variations **********/
-
 
 /* Compact*/
 
@@ -81,6 +73,9 @@
 /* Floating */
 
 .ui.floating.message {box-shadow: 0px 0px 0px 1px rgba(34, 36, 38, 0.22) inset, 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);}
+.ui.floating.red.message {box-shadow: 0px 0px 0px 1px #DB2828 inset, 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);}
+.ui.floating.green.message {box-shadow: 0px 0px 0px 1px #1EBC30 inset, 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);}
+.ui.floating.info.message {box-shadow: 0px 0px 0px 1px #A9D5DE inset, 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);}
 
 /* Colors */
 
@@ -119,7 +114,6 @@
 .ui.success.message .header {color: #1A531B;}
 
 /* Colors */
-.ui.inverted.message,
 .ui.black.message {background-color: #1B1C1D;color: rgba(255, 255, 255, 0.9);}
 .ui.red.message {background-color: #FFE8E6;color: #DB2828;box-shadow: 0px 0px 0px 1px #DB2828 inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);}
 .ui.red.message .header {color: #c82121;}
