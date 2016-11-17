@@ -120,8 +120,9 @@
                         <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
 
                         <div id="messages">
-                            <?= $this->section($err, '<div class="ui red message">{text}</div>'); ?>
-                            <?= $this->section($msg, '<div class="ui green message">{text}</div>'); ?>
+                            <?= $this->section($err, '<div class="ui floating red message"><p>{text}</p></div>'); ?>
+                            <?= $this->section($msg, '<div class="ui floating green message">{text}</div>'); ?>
+                            <?= $this->section($info, '<div class="ui floating info message">{text}</div>'); ?>
                         </div>
                         <div class="listing" style="padding: 5px;">
                             <a class="ui basic label" href="/"> <i class="fa fa-home fa-fw"></i> </a> 
