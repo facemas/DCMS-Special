@@ -45,10 +45,10 @@ if ($ank->ank_d_r && $ank->ank_m_r && $ank->ank_g_r) {
 if ($ank->language || $ank->languages) { // $ank->language(s)
     $post = $listing->post(); // Новый блок
     $post->list = true;
-    $post->title = $ank->languages ? __('Языки') : __('Язык');
+    $post->title = ($ank->languages ? __('Языки') : __('Язык'));
     $post->class = 'ui segment';
     $post->icon('language'); // Пиктограмка пункта: иероглиф
-    $post->content = $ank->languages ? $ank->languages : $ank->language;
+    $post->content = ($ank->languages ? $ank->languages : $ank->language);
 }
 
 if ($ank->skype) {
