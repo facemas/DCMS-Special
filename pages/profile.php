@@ -7,6 +7,8 @@ $doc->tab(__('Активность'), '?act=activity&amp;id=' . $ank->id, $from 
 $doc->tab(__('Анкета'), '?act=anketa&amp;id=' . $ank->id, $from === 'anketa');
 $doc->tab(__('Основное'), '?id=' . $ank->id, $from === 'default');
 
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
 # Выводим подарки если есть
 $res = $db->prepare("SELECT COUNT(*) FROM `present_users` WHERE `id_user` = ?");
 $res->execute(Array($ank->id));
@@ -182,3 +184,16 @@ if ($ank->last_time_login) {
     $post->url = '/profile.logins.php?id=' . $ank->id;
 }
 
+// По приглашению от...
+
+$q = $db->prepare("SELECT `id_user` FROM `invations` WHERE `id_invite` = ? LIMIT 1");
+$q->execute(Array($ank->id));
+if ($row = $q->fetch()) {
+    $inv = new user($row['id_user']);
+    $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
+    $post->title = text::toOutput(__('По приглашению от %s', '[user]' . $inv->id . '[/user]'));
+}
+
+$listing->display();
