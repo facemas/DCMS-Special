@@ -55,12 +55,18 @@ if ($head) {
                 if ($comments) {
                     echo "<a class='author' href='$url'>$i $login $title</a>";
                 }
+                if ($list) {
+                    echo "<p><a class='item' href='$url'>$i $title</a></p>";
+                }
                 if ($feed) {
                     echo "<div class='summary'><a class='user' href='$url'>$i $login</a> $content </div>";
                 }
             } else {
                 if ($comments) {
                     echo "<a class='author'>$i $login</a>";
+                }
+                if ($list) {
+                    echo "<p><a class='item'>$i $title</a></p>";
                 }
                 if ($feed) {
                     echo "<div class='summary'><a class='user'>$i $login</a> $content </div>";
