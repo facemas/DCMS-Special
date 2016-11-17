@@ -22,7 +22,7 @@ if ($head) {
 <div id="<?= $id ?>" class="<?= implode(' ', $classes) ?>" data-ng-controller="ListingPostCtrl" data-post-url="<?= $url ?>">
     <?php
     $img_class = ($image_class ? "class='$image_class'" : null);
-    $img_a_class = ($image_a_class ? "<a class='$image_a_class'>" : null);
+    $img_a_class = ($image_a_class ? "<div class='$image_a_class'>" : null);
     $post_counter = $counter ? '<span class="ui basic label" style="float: right;margin-left: 10px;">' . $counter . '</span>' : '';
 
     # Если активирован comments, то строим для него отдельную структуру
@@ -39,7 +39,7 @@ if ($head) {
     <div class="content">
         <?php
         if ($image) {
-            $i = "<img src='$image' alt='' />";
+            $i = "<img src='$image' alt='' $img_class/>";
         } elseif ($icon) {
             $i = "<i class='fa fa-$icon fa-fw'></i>";
         } else {
