@@ -38,9 +38,13 @@ if ($gift > 0) {
 }
 $listing->display();
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segment
+$listing->ui_list = true; //подключаем css list
+$listing->class = 'segments';
+
 $post = $listing->post();
-$post->highlight = true;
+$post->class = 'ui secondary segment';
 $post->icon('th-large');
 $post->title = __('Меню %s', $ank->nick);
 
@@ -64,17 +68,17 @@ if ($ank->id) {
 
     $albums_dir = new files($albums_path);
 
-    $photos_count ['all'] = $albums_dir->count();
-    if ($photos_count ['all']) {
-        $photos_count ['new'] = $albums_dir->count(NEW_TIME);
+    $photos_count['all'] = $albums_dir->count();
+    $photos_count['new'] = $albums_dir->count(NEW_TIME);
 
-        $post = $listing->post();
-        $post->title = __('Фотографии');
-        $post->icon('image');
-        $post->url = '/photos/albums.php?id=' . $ank->id;
-        if ($photos_count ['new']) {
-            $post->counter = '+' . $photos_count ['new'];
-        }
+    $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
+    $post->title = __('Фотографии');
+    $post->icon('image');
+    $post->url = '/photos/albums.php?id=' . $ank->id;
+    if ($photos_count['new']) {
+        $post->counter = '+' . $photos_count ['new'];
     }
 }
 
@@ -84,6 +88,8 @@ if ($ank->id) {
     $res->execute(Array($user->id));
     $gifts = $res->fetchColumn();
     $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->icon('gift');
     $post->title = __('Подарки');
     $post->url = '/profile.presents.php?id=' . $ank->id;
@@ -94,17 +100,21 @@ if ($ank->id) {
 
 # Отзывы
 $post = $listing->post();
+$post->list = true;
+$post->class = 'ui segment';
 $post->title = __('Отзывы');
 $post->icon('ticket');
 $post->url = '/profile.reviews.php?id=' . $ank->id;
 $post->counter = $ank->rating;
 
-# Гости
 if ($user->id && $user->id == $ank->id) {
+    # Гости
     $res = $db->prepare("SELECT COUNT(*) FROM `my_guests` WHERE `id_ank` = ? AND `read`= ?");
     $res->execute(Array($user->id, 1));
     $new_g = $res->fetchColumn();
     $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->icon('user-o');
     $post->title = __('Гости');
     $post->url = '/my.guest.php';
@@ -112,10 +122,20 @@ if ($user->id && $user->id == $ank->id) {
         $post->counter = '+' . $new_g;
     }
 
+    # Почта
+    $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
+    $post->icon('envelope-o');
+    $post->title = __('Почта');
+    $post->url = '/my.mail.php';
+
     $res = $db->prepare("SELECT COUNT(*) FROM `notification` WHERE `id_user` = ? AND `is_read`= ?");
     $res->execute(Array($user->id, 1));
     $not = $res->fetchColumn();
     $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->icon('bell-o');
     $post->title = __('Уведомления');
     $post->url = '/my.notification.php';
@@ -130,12 +150,16 @@ if ($ank->is_friend($user) || $ank->vis_friends) {
     $k_friends = $res->fetchColumn();
 
     $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->icon('handshake-o');
     $post->title = __('Друзья');
     $post->url = $ank->id == $user->id ? "/my.friends.php" : "/profile.friends.php?id={$ank->id}";
     $post->counter = $k_friends;
 } else {
     $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->icon('handshake-o');
     $post->title = __('Друзья');
     $post->url = '/faq.php?info=hide&amp;return=' . URL;
@@ -151,6 +175,8 @@ if ($ank->last_time_login) {
         $logins[] = $v['login'];
     }
     $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->title = __('История логинов');
     $post->post = implode(', ', $logins);
     $post->url = '/profile.logins.php?id=' . $ank->id;
