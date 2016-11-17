@@ -4,6 +4,7 @@ include_once '../sys/inc/start.php';
 
 $doc = new document(1);
 $doc->title = __('Гости');
+
 if (isset($_GET['truncate'])) {
     $res = $db->prepare("DELETE FROM `my_guests` WHERE `id_ank` = ? ");
     $res->execute(Array($user->id));
