@@ -11,7 +11,7 @@ if (AJAX) {
 $doc->title = __('Моя почта');
 $doc->head = 'mail';
 
-if (isset($_GET ['id'])) {
+if (isset($_GET['id'])) {
     $id_kont = (int) $_GET ['id'];
     $ank = new user($id_kont);
     $res = $db->prepare("SELECT COUNT(*) FROM `mail` WHERE `id_user` = ? AND `id_sender` = ?");
@@ -99,16 +99,25 @@ if (isset($_GET ['id'])) {
     $user->mail_new_count = $user->mail_new_count - $res->rowCount();
 
     $id_after = false;
-    $listing = new listing();
+
+    $listing = new ui_components();
+    $listing->ui_comment = true; //подключаем css comments
+    $listing->ui_segment = true; //подключаем css segment
+    $listing->class = $dcms->browser_type == 'full' ? 'segments large comments' : 'segments small comments';
+
 
     if ($arr = $q->fetchAll()) {
         foreach ($arr AS $mail) {
             $ank2 = new user((int) $mail ['id_sender']);
+
             $post = $listing->post();
+            $post->class = 'segment comment';
+            $post->comments = true;
             $post->id = 'mail_post_' . $mail['id'];
-            $post->title = $ank2->nick();
+            $post->login = $ank2->nick();
             $post->url = '/profile.view.php?id=' . $ank2->id;
-            $post->image = $ank2->getAvatar();
+            $post->avatar = $ank2->getAvatar();
+            $post->image_a_class = 'avatar';
             $post->content = text::toOutput($mail ['mess']);
             $post->highlight = !$mail ['is_read'];
             $post->time = misc::times($mail ['time']);
@@ -126,7 +135,7 @@ if (isset($_GET ['id'])) {
     $listing->setAjaxUrl('?id=' . $ank->id . '&amp;page=' . $pages->this_page);
 
     if ($doc instanceof document_json && !$arr && $user->group) {
-        $post = new listing_post(__('Нет результатов'));
+        $post = new ui_compost(__('Нет результатов'));
         $post->icon('clone');
         $doc->add_post($post);
     }
@@ -150,29 +159,52 @@ $user->mail_new_count = $res->fetchColumn();
 
 $pages = new pages ();
 
-if (isset($_GET ['only_unreaded'])) {
-    $res = $db->prepare("SELECT COUNT(DISTINCT(`mail`.`id_sender`)) FROM `mail` WHERE `mail`.`id_user` = ? AND `mail`.`is_read` = '0'");
-    $res->execute(Array($user->id));
-    $pages->posts = $res->fetchColumn();
-    $q = $db->prepare("SELECT `users`.`id`, `mail`.`id_sender`, MAX(`mail`.`time`) AS `time`, MIN(`mail`.`is_read`) AS `is_read`, COUNT(`mail`.`id`) AS `count` FROM `mail` LEFT JOIN `users` ON `mail`.`id_sender` = `users`.`id` WHERE `mail`.`id_user` = ? AND `mail`.`is_read` = '0' GROUP BY `mail`.`id_sender` ORDER BY `time` DESC LIMIT " . $pages->limit);
-} else {
-    $res = $db->prepare("SELECT COUNT(DISTINCT(`mail`.`id_sender`)) FROM `mail` WHERE `mail`.`id_user` = ?");
-    $res->execute(Array($user->id));
-    $pages->posts = $res->fetchColumn();
-    $q = $db->prepare("SELECT `users`.`id`, `mail`.`id_sender`, MAX(`mail`.`time`) AS `time`, MIN(`mail`.`is_read`) AS `is_read`, COUNT(`mail`.`id`) AS `count` FROM `mail` LEFT JOIN `users` ON `mail`.`id_sender` = `users`.`id` WHERE `mail`.`id_user` = ? GROUP BY `mail`.`id_sender` ORDER BY `time` DESC LIMIT " . $pages->limit);
+switch (@$_GET['from']) {
+    case 'new':
+        $from = 'new';
+
+        $res = $db->prepare("SELECT COUNT(DISTINCT(`mail`.`id_sender`)) FROM `mail` WHERE `mail`.`id_user` = ? AND `mail`.`is_read` = '0'");
+        $res->execute(Array($user->id));
+        $pages->posts = $res->fetchColumn();
+        $q = $db->prepare("SELECT `users`.`id`, `mail`.`id_sender`, `mail`.`mess`, MAX(`mail`.`time`) AS `time`, MIN(`mail`.`is_read`) AS `is_read`, COUNT(`mail`.`id`) AS `count` FROM `mail` LEFT JOIN `users` ON `mail`.`id_sender` = `users`.`id` WHERE `mail`.`id_user` = ? AND `mail`.`is_read` = '0' GROUP BY `mail`.`id_sender` ORDER BY `time` DESC LIMIT " . $pages->limit);
+
+        break;
+    default:
+        $from = 'all';
+
+        $res = $db->prepare("SELECT COUNT(DISTINCT(`mail`.`id_sender`)) FROM `mail` WHERE `mail`.`id_user` = ?");
+        $res->execute(Array($user->id));
+        $pages->posts = $res->fetchColumn();
+        $q = $db->prepare("SELECT `users`.`id`, `mail`.`id_sender`, `mail`.`mess`, MAX(`mail`.`time`) AS `time`, MIN(`mail`.`is_read`) AS `is_read`, COUNT(`mail`.`id`) AS `count` FROM `mail` LEFT JOIN `users` ON `mail`.`id_sender` = `users`.`id` WHERE `mail`.`id_user` = ? GROUP BY `mail`.`id_sender` ORDER BY `time` DESC LIMIT " . $pages->limit);
+
+        break;
 }
 
+$doc->tab(__('Новые'), '?from=new', $from === 'new');
+$doc->tab(__('Все'), '?', $from === 'all');
+
 $q->execute(Array($user->id));
-$listing = new listing();
+
+$listing = new ui_components();
+$listing->ui_comment = true; //подключаем css comments
+$listing->ui_segment = true; //подключаем css segment
+$listing->class = $dcms->browser_type == 'full' ? 'segments large comments' : 'segments small comments';
+
 if ($arr = $q->fetchAll()) {
     foreach ($arr AS $mail) {
         $ank = new user((int) $mail['id_sender']);
+
         $post = $listing->post();
-        $post->image = $ank->getAvatar();
+        $post->ui_label = true; //подключаем css label
+        $post->class = 'segment comment';
+        $post->comments = true;
+        $post->avatar = $ank->getAvatar();
+        $post->image_a_class = 'avatar';
         $post->url = '?id=' . $ank->id;
-        $post->title = $ank->nick();
-        $post->post = misc::times($mail['time']);
-        $post->counter = isset($_GET ['only_unreaded']) ? '+' . $mail['count'] : $mail['count'];
+        $post->login = $ank->nick();
+        $post->time = misc::times($mail['time']);
+        $post->content = text::substr($mail['mess'], 30);
+        $post->counter = $from == 'new' ? '+' . $mail['count'] : $mail['count'];
     }
 }
 $listing->display(__('Нет результатов'));
