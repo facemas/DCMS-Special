@@ -16,9 +16,10 @@ $form = new form('?' . passgen());
 $form->checkbox('email', __('Показывать %s', 'E-Mail'), $user->vis_email);
 $form->checkbox('skype', __('Показывать %s', 'Skype'), $user->vis_skype);
 $form->checkbox('friends', __('Список друзей'), $user->vis_friends);
-$form->bbcode(__('Ваши друзья будут видеть все ваши данные независимо от установленных параметров'));
+$form->block("<div class='ui mini info message'>" . __('Ваши друзья будут видеть все ваши данные независимо от установленных параметров') . "</div>");
 $form->checkbox('mail_only_friends', __('Принимать личные сообщения только от друзей'), $user->mail_only_friends);
-$form->button(__('Сохранить'), 'save');
+$form->block("<br />");
+$form->button(__('Сохранить'), 'save', false, 'tiny ui green labeled fa button', 'fa fa-save fa-fw');
 $form->display();
 
-$doc->ret(__('Личное меню'), '/menu.user.php');
+$doc->opt(__('Личное меню'), '/menu.user.php');
