@@ -150,7 +150,7 @@ section#content {padding: 0.3em; font-size: .8em;}
 }
 .blink {-webkit-animation: blink 1s linear infinite;-moz-animation: blink 1s linear infinite;animation: blink 1s linear infinite;} 
 
-td.icon {width: 16px; padding-right: 3px; padding-top: 2px;}
+td.icon {width: 16px; padding-right: 3px;}
 td.title {position: relative; white-space: nowrap;}
 td.right {text-align: right;}
 td.content {padding: .5em 0;}
@@ -189,7 +189,7 @@ span.vote_name {font-weight: bold; display: block; text-align: center; padding: 
 .listing .post:hover:not([data-post-url=""]) {background-color: #f5f8fa; cursor: pointer;}
 .listing .post:not([data-post-url=""]) {transition: all 500ms;}
 .listing .post.highlight {background-color: rgb(246, 247, 249);}
-.listing .post.icon {display: inline-block; vertical-align: middle; margin-top: -2px;}
+.listing .post.icon {display: inline-block; vertical-align: middle;}
 
 .comment:not([data-post-url=""]) {transition: all 500ms;}
 .comment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
@@ -199,8 +199,8 @@ span.vote_name {font-weight: bold; display: block; text-align: center; padding: 
 .post {display: block; padding: 1em 0;}
 .post.highlight td.title {font-weight: bold; color: #383838;}
 .post td.content a {color: #373a3c; text-decoration: none;}
-.post td.icon, td.title {vertical-align: middle;}
-.post.icon .post_icon {display: inline-block; vertical-align: middle; margin-top: -3px;}
+.post td.icon, .post td.title {vertical-align: middle;}
+.post.icon .post_icon {display: inline-block; vertical-align: middle;}
 .post.image .post_image {float: left; display: inline-block; width: 50px; overflow: hidden; border-radius: 2px; border: 1px solid #BBB; box-shadow: 1px 1px 3px #E4E4E4;}
 .post:first-child {border-top-left-radius: 3px; border-top-right-radius: 3px;}
 .post:last-child {border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;}
