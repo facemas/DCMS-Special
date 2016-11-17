@@ -174,7 +174,6 @@ span.vote_name {font-weight: bold; display: block; text-align: center; padding: 
 #adt_top, #adt_bottom {text-align: center; margin-bottom: 20px;}
 #adt_top a, #adt_bottom a {display: block; margin: 5px;}
 #adt_top {border-radius: 5px;}
-#messages > div {margin: 5px auto; padding: 5px 2%; min-width: 50%; text-align: center;}
 #content {padding: 3px; position: relative; overflow: hidden;}
 
 .nick_on:after {content: '●'; margin-left: 2px; color: #07BE07;}
