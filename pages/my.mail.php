@@ -64,8 +64,9 @@ if (isset($_GET['id'])) {
             header('Refresh: 1; url=?id=' . $id_kont);
             exit();
         }
-        if ($doc instanceof document_json)
+        if ($doc instanceof document_json) {
             $doc->form_value('token', antiflood::getToken('mail'));
+        }
         $doc->ret(__('К сообщениям'), '?id=' . $id_kont);
     }
 
