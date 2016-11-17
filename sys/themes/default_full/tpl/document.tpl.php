@@ -99,7 +99,7 @@
                                 <a class="action" href="/menu.user.php"><i class="fa fa-cogs fa-fw"></i> <?= __("Личное меню") ?></a>
                             <?php } ?>
                             <a ng-show="+ user.friend_new_count" class='ng-hide' href='/my.friends.php' ng-bind="str.friends"><?= __("Друзья") ?></a>
-                            <a ng-show="+ user.mail_new_count" class='ng-hide' href='/my.mail.php?only_unreaded' ng-bind="str.mail"><?= __("Почта") ?></a>
+                            <a ng-show="+ user.mail_new_count" class='ng-hide' href='/my.mail.php' ng-bind="str.mail"><?= __("Почта") ?></a>
                             <a ng-show="+ user.not_new_count" class='ng-hide' href='/my.notification.php' ng-bind="str.notification"><?= __("Уведомления") ?></a>
                             <a ng-hide="+ user.group" class="ng-hide" href="/login.php?return={{URL}}" ng-bind="translates.auth"><?= __("Авторизация") ?></a>
                             <a ng-hide="+ user.group" class="ng-hide" href="/reg.php?return={{URL}}" ng-bind="translates.reg"><?= __("Регистрация") ?></a>
