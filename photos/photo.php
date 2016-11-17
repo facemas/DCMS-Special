@@ -70,9 +70,9 @@ if ($photo->id_user && $photo->id_user == $user->id) {
     if (!empty($_GET ['act']) && $_GET ['act'] === 'delete') {
 
         if (!empty($_POST ['delete'])) {
-            if (empty($_POST ['captcha']) || empty($_POST ['captcha_session']) || !captcha::check($_POST ['captcha'], $_POST ['captcha_session']))
+            if (empty($_POST ['captcha']) || empty($_POST ['captcha_session']) || !captcha::check($_POST ['captcha'], $_POST ['captcha_session'])) {
                 $doc->err(__('Проверочное число введено неверно'));
-            elseif ($photo->delete()) {
+            } elseif ($photo->delete()) {
                 $doc->msg(__('Фото успешно удалено'));
                 $doc->ret(__('Альбом %s', $album->name), 'photos.php?id=' . $ank->id . '&amp;album=' . urlencode($album->name));
                 $doc->ret(__('Альбомы %s', $ank->nick), 'albums.php?id=' . $ank->id);
