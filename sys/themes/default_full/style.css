@@ -178,6 +178,8 @@ a:hover {color: #1e70bf; text-decoration: none;}
 
 .comment:not([data-post-url=""]) {transition: all 500ms;}
 .comment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
+.segment:not([data-post-url=""]) {transition: all 500ms;}
+.segment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
 
 .post:first-child {border-top-left-radius: 3px; border-top-right-radius: 3px;}
 .post:last-child {border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;}
