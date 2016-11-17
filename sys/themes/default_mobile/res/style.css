@@ -193,6 +193,8 @@ span.vote_name {font-weight: bold; display: block; text-align: center; padding: 
 
 .comment:not([data-post-url=""]) {transition: all 500ms;}
 .comment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
+.segment:not([data-post-url=""]) {transition: all 500ms;}
+.segment:hover:not([data-post-url=""]) {text-decoration: none !important; background-color: #f5f8fa; cursor: pointer;}
 
 .post {display: block; padding: 1em 0;}
 .post.highlight td.title {font-weight: bold; color: #383838;}
