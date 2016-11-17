@@ -36,6 +36,11 @@ if ($ui_divider) {
     <link rel="stylesheet" href="<?= $path ?>/css/divider.css" type="text/css" />
     <?php
 }
+if ($ui_menu) {
+    ?>
+    <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css" />
+    <?php
+}
 
 $classes = array('ui');
 if ($class) {
