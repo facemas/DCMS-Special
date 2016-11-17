@@ -176,7 +176,6 @@ if (isset($_GET['like_avatar']) && $user->id) {
 }
 
 // Профиль пользователя
-$listing = new listing();
 $fon = new user_fon($ank->id);
 $d = new design();
 $d->assign('fon', $fon->image());
@@ -276,19 +275,6 @@ switch ($act) {
         require_once 'activity.php';
         break;
 }
-//endregion
-//region По приглашению от...
-
-$q = $db->prepare("SELECT `id_user` FROM `invations` WHERE `id_invite` = ? LIMIT 1");
-$q->execute(Array($ank->id));
-if ($row = $q->fetch()) {
-    $inv = new user($row['id_user']);
-    $post = $listing->post();
-    $post->title = text::toOutput(__('По приглашению от %s', '[user]' . $inv->id . '[/user]'));
-}
-
-$listing->display();
-
 
 if ($user->group && $ank->id != $user->id) {
     if ($user->group > $ank->group) {
