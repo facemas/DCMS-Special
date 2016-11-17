@@ -13,7 +13,7 @@ $res = $db->query("SELECT COUNT(*) FROM `guest_online` WHERE `conversions` >= '5
 $guest = $res->fetchColumn();
 
 # Для вывода кол-ва аватаров
-$user_limit = ($dcms->browser_type == 'full' ? '10' : '5');
+$user_limit = ($dcms->browser_type == 'full' ? '10' : '7');
 
 $listing = new ui_components();
 $listing->ui_segment = true; //подключаем css segment
