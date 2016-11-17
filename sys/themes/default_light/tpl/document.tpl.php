@@ -19,6 +19,7 @@
     </head>
     <body class="theme_light theme_light_light">
         <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
+        <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
 
         <div>
             <? $this->display('inc.title.tpl') ?>
@@ -35,9 +36,12 @@
             </div>
             <? $this->displaySection('before_content')?>
             <div id="content">
+                <link rel="stylesheet" href="<?= $path ?>/css/message.css" type="text/css"/>
+
                 <div id="messages">
-                    <?= $this->section($err, '<div class="err">{text}</div>'); ?>
-                    <?= $this->section($msg, '<div class="msg">{text}</div>'); ?>
+                    <?= $this->section($err, '<div class="ui red message">{text}</div>'); ?>
+                    <?= $this->section($msg, '<div class="ui green message">{text}</div>'); ?>
+                    <?= $this->section($info, '<div class="ui info message">{text}</div>'); ?>
                 </div>
                 <?php $this->displaySection('content') ?>
             </div>
