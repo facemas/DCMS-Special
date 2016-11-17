@@ -66,7 +66,7 @@ if ($head) {
                     echo "<a class='author'>$i $login</a>";
                 }
                 if ($list) {
-                    echo "<p><a class='item'>$i $title</a></p>";
+                    echo "<p><a class='item'>$i $title</a> " . ($time ? $time : null) . "</p>";
                 }
                 if ($feed) {
                     echo "<div class='summary'><a class='user'>$i $login</a> $content </div>";
@@ -87,7 +87,7 @@ if ($head) {
             }
 
             if ($content) {
-                if ($comments) {
+                if ($comments || $list) {
                     echo "<div class='text'><p>$content</p></div>";
                 }
             }
