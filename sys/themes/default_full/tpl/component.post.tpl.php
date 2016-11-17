@@ -57,7 +57,7 @@ if ($head) {
                 echo "<a class='author' href='$url'>$i $login $title</a>";
             }
             if ($list) {
-                echo "<p><a class='item' href='$url'>$i $title</a></p>";
+                echo "<p><a class='item' href='$url'>$i $title</a> " . ($time ? $time : null) . "</p>";
             }
             if ($feed) {
                 echo "<div class='summary'><a class='user' href='$url'>$i $login</a> $content </div>";
@@ -89,7 +89,7 @@ if ($head) {
 
 
         if ($content) {
-            if ($comments) {
+            if ($comments || $list) {
                 echo "<div class='text'><p>$content</p></div>";
             }
         }
