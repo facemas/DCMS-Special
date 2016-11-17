@@ -79,7 +79,7 @@ if ($can_write && $pages->this_page == 1) {
 
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
-$listing->ui_segment = true; //подключаем css comments
+$listing->ui_segment = true; //подключаем css segments
 $listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments small comments';
 
 // привязываем форму к листингу, чтобы листинг мог обновиться при отправке формы через AJAX
@@ -95,7 +95,7 @@ if ($arr = $q->fetchAll()) {
         $ank = new user($message['id_user']);
 
         $post = $listing->post();
-        $post->class = 'segment comment';
+        $post->class = 'ui segment comment';
         $post->comments = true;
 
         $post->id = 'chat_post_' . $message['id'];
