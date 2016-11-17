@@ -10,6 +10,7 @@ class ui_compost extends ui {
     public $url = '';
     public $icon = false;
     public $ui_image = false;
+    public $ui_label = false;
     public $comments = false;
     public $list = false;
     public $feed = false;
@@ -115,12 +116,14 @@ class ui_compost extends ui {
         $this->_data['text'] = $this->text;
         $this->_data['comments'] = $this->comments;
         $this->_data['list'] = $this->list;
+        $this->_data['counter'] = $this->counter;
         $this->_data['image'] = $this->image;
         $this->_data['avatar'] = $this->avatar;
         $this->_data['image_class'] = $this->image_class;
         $this->_data['image_a_class'] = $this->image_a_class;
         $this->_data['icon'] = $this->icon;
         $this->_data['ui_image'] = $this->ui_image;
+        $this->_data['ui_label'] = $this->ui_label;
         $this->_data['bottom'] = $this->bottom;
         $this->_data['class'] = $this->class;
         $this->_data['actions'] = $this->actions;
