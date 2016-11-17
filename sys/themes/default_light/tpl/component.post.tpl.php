@@ -6,6 +6,11 @@ if ($ui_image) {
     <link rel="stylesheet" href="<?= $path ?>/css/image.css" type="text/css" />
     <?php
 }
+if ($ui_label) {
+    ?>
+    <link rel="stylesheet" href="<?= $path ?>/css/label.css" type="text/css" />
+    <?php
+}
 
 $classes = array();
 
@@ -38,6 +43,12 @@ if ($head) {
                 $i = "<i class='fa fa-$icon fa-fw'></i>";
             } else {
                 $i = null;
+            }
+
+            if ($counter) {
+                echo '<span class="ui basic label" style="float: right;margin-left: 10px;">';
+                echo $counter;
+                echo '</span>';
             }
 
             if ($url) {
