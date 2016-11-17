@@ -46,6 +46,7 @@
         <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
         <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
         <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
+        <link rel="stylesheet" href="<?= $path ?>/css/image.css" type="text/css"/>
         <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
 
         <header id='title' class="<?= $returns ? 'ui secondary pointing fluid menu returns' : 'ui secondary pointing fluid menu' ?>">
@@ -69,7 +70,7 @@
 
             <div class="right menu">
                 <?php if ($user->group) { ?>
-                    <a class="<?= ($head == 'profile' ? 'item active' : 'item') ?>" href="/profile.view.php"><i class="fa fa-user-circle-o fa-lg"></i></a>
+                    <a class="<?= ($head == 'profile' ? 'item active' : 'item') ?>" href="/profile.view.php" style="padding: 0.4em 0.6em;"><img class="ui avatar image" src="<?= $user->getAvatar() ?>"></a>
                 <?php } else { ?>
                     <a class="item" href="/login.php?return=<?= URL ?>"><i class="fa fa-sign-in fa-lg"></i></a>
                     <a class="item" href="/reg.php?return=<?= URL ?>"><i class="fa fa-user-plus fa-lg"></i></a>
