@@ -157,30 +157,69 @@ $pages = new pages(count($files));
 $start = $pages->my_start();
 $end = $pages->end();
 
-$listing = new listing();
-for ($i = $start; $i < $end && $i < $pages->posts; $i++) {
+if ($ank->id == $user->id) {
+    $listing = new ui_components();
+    $listing->ui_menu = true;
+
     $post = $listing->post();
-    $post->image = $files [$i]->image();
-    $post->url = "photo.php?id=$ank->id&amp;album=" . urlencode($album->name) . "&amp;photo=" . urlencode($files [$i]->name);
-    $post->title = text::toValue($files [$i]->runame);
+    $post->head = '<div class="ui icon menu">
+        <span data-tooltip="' . __('Выгрузить фото') . '" data-position="bottom left">
+        <a class="item" href="?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=photo_add"><i class="fa fa-camera fa-fw"></i></a>
+            </span>
+            <span data-tooltip="' . __('Параметры альбома') . '" data-position="bottom left">
+        <a class="item" href="?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=prop"><i class="fa fa-cog fa-fw"></i></a>
+            </span>
+            <span data-tooltip="' . __('Удалить альбом') . '" data-position="bottom left">
+        <a class="item" href="?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=delete"><i class="fa fa-trash-o fa-fw"></i></a>
+            </span>
+        </div>';
+
+    $listing->display();
+}
+
+/*
+  if ($ank->id == $user->id) {
+  $doc->opt(__('Выгрузить фото'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=photo_add');
+  $doc->opt(__('Параметры'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=prop');
+  $doc->opt(__('Удалить альбом'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=delete');
+  }
+ * 
+ */
+
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
+$listing->ui_image = true; //подключаем css segments
+
+$display = false;
+
+echo "<div class='ui segment'>";
+echo "<div class='ui tiny images'>";
+for ($i = $start; $i < $end && $i < $pages->posts; $i++) {
+    $display = true;
+
+    echo "<a href='photo.php?id=$ank->id&amp;album=" . urlencode($album->name) . "&amp;photo=" . urlencode($files [$i]->name) . "'>";
+    echo "<img class='ui image' src='" . $files[$i]->image() . "' />";
+    //$post->title = text::toValue($files [$i]->runame);
 
     if ($comments = $files [$i]->comments) {
-        $post->content[] = __('%s комментари' . misc::number($comments, 'й', 'я', 'ев'), $comments);
+        //$post->content[] = __('%s комментари' . misc::number($comments, 'й', 'я', 'ев'), $comments);
     }
 
     if ($properties = $files [$i]->properties) {
         // Параметры файла (только основное)
-        $post->content[] = $properties;
+        //$post->content[] = $properties;
     }
+    echo "</a>";
 }
 
+echo "</div>";
+if ($display) {
+    $listing->post();
+}
 $listing->display(__('Фотографии отсутствуют'));
+echo "</div>";
+
 $pages->display('?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;'); // вывод страниц
 
-if ($ank->id == $user->id) {
-    $doc->opt(__('Выгрузить фото'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=photo_add');
-    $doc->opt(__('Параметры'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=prop');
-    $doc->opt(__('Удалить альбом'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;act=delete');
-}
 
-$doc->ret(__('Альбомы %s', $ank->login), 'albums.php?id=' . $ank->id);
+$doc->act(__('Альбомы %s', $ank->login), 'albums.php?id=' . $ank->id);
