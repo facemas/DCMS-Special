@@ -44,8 +44,8 @@ $pages->posts = $res->fetchColumn();
 
 include 'inc/theme.votes.php';
 
-$img_thumb_down = '<a href="{url}" class="thumb_down"><i class="fa fa-thumbs-down"></i></a>';
-$img_thumb_up = '<a href="{url}" class="thumb_up"><i class="fa fa-thumbs-up"></i></a>';
+$img_thumb_down = '<span class="thumb_down"><i class="fa fa-thumbs-down"></i></span>';
+$img_thumb_up = '<span class="thumb_up"><i class="fa fa-thumbs-up"></i></span>';
 
 $q = $db->prepare("SELECT * FROM `forum_messages` WHERE `id_theme` = ? AND `group_show` <= ? ORDER BY `id` ASC LIMIT " . $pages->limit);
 $q->execute(Array($theme['id'], $user->group));
