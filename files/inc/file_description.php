@@ -382,7 +382,8 @@ if (empty($_GET['act'])) {
 
     $listing = new ui_components();
     $listing->ui_comment = true; //подключаем css comments
-    $listing->class = $dcms->browser_type == 'full' ? 'minimal comments large listing' : 'comments large listing';
+    $listing->ui_segment = true; //подключаем css segments
+    $listing->class = $dcms->browser_type == 'full' ? 'ui minimal comments large segments' : 'ui comments large segments';
 
     if (!empty($form)) {
         $listing->setForm($form);
@@ -398,7 +399,7 @@ if (empty($_GET['act'])) {
             $ank = new user($comment['id_user']);
 
             $post = $listing->post();
-            $post->class = 'comment';
+            $post->class = 'ui segment comment';
             $post->comments = true;
             $post->id = 'files_post_' . $comment['id'];
             $post->url = '/profile.view.php?id=' . $ank->id;
@@ -427,7 +428,7 @@ if (empty($_GET['act'])) {
     }
 
     if ($doc instanceof document_json && !$arr) {
-        $post = new listing_post(__('Нет результатов'));
+        $post = new ui_compost(__('Нет результатов'));
         $post->icon('clone');
         $doc->add_post($post);
     }
