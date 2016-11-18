@@ -42,10 +42,11 @@ class native_templating {
         }
         extract($this->_assigned);
         ob_start();
-        if ($this->cache_template)
+        if ($this->cache_template) {
             @eval('?>' . $this->_getTemplate($tpl_path));
-        else
+        } else {
             @include $tpl_path;
+        }
 
         $content = ob_get_clean();
         return $content;
