@@ -53,6 +53,7 @@ class form extends ui {
             'close_fiels' => (bool) $close_fiels
         );
     }
+
     function block($block) {
         $this->_data['el'][] = array(
             'type' => 'html',
