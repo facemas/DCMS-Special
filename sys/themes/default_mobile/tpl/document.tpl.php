@@ -44,20 +44,13 @@
         </audio>
 
         <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
-        <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
         <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>
         <link rel="stylesheet" href="<?= $path ?>/css/image.css" type="text/css"/>
         <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
 
-        <header id='title' class="<?= $returns ? 'ui secondary pointing fluid menu returns' : 'ui secondary pointing fluid menu' ?>">
+        <header id='title' class="ui secondary pointing fluid menu">
 
             <a class="<?= ($head == 'home' ? 'item active' : 'item') ?>" href="/"><i class="fa fa-home fa-lg"></i></a>
-            <span class="tIcon left"><div class="ui dropdown item"><i class="fa fa-chevron-left fa-lg"></i> 
-                    <div class="menu">
-                        <?= $this->section($returns, '<a href="{url}" class="item"><i class="fa fa-chevron-left fa-lg"></i> {name}</a>', true); ?>
-                    </div>
-                </div>
-            </span>
 
             <?php if ($user->group) { ?>
                 <span class="tIcon mail"><a class="<?= ($head == 'mail' ? 'item active' : 'item') ?>" href="/my.mail.php"><span class="blink"><i class="fa fa-envelope fa-lg"></i></span></a></span>
@@ -80,9 +73,49 @@
 
         <div id="container_content">
             <?php $this->displaySection('after_title') ?>
+
+            <?php if (!$options) { ?>
+                <span class="<?= $returns ? 'returns tIcon left' : 'tIcon left' ?>">
+
+                    <script src="<?= $path ?>/res/dropdown.min.js"></script>
+                    <script src="<?= $path ?>/res/transition.min.js"></script>
+                    <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
+                    <link rel="stylesheet" href="<?= $path ?>/css/transition.css" type="text/css"/>
+
+                    <div class="mini ui icon top left pointing dropdown button" id="hybrid" style="border: 1px solid #e1e8ed; background: #fff; margin-left: 5px; font-size: 0.875rem; line-height: 1.25; text-align: center; white-space: nowrap;   padding: 0.25rem 0.5rem;">
+                        <i class="fa fa-map-signs" style="margin: 0;"></i>
+                        <div class="menu">
+                            <div class="header"><?= __('Навигация') ?></div>
+                            <?= $this->section($returns, '<div class="item"><a href="{url}">{name}</a></div>', true); ?>
+                        </div>
+                    </div>
+                    <script>
+            $('#hybrid').dropdown();
+                    </script>
+                </span>
+            <?php } ?>
             <?php if ($options) { ?>
                 <div id="options">
-                    <?= $this->section($options, '<a class="gradient_blue border" href="{url}">{name}</a>'); ?>
+                    <span class="<?= $returns ? 'returns tIcon left' : 'tIcon left' ?>">
+
+                        <script src="<?= $path ?>/res/dropdown.min.js"></script>
+                        <script src="<?= $path ?>/res/transition.min.js"></script>
+                        <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
+                        <link rel="stylesheet" href="<?= $path ?>/css/transition.css" type="text/css"/>
+
+                        <div class="mini ui icon top left pointing dropdown button" id="hybrid" style="border: 1px solid #e1e8ed; background: #fff; margin-left: 5px; font-size: 0.875rem; line-height: 1.25; text-align: center; white-space: nowrap;   padding: 0.25rem 0.5rem;">
+                            <i class="fa fa-map-signs" style="margin: 0;"></i>
+                            <div class="menu">
+                                <div class="header"><?= __('Навигация') ?></div>
+                                <?= $this->section($returns, '<div class="item"><a href="{url}" style="border: 0;margin-left: -5px;padding: 0;">{name}</a></div>', true); ?>
+                            </div>
+                        </div>
+                        <script>
+            $('#hybrid').dropdown();
+                        </script>
+                        <?= $this->section($options, '<a class="gradient_blue border" href="{url}">{name}</a>'); ?>
+                    </span>
+
                 </div>
             <?php } ?>
             <?php if ($tabs) { ?>
