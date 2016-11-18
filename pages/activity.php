@@ -13,6 +13,7 @@ $listing->class = 'ui segments';
 
 # Баллы
 $post = $listing->post();
+$post->ui_label = true;
 $post->class = 'ui segment';
 $post->title = __('Баллы');
 $post->icon('gg-circle');
