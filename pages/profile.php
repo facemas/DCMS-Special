@@ -46,6 +46,7 @@ $listing->ui_list = true; //подключаем css list
 $listing->class = 'segments';
 
 $post = $listing->post();
+$post->ui_label = true;
 $post->class = 'ui secondary segment';
 $post->icon('th-large');
 $post->title = __('Меню %s', $ank->nick);
