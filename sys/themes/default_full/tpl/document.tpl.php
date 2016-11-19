@@ -91,18 +91,48 @@
         </audio>
         <div id="main">
             <div id="top_part">
-                <nav id="header" class="navbar navbar-light">
+                <link rel="stylesheet" href="<?= $path ?>/css/image.css" type="text/css"/>
+
+                <nav id="header">
                     <div id="navigation_user">
                         <div class="body_width_limit clearfix">
-                            <a ng-show="+ user.group" class="<?= $user->group ? '' : 'ng-hide' ?>" href="/profile.view.php" ng-bind="user.nick"><?= $user->nick ?></a>
-                            <?php if ($user->group > 0) { ?>
-                                <a class="action" href="/menu.user.php"><i class="fa fa-cogs fa-fw"></i> <?= __("Личное меню") ?></a>
+                            <?php if ($user->group) { ?>
+                                <link rel="stylesheet" href="<?= $path ?>/css/transition.css" type="text/css"/>
+                                <link rel="stylesheet" href="<?= $path ?>/css/dropdown.css" type="text/css"/>
+                                <script charset="utf-8" src="<?= $path ?>/js/transition.min.js" type="text/javascript"></script>
+                                <script charset="utf-8" src="<?= $path ?>/js/dropdown.min.js" type="text/javascript"></script>
+
+                                <div class="ui right pointing dropdown" id="profile" style="float: right">
+                                    <span data-tooltip='<?= __('Профиль и настройки') ?>' data-position='bottom center'><img class="ui image" src="<?= $user->getAvatar() ?>" style="max-width: 35px; max-height: 35px;border-radius: 3px; "></span>
+                                    <div class="menu">
+                                        <a class="active item" href="/profile.view.php"><?= __('Мой профиль') ?></a>
+                                        <a class="item" href="/menu.user.php"><?= __('Личное меню') ?></a>
+                                        <a class="item" href="/profile.edit.php"><?= __('Обновить анкету') ?></a>
+                                        <div class="divider"></div>
+                                        <a class="item" href="/log.user_aut.php"><?= __('Журнал авторизаций') ?></a>
+                                        <div class="item"><i class="fa fa-caret-left icon left"></i> <?= __('Настройки') ?> 
+                                            <div class="left menu">
+                                                <a class="item" href="/settings.common.php"><?= __('Общие') ?></a>
+                                                <a class="item" href="/settings.language.php"><?= __('Язык') ?></a>
+                                                <a class="item" href="/settings.private.php"><?= __('Приватность') ?></a>
+                                                <a class="item" href="/settings.themes.php"><?= __('Тема оформления') ?></a>
+                                                <a class="item" href="/my.avatar.php"><?= __('Обновить аватар') ?></a>
+                                                <a class="item" href="/my.fon.php"><?= __('Фон профиля') ?></a>
+                                            </div>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <a class="item" href="/exit.php"><?= __('Выйти') ?></a>
+                                    </div>
+                                </div>
+                                <script>
+            $('#profile').dropdown();
+                                </script>
                             <?php } ?>
-                            <a ng-show="+ user.friend_new_count" class='ng-hide' href='/my.friends.php' ng-bind="str.friends"><?= __("Друзья") ?></a>
-                            <a ng-show="+ user.mail_new_count" class='ng-hide' href='/my.mail.php' ng-bind="str.mail"><?= __("Почта") ?></a>
-                            <a ng-show="+ user.not_new_count" class='ng-hide' href='/my.notification.php' ng-bind="str.notification"><?= __("Уведомления") ?></a>
-                            <a ng-hide="+ user.group" class="ng-hide" href="/login.php?return={{URL}}" ng-bind="translates.auth"><?= __("Авторизация") ?></a>
-                            <a ng-hide="+ user.group" class="ng-hide" href="/reg.php?return={{URL}}" ng-bind="translates.reg"><?= __("Регистрация") ?></a>
+                            <a ng-show="+ user.friend_new_count" class='ng-hide link' href='/my.friends.php' ng-bind="str.friends"><?= __("Друзья") ?></a>
+                            <a ng-show="+ user.mail_new_count" class='ng-hide link' href='/my.mail.php' ng-bind="str.mail"><?= __("Почта") ?></a>
+                            <a ng-show="+ user.not_new_count" class='ng-hide link' href='/my.notification.php' ng-bind="str.notification"><?= __("Уведомления") ?></a>
+                            <a ng-hide="+ user.group" class="ng-hide link" href="/login.php?return={{URL}}" ng-bind="translates.auth"><?= __("Авторизация") ?></a>
+                            <a ng-hide="+ user.group" class="ng-hide link" href="/reg.php?return={{URL}}" ng-bind="translates.reg"><?= __("Регистрация") ?></a>
 
                             <?= $this->section($actions, ' <a class="action" href="{url}">{icon}{name}</a>'); ?>
 
@@ -110,6 +140,7 @@
                     </div>
                     <?php $this->displaySection('header'); ?>
                 </nav>
+
                 <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
                 <div class="body_width_limit clearfix">
                     <div id="left_column">
