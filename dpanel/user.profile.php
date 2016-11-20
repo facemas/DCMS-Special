@@ -30,6 +30,8 @@ if ($ank->group >= $user->group) {
 
 if (isset($_POST['save'])) {
     $ank->realname = text::for_name(@$_POST['realname']);
+    $ank->lastname = text::for_name(@$_POST['lastname']);
+    $ank->middle_n = text::for_name(@$_POST['middle_n']);
     $ank->balls = abs((int) @$_POST['balls']);
 
     if (isset($_POST['ank_d_r'])) {
@@ -74,16 +76,7 @@ if (isset($_POST['save'])) {
             $ank->email = $_POST ['email'];
         }
     }
-    if (isset($_POST ['wmid'])) {
-        if (empty($_POST ['wmid'])) {
-            $ank->wmid = '';
-        } elseif (!is_valid::wmid($_POST ['wmid'])) {
-            $doc->err(__('Указан не корректный %s', 'WMID'));
-        } else {
-            $ank->wmid = $_POST ['wmid'];
-        }
-    }
-    if (!empty($_POST ['reg_mail'])) {
+    if (!empty($_POST['reg_mail'])) {
         if (!is_valid::mail($_POST ['reg_mail'])) {
             $doc->err(__('Указан не корректный %s', 'Primary E-mail'));
         } else {
@@ -124,9 +117,9 @@ if (isset($_POST['save'])) {
     }
 
     $ank->vis_email = (int) !empty($_POST ['vis_email']);
+    $ank->vis_verify = (int) !empty($_POST ['vis_verify']);
     $ank->vis_friends = (int) !empty($_POST ['vis_friends']);
     $ank->vis_skype = (int) !empty($_POST ['vis_skype']);
-    $ank->donate_rub = floatval($_POST ['donate_rub']);
 
     $dcms->log('Пользователи', 'Изменение профиля пользователя [url=/profile.view.php?id=' . $ank->id . ']' . $ank->login . '[/url]');
 
@@ -158,6 +151,8 @@ for ($i = -12; $i < 12; $i++) {
 $form->select('time_shift', __('Время'), $options);
 
 $form->text('realname', __('Имя'), $ank->realname);
+$form->text('lastname', __('Фамилия'), $ank->lastname);
+$form->text('middle_n', __('Отчество'), $ank->middle_n);
 
 $d_r = array();
 $m_r = array();
@@ -174,20 +169,23 @@ for ($i = (date('Y') - 5); $i >= (date('Y') - 90); $i--) {
 }
 
 $form->bbcode(__('Дата рождения') . ':');
+$form->block("<div class='fields'>");
 $form->select('ank_d_r', false, $d_r, false);
 $form->select('ank_m_r', false, $m_r, false);
 $form->select('ank_g_r', false, $g_r, true);
-
+$form->block("</div>");
 $form->text('balls', __('Баллы'), $ank->balls);
 $form->text('skype', 'Skype', $ank->skype);
-$form->checkbox('vis_skype', __('Показывать %s', 'Skype'), $ank->vis_skype);
-$form->text('reg_mail', 'Primary E-mail', $ank->reg_mail);
+$form->text('reg_mail', __('Приватный E-mail'), $ank->reg_mail);
 $form->text('email', 'E-mail', $ank->email);
+
+$form->checkbox('vis_skype', __('Показывать %s', 'Skype'), $ank->vis_skype);
 $form->checkbox('vis_email', __('Показывать %s', 'E-Mail'), $ank->vis_email);
-$form->text('wmid', 'WebMoney ID', $ank->wmid);
 $form->checkbox('vis_friends', __('Отображать список друзей'), $ank->vis_friends);
-$form->text('donate_rub', __('Сумма пожертвований'), $ank->donate_rub);
-$form->button(__('Сохранить'), 'save');
+$form->checkbox('vis_verify', __('Верификация страницы'), $ank->vis_verify);
+
+$form->block("<br />");
+$form->button(__('Сохранить'), 'save', false, 'tiny ui green labeled fa button', 'fa fa-save fa-fw');
 $form->display();
 
 $doc->ret(__('Действия'), 'user.actions.php?id=' . $ank->id);
