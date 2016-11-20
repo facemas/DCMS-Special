@@ -83,11 +83,6 @@ if ($step == 2 && $step_name === 'final' && isset($_POST['sex'])) {
     $ank_mr = $_POST['ank_m_r'];
     $ank_gr = $_POST['ank_g_r'];
 
-    if (empty($_POST['captcha']) || empty($_POST['captcha_session']) || !captcha::check($_POST['captcha'], $_POST['captcha_session'])) {
-        $doc->err(__('Проверочное число введено неверно'));
-        $error = true;
-    }
-
     if ($dcms->reg_with_mail && !$inv) {
         if (empty($_POST['mail'])) {
             $doc->err(__('Необходимо указать E-mail'));
@@ -118,6 +113,11 @@ if ($step == 2 && $step_name === 'final' && isset($_POST['sex'])) {
         }
         if (!is_valid::password($_POST['password'])) {
             $doc->err(__('Не корректный пароль'));
+            $error = true;
+        }
+
+        if (empty($_POST['captcha']) || empty($_POST['captcha_session']) || !captcha::check($_POST['captcha'], $_POST['captcha_session'])) {
+            $doc->err(__('Проверочное число введено неверно'));
             $error = true;
         }
 
@@ -176,6 +176,11 @@ if ($step == 2 && $step_name === 'final' && isset($_POST['sex'])) {
             $error = true;
         }
 
+        if (empty($_POST['captcha']) || empty($_POST['captcha_session']) || !captcha::check($_POST['captcha'], $_POST['captcha_session'])) {
+            $doc->err(__('Проверочное число введено неверно'));
+            $error = true;
+        }
+
         $res = $db->prepare("SELECT * FROM `users` WHERE `reg_mail` = ?");
         $res->execute(Array($inv['email']));
         if ($res->fetch()) {
@@ -208,23 +213,50 @@ if ($step == 2 && $step_name === 'final' && isset($_POST['sex'])) {
             }
         }
     } else {
-        $res = $db->prepare("INSERT INTO `users` (`reg_date`, `login`, `password`, `sex`, `ank_d_r`, `ank_m_r`, `ank_g_r`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $res->execute(Array(TIME, $_SESSION['reg']['login'], crypt::hash($_POST['password'], $dcms->salt), $sex, $ank_dr, $ank_mr, $ank_gr));
-        $id_user = $db->lastInsertId();
+        if (empty($_POST['password'])) {
+            $doc->err(__('Необходимо указать пароль'));
+            $error = true;
+        }
 
-        if ($id_user && is_numeric($id_user)) {
+        if (!isset($_POST['password_retry'])) {
+            $doc->err(__('Необходимо подтвердить пароль'));
+            $error = true;
+        }
 
-            if ($susp = is_valid::suspicion($_SESSION['reg']['login'])) {
-                // подозрительный логин
-                $res = $db->prepare("INSERT INTO `users_suspicion` (`id_user`, `text`) VALUES (?, ?)");
-                $res->execute(Array($id_user, $susp));
-                $dcms->distribution("Пользователь [user]{$id_user}[/user] сочтен подозрительным, так как в нике была обнаружена несвязная комбинация символов: {$susp}\n[url=/dpanel/users.suspicious.php]Список подозрительных пользователей[/url]", 4);
+        if ($_POST['password_retry'] != $_POST['password']) {
+            $doc->err(__('Введенные пароли не совпадают'));
+            $error = true;
+        }
+        if (!is_valid::password($_POST['password'])) {
+            $doc->err(__('Не корректный пароль'));
+            $error = true;
+        }
+
+        if (empty($_POST['captcha']) || empty($_POST['captcha_session']) || !captcha::check($_POST['captcha'], $_POST['captcha_session'])) {
+            $doc->err(__('Проверочное число введено неверно'));
+            $error = true;
+        }
+
+        //Если нет ошибок
+        if (!$error) {
+            $res = $db->prepare("INSERT INTO `users` (`reg_date`, `login`, `password`, `sex`, `ank_d_r`, `ank_m_r`, `ank_g_r`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $res->execute(Array(TIME, $_SESSION['reg']['login'], crypt::hash($_POST['password'], $dcms->salt), $sex, $ank_dr, $ank_mr, $ank_gr));
+            $id_user = $db->lastInsertId();
+
+            if ($id_user && is_numeric($id_user)) {
+
+                if ($susp = is_valid::suspicion($_SESSION['reg']['login'])) {
+                    // подозрительный логин
+                    $res = $db->prepare("INSERT INTO `users_suspicion` (`id_user`, `text`) VALUES (?, ?)");
+                    $res->execute(Array($id_user, $susp));
+                    $dcms->distribution("Пользователь [user]{$id_user}[/user] сочтен подозрительным, так как в нике была обнаружена несвязная комбинация символов: {$susp}\n[url=/dpanel/users.suspicious.php]Список подозрительных пользователей[/url]", 4);
+                }
+
+                $step = 3;
+            } else {
+                $doc->err(__('Ошибка при регистрации. Попробуйте позже'));
+                $step = 1;
             }
-
-            $step = 3;
-        } else {
-            $doc->err(__('Ошибка при регистрации. Попробуйте позже'));
-            $step = 1;
         }
     }
 }
