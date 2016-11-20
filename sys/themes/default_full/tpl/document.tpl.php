@@ -85,6 +85,10 @@
         </style>
     </head>
     <body class="theme_light" ng-controller="SocCMS">
+
+        <script src="https://cdn.jsdelivr.net/emojione/2.2.6/lib/js/emojione.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
+
         <audio id="audio_notify" preload="auto" class="ng-hide">
             <source src="/sys/themes/.common/notify.mp3" />
             <source src="/sys/themes/.common/notify.ogg" />

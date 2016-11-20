@@ -99,7 +99,10 @@ abstract class text {
      */
     static function toOutput($str) {
 
-        //
+        $client = new Client(new Ruleset());
+        $client->imageType = 'svg'; // or png (default)
+        $client->imagePathPNG = '//soccms.com/sys/images/assets/png/'; // defaults to jsdelivr's free CDN
+        $client->imagePathSVG = '//soccms.com/sys/images/assets/svg/'; // defaults to jsdelivr's free CDN
         // преобразование смайлов в BBcode
         $str = smiles::input($str);
 
@@ -131,6 +134,9 @@ abstract class text {
 
         $str = $bbcode->get_html();
 
+        $str = $client->toImage($str);
+        $str = $client->unicodeToImage($str);
+        $str = $client->shortnameToImage($str);
         //$str = wordwrap($str, 10, "&#173;");
 
         return $str;

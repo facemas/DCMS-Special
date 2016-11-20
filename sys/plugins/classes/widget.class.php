@@ -45,7 +45,7 @@ class widget {
             if (!$this->_data ['skin']) {
                 return $content;
             } else {
-                $widget = new design ();
+                $widget = new design();
                 $widget->assign('content', $content);
                 $widget->assign('name', $this->_data ['runame']);
                 return $widget->fetch('widget.tpl');

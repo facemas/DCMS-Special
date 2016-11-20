@@ -45,6 +45,8 @@
             <source src="/sys/themes/.common/notify.aac"/>
             <source src="/sys/themes/.common/notify.ogg"/>
         </audio>
+        <script src="https://cdn.jsdelivr.net/emojione/2.2.6/lib/js/emojione.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
 
         <link rel="stylesheet" href="<?= $path ?>/css/menu.css" type="text/css"/>
         <link rel="stylesheet" href="<?= $path ?>/css/popup.css" type="text/css"/>

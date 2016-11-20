@@ -19,7 +19,8 @@
     </head>
     <body class="theme_light theme_light_light">
         <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
-        <link rel="stylesheet" href="/sys/themes/.common/flag.css" type="text/css"/>
+        <script src="https://cdn.jsdelivr.net/emojione/2.2.6/lib/js/emojione.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
 
         <div>
             <? $this->display('inc.title.tpl') ?>
