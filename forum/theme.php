@@ -142,7 +142,7 @@ foreach ($messages AS $message) {
             $post->bottom .= ' <small>' . __('%s / %s', '<span class="rating_down"><i class="fa fa-thumbs-o-down fa-fw"></i> ' . $message['rating_down'] . '</span>', '<span class="rating_up"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . $message['rating_up'] . '</span>') . '</small> ';
         } else {
 
-            $rat = ($my_rating == 1 ? ' <span class="rating_up">' . __('Вам нравится') . '</span> ' : ' <span class="rating_down">' . lang('Вам не нравится') . '</span> ');
+            $rat = ($my_rating == 1 ? ' <span class="rating_up">' . __('Вам нравится') . '</span> ' : ' <span class="rating_down">' . __('Вам не нравится') . '</span> ');
             $post->bottom .= ' <small>' . __('%s / %s / %s', '<span class="rating_down"><i class="fa fa-thumbs-down fa-fw"></i> ' . $message['rating_down'] . '</span>', '<span class="rating_up"><i class="fa fa-thumbs-up fa-fw"></i> ' . $message['rating_up'] . '</span>', $rat) . '</small> ';
         }
 
