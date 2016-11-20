@@ -249,6 +249,11 @@ if ($ank->online) {
 } else {
     $d->assign('online', 'nick_off');
 }
+if ($ank->vis_verify == 1) {
+    $d->assign('verify', true);
+} else {
+    $d->assign('verify', false);
+}
 
 $d->assign('rating', array('/profile.reviews.php?id=' . $ank->id, $ank->rating));
 
