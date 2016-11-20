@@ -77,7 +77,7 @@ if (!empty($_GET['smile']) && isset($smiles_a[$_GET['smile']])) {
         $post = $listing->post();
         $post->title = $text;
         $post->image = '/sys/images/smiles/' . $sm . '.gif';
-        $post->action('delete', '?smile=' . urlencode($sm) . '&amp;phrase=' . urlencode($text) . '&amp;act=delete');
+        $post->action('trash-o', '?smile=' . urlencode($sm) . '&amp;phrase=' . urlencode($text) . '&amp;act=delete');
     }
 
     $listing->display(__('Фразы отсутствуют'));
@@ -157,7 +157,7 @@ foreach ($smiles_a as $name => $path) {
     $post->image = '/sys/images/smiles/' . $name . '.gif';
     $post->setUrl(new url(null, array('smile' => $name)));
     $post->content = __('Варианты') . ': ' . implode(', ', array_keys($smiles, $name));
-    $post->action('delete', '?delete=' . $name);
+    $post->action('trash-o', '?delete=' . $name);
 }
 $listing->display(__('Смайлы отсутствуют'));
 $doc->opt(__('Добавить'), '?add', false, '<i class="fa fa-plus fa-fw"></i>');
