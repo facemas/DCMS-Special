@@ -157,7 +157,7 @@ a:hover {color: #1e70bf; text-decoration: none;}
 .smiles {position: relative; float: right;}
 .smiles_drop_menu:before {content: ''; position: absolute; top: -17px; right: 24px; height: 0; width: 0; border: transparent solid 8px; border-bottom-color: rgba(0, 0, 0, 0.38);}
 .smiles_drop_menu:after {content: ''; position: absolute; top: -16px; right: 24px; height: 0; width: 0; border: transparent solid 8px; border-bottom-color: #FFFFFF;}
-.smiles_drop_menu {position: absolute; top: 24px; right: 0; width: 200px; height: 150px; background-color: #FFFFFF; border: 1px solid rgba(0, 0, 0, 0.17); border-radius: 3px; z-index: 1;}
+.smiles_drop_menu {position: absolute; top: 24px; right: 0; width: 300px; height: 200px; background-color: #FFFFFF; border: 1px solid rgba(0, 0, 0, 0.17); border-radius: 3px; z-index: 1;}
 .smiles_drop_menu_container {position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px; background-color: #eeeeee; border: 1px solid #D8D8D8; box-shadow: inset 1px 1px 4px -3px #000; overflow-x: hidden; overflow-y: auto;}
 .smiles_drop_menu_container div {display: inline-block; min-width: 40px; min-height: 32px; line-height: 32px; text-align: center; background-color: #fff; border: 1px solid #ECECEC; margin: 1px; border-radius: 3px;}
 .smiles_drop_menu_container div:hover {border: 1px solid #d3d3d3;}
