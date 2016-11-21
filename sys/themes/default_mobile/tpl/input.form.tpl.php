@@ -1,7 +1,7 @@
 <!-- Подключаем нужные файлы css -->
 <link rel="stylesheet" href="<?= $path ?>/css/form.css" type="text/css" />
 <link rel="stylesheet" href="<?= $path ?>/css/input.css" type="text/css" />
-
+<link rel="stylesheet" href="<?= $path ?>/css/button.css" type="text/css" />
 
 <div class="ui form">
     <?=
@@ -17,10 +17,6 @@
 
         if ($element['type'] == 'checkbox') {
             echo '<link rel="stylesheet" href="' . $path . '/css/checkbox.css" type="text/css" />';
-        }
-
-        if ($element['type'] == 'submit') {
-            echo '<link rel="stylesheet" href="' . $path . '/css/button.css" type="text/css" />';
         }
 
         if ($element['type'] == 'html') {
@@ -127,7 +123,7 @@
             echo '</div>';
             break;
         case 'select':
-            echo '<select name="' . $element['info']['name'] . '">';
+            echo ' <select name="' . $element['info']['name'] . '"> ';
             foreach ($element['info']['options'] AS $option) {
                 if ($option['groupstart']) {
                     echo '<optgroup label="' . $option[0] . '">';
@@ -137,7 +133,7 @@
                     echo '<option' . ($option[2] ? ' selected="selected"' : '') . ' value="' . $option[0] . '"' . '>' . $option[1] . '</option>';
                 }
             }
-            echo '</select>';
+            echo ' </select> ';
             break;
     }
 

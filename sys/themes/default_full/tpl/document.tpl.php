@@ -107,7 +107,7 @@
                                 <script charset="utf-8" src="<?= $path ?>/js/dropdown.min.js" type="text/javascript"></script>
 
                                 <div class="ui right pointing dropdown" id="profile" style="float: right">
-                                    <span data-tooltip='<?= __('Профиль и настройки') ?>' data-position='bottom center'><img class="ui image" src="<?= $user->getAvatar() ?>" style="max-width: 35px; max-height: 35px;border-radius: 3px; "></span>
+                                    <span data-tooltip='<?= __('Профиль и настройки') ?>' data-position='bottom center'><img class="ui image" src="<?= $user->getAvatar() ?>" style="max-width: 30px; max-height: 30px;border-radius: 3px; "></span>
                                     <div class="menu">
                                         <a class="active item" href="/profile.view.php"><?= __('Мой профиль') ?></a>
                                         <a class="item" href="/menu.user.php"><?= __('Личное меню') ?></a>

@@ -27,7 +27,7 @@
     ._2CFyTHU5{clear:both;display:block;margin:0 0 .65625rem}
     .Dk8nbDvd{display:block;font-size:1.285714286rem;line-height:1.25}
     .Z5IeoGpY{color:#657786;direction:ltr;margin-top:.1rem;unicode-bidi:embed}
-    ._2y7Q7Itc{margin-left:.6rem}
+    ._2y7Q7Itc{margin-left:.4rem; vertical-align: top;color: #79A6D4;}
     ._2bdbLw2N{clear:both;margin-top:.65625rem}
     ._2bdbLw2N,.EcSZ4Fq3{margin-bottom:.65625rem}
     .EcSZ4Fq3{display:block}
@@ -103,7 +103,9 @@
             <h1 class="Fe7ul3Lt Dk8nbDvd _2DggF3sL _3WJqTbOE" role="heading">
                 <?php echo "$realname $lastname"; ?>
                 <span class="<?= $online ?>"></span>
-                <span class="_2y7Q7Itc"></span>
+                <?php if ($verify) { ?>
+                    <span class="_2y7Q7Itc" data-tooltip='<?= __('Данная отметка означает, что страница %s была подтверждена администрацией.', $login) ?>' data-position='top center' data-variation="wide"><i class="fa fa-check"></i></span>
+                <?php } ?>
             </h1>
             <span class="Fe7ul3Lt Z5IeoGpY _2DggF3sL">
                 @<?= $login ?> &#183; <?= $group_name ?>

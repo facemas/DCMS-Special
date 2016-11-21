@@ -1,6 +1,7 @@
 <!-- Подключаем нужные файлы css -->
 <link rel="stylesheet" href="<?= $path ?>/css/form.css" type="text/css" />
 <link rel="stylesheet" href="<?= $path ?>/css/input.css" type="text/css" />
+<link rel="stylesheet" href="<?= $path ?>/css/button.css" type="text/css" />
 
 <div class="ui form">
     <?=
@@ -18,9 +19,6 @@
 
         if ($element['type'] == 'checkbox') {
             echo '<link rel="stylesheet" href="' . $path . '/css/checkbox.css" type="text/css" />';
-        }
-        if ($element['type'] == 'submit') {
-            echo '<link rel="stylesheet" href="' . $path . '/css/button.css" type="text/css" />';
         }
 
         if ($element['type'] == 'html') {
