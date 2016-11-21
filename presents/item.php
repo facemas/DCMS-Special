@@ -31,8 +31,6 @@ if ($ank->id == $user->id) {
     exit;
 }
 
-
-
 $q = $db->prepare("SELECT * FROM `present_items` WHERE `id` = ?");
 $q->execute(Array($id_present));
 if (!$item = $q->fetch()) {
@@ -51,9 +49,9 @@ if (isset($_POST['text'])) {
         $res = $db->prepare("INSERT INTO `present_users` (`id_user`, `id_ank`, `id_present`, `time`, `text`)VALUES (?, ?, ?, ?, ?)");
         $res->execute(Array($ank->id, $user->id, $id_present, TIME, $text));
         if ($user->group && $ank->id != $user->id) {
-            $ank->not("Подарил" . ($user->sex ? '' : 'а') . " Вам  [url=/profile.presents.php?id=" . $ank->id . "]подарок[/url]", $user->id);
+            $ank->not(($user->sex ? 'подарил' : 'подарила') . " вам  [url=/profile.presents.php?id=" . $ank->id . "]подарок[/url]", $user->id);
         }
-        $doc->msg(__('Подарок успешно отправлено'));
+        $doc->msg(__('Подарок успешно отправлен'));
 
         header('Refresh: 1; url=/profile.view.php?id=' . $ank->id . '&' . passgen());
         $doc->ret(__('В анкету'), "/profile.view.php?id={$ank->id}");
@@ -63,8 +61,14 @@ if (isset($_POST['text'])) {
     }
 }
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
+$listing->class = 'ui segments';
+
 $post = $listing->post();
+$post->class = 'ui segment';
+$post->ui_label = true;
+$post->list = true;
 
 if (is_file(H . $screen = '/sys/images/presents/' . $id_present . '.png')) {
     $post->title = '<img  src="' . $screen . '" style="max-width: 80px;"/>';
@@ -79,9 +83,10 @@ $form->textarea('text', __('Комментарий'));
 $form->button(__('Отправить'));
 $form->display();
 
-if (isset($_GET['return']))
+if (isset($_GET['return'])) {
     $doc->ret(__('Вернуться'), text::toValue($_GET['return']));
-else
+} else {
     $doc->ret(__('В категорию'), 'category.php?id=' . $item['id_category'] . '&user=' . $ank->id);
+}
 
-$doc->ret(__('В анкету'), "/profile.view.php?id={$ank->id}");
+$doc->ret($ank->login, "/profile.view.php?id={$ank->id}");

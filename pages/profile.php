@@ -9,6 +9,7 @@ $doc->tab(__('Основное'), '?id=' . $ank->id, $from === 'default');
 
 $listing = new ui_components();
 $listing->ui_segment = true; //подключаем css segments
+$listing->class = 'ui segments';
 # Выводим подарки если есть
 $res = $db->prepare("SELECT COUNT(*) FROM `present_users` WHERE `id_user` = ?");
 $res->execute(Array($ank->id));
@@ -17,7 +18,9 @@ $gift = $res->fetchColumn();
 if ($gift > 0) {
 
     $post = $listing->post();
-    $post->highlight = true;
+    $post->class = 'ui secondary segment';
+    $post->ui_label = true;
+    $post->list = true;
     $post->icon('gift');
     $post->url = "/profile.presents.php?id=$ank->id";
     $post->title = __('Подарки %s', $ank->nick);
@@ -25,17 +28,18 @@ if ($gift > 0) {
         $post->counter = '<i class="fa fa-gift fa-fw"></i> ' . $gift;
     }
 
-    $presents = '';
-    $q = $db->prepare("SELECT * FROM `present_users` WHERE `id_user` = ? ORDER BY `id` DESC LIMIT 5"); //запилить настройку сколько выводить
+    $post = $listing->post();
+    $post->class = 'ui segment';
+    $post->ui_label = true;
+    $post->list = true;
+
+    $limit = $dcms->browser_type == 'full' ? '10' : '7';
+    $q = $db->prepare("SELECT * FROM `present_users` WHERE `id_user` = ? ORDER BY `id` DESC LIMIT $limit"); //запилить настройку сколько выводить
     $q->execute(Array($ank->id));
     while ($item = $q->fetch()) {
         if (is_file(H . $screen = '/sys/images/presents/' . $item['id_present'] . '.png')) {
-            $presents .= '<img class="podarki_photo" src="' . $screen . '" style="float:left; max-width: 80px;"/>';
+            $post->content .= '<img class="podarki_photo" src="' . $screen . '" width="50"/>';
         }
-    }
-    if ($presents) {
-        $post = $listing->post();
-        $post->title = $presents;
     }
 }
 $listing->display();

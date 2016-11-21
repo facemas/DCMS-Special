@@ -45,11 +45,28 @@ $res->execute(Array($category['id']));
 $pages = new pages;
 $pages->posts = $res->fetchColumn();
 
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
+$listing->class = 'ui segments';
+
+$post = $listing->post();
+$post->class = 'ui secondary segment';
+$post->ui_label = true;
+$post->list = true;
+$post->title = __('У вас %s ' . misc::number($user->balls, 'балл', 'балла', 'баллов'), "<b>$user->balls</b>");
+
 $q = $db->prepare("SELECT * FROM `present_items` WHERE `id_category` = ? ORDER BY `id` DESC LIMIT " . $pages->limit);
 $q->execute(Array($category['id']));
-$listing = new listing();
+
 while ($item = $q->fetch()) {
     $post = $listing->post();
+    $post->list = true;
+    if ($user->balls >= $item['ball']) {
+        $post->url = "item.php?id=" . $item['id'] . "&user=" . $ank->id;
+        $post->class = 'ui segment';
+    } else {
+        $post->class = 'ui secondary segment';
+    }
 
     if (is_file(H . $screen = '/sys/images/presents/' . $item['id'] . '.png')) {
         $post->title = '<img src="' . $screen . '"  style="max-width: 80px;"> ';
@@ -58,7 +75,7 @@ while ($item = $q->fetch()) {
     }
 
     $post->title .= text::toValue($item['name']);
-    $post->url = "item.php?id=" . $item['id'] . "&user=" . $ank->id;
+
 
     $post->counter = __('%s', ($item['ball'] == 0 ? __('Бесплатно') : "<i class='fa fa-gg-circle fa-fw'></i> $item[ball]"));
 }
@@ -67,4 +84,4 @@ $listing->display(__('Подарков нет'));
 $pages->display('?id=' . $id_cat . '&amp;');
 
 $doc->ret(__('К категориям'), './?user=' . $ank->id);
-$doc->ret(__('В анкету'), "/profile.view.php?id={$ank->id}");
+$doc->ret($ank->login, "/profile.view.php?id={$ank->id}");

@@ -21,21 +21,33 @@ $res->execute(Array($ank->id));
 $pages = new pages;
 $pages->posts = $res->fetchColumn();
 
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
+$listing->ui_list = true; //подключаем css segments
+$listing->class = 'ui segments list';
+
 $q = $db->prepare("SELECT * FROM `present_users` WHERE `id_user` = ? ORDER BY `id` DESC LIMIT " . $pages->limit);
 $q->execute(Array($ank->id));
-$listing = new listing();
+
 while ($item = $q->fetch()) {
-    $ank_present = new user((int) $item['id_ank']);
+    $ank = new user($item['id_ank']);
 
     $post = $listing->post();
+    $post->class = 'ui segment item';
+    $post->ui_label = true;
+    $post->ui_image = true;
 
     if (is_file(H . $screen = '/sys/images/presents/' . $item['id_present'] . '.png')) {
-        $post->title = '<img  src="' . $screen . '" style="max-width: 80px;"/> ';
+        $post->avatar = $screen;
+        $post->image_class = 'ui tiny image';
     }
-    $post->title .= '' . $ank_present->nick();
-    $post->post .= text::toOutput($item['text']);
-    $post->time = misc::when($item['time']);
-    $post->url = '/profile.view.php?id=' . $ank_present->id;
+    $post->content = '
+        <a class="header" href="/profile.view.php?id=' . $ank->id . '">' . $ank->nick() . '</a>
+        <div class="description">' . text::toOutput($item['text']) . '</div>
+        <div class="description" style="color: grey;">' . misc::times($item['time']) . '</div>';
+
+    $post->url = '/profile.view.php?id=' . $ank->id;
+
     if ($user->id == $ank->id) {
         //$post->action('delete', 'item.delete.php?id=' . $item['id'] . "&amp;return=" . URL);
     }
@@ -44,5 +56,4 @@ $listing->display(__('Подарков нет'));
 
 $pages->display('?id=' . $ank->id . '&amp;');
 
-$doc->ret(__('В анкету'), "profile.view.php?id={$ank->id}");
-$doc->ret(__('Личное меню'), '/menu.user.php');
+$doc->ret($ank->login, "profile.view.php?id={$ank->id}");
