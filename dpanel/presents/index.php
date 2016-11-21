@@ -10,11 +10,17 @@ $pages = new pages();
 $res = $db->query("SELECT COUNT(*) FROM `present_categories`");
 $pages->posts = $res->fetchColumn();
 
+$listing = new ui_components();
+$listing->ui_segment = true; //подключаем css segments
+$listing->class = 'ui segments';
+
 $q = $db->query("SELECT * FROM `present_categories` ORDER BY `position` ASC LIMIT " . $pages->limit);
-$listing = new listing();
 
 while ($category = $q->fetch()) {
     $post = $listing->post();
+    $post->class = 'ui segment';
+    $post->ui_label = true;
+    $post->list = true;
     $post->url = "category.php?id=$category[id]";
     $post->title = text::toValue($category['name']);
     $post->icon('folder-o');

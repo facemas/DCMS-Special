@@ -1,23 +1,31 @@
 <?php
 
 include_once '../../sys/inc/start.php';
+
 dpanel::check_access();
+
 $doc = new document(4);
 $doc->title = __('Картинка');
+
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header('Refresh: 1; url=./');
     $doc->err(__('Ошибка выбора подарка'));
     exit;
 }
+
 $id_present = (int) $_GET['id'];
+
 $q = $db->prepare("SELECT * FROM `present_items` WHERE `id` = ?");
 $q->execute(Array($id_present));
+
 if (!$item = $q->fetch()) {
     header('Refresh: 1; url=./');
     $doc->err(__('Подарок не доступен'));
     exit;
 }
+
 $doc->title .= ' - ' . $item['name'];
+
 if (!empty($_FILES ['file'])) {
     if ($_FILES ['file'] ['error']) {
         $doc->err(__('Ошибка при загрузке'));
@@ -44,7 +52,9 @@ $form = new form('?id=' . $id_present . '&' . passgen() . (isset($_GET['return']
 $form->file('file', __('Файл'));
 $form->button(__('Создать'));
 $form->display();
-if (isset($_GET['return']))
+
+if (isset($_GET['return'])) {
     $doc->ret(__('Вернуться'), text::toValue($_GET['return']));
-else
+} else {
     $doc->ret(__('В категорию'), 'category.php?id=' . $item['id_category']);
+}
