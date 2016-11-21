@@ -50,7 +50,7 @@ if ($arr = $q->fetchAll()) {
         $post->url = '/profile.view.php?id=' . $ank2->id;
         $post->avatar = $ank2->getAvatar();
         $post->image_a_class = 'label';
-        $post->content = text::toOutput($not['mess']);
+        $post->title = text::toOutput($not['mess']);
         //$post->highlight = !$not['is_read'];
         $post->time = misc::when($not['time']);
 
