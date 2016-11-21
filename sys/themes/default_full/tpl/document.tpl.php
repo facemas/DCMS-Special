@@ -107,7 +107,7 @@
                                 <script charset="utf-8" src="<?= $path ?>/js/dropdown.min.js" type="text/javascript"></script>
 
                                 <div class="ui right pointing dropdown" id="profile" style="float: right">
-                                    <span data-tooltip='<?= __('Профиль и настройки') ?>' data-position='bottom center'><img class="ui image" src="<?= $user->getAvatar() ?>" style="max-width: 30px; max-height: 30px;border-radius: 3px; "></span>
+                                    <span data-tooltip='<?= __('Профиль и настройки') ?>' data-position='bottom center'><img class="ui image" src="<?= $user->getAvatar() ?>" style="max-width: 40px; max-height: 30px;border-radius: 3px; "></span>
                                     <div class="menu">
                                         <a class="active item" href="/profile.view.php"><?= __('Мой профиль') ?></a>
                                         <a class="item" href="/menu.user.php"><?= __('Личное меню') ?></a>
@@ -132,8 +132,8 @@
             $('#profile').dropdown();
                                 </script>
                             <?php } ?>
-                            <a ng-show="+ user.friend_new_count" class='ng-hide link' href='/my.friends.php' ng-bind="str.friends"><?= __("Друзья") ?></a>
-                            <a ng-show="+ user.mail_new_count" class='ng-hide link' href='/my.mail.php' ng-bind="str.mail"><?= __("Почта") ?></a>
+                            <a ng-show="+ user.friend_new_count" class='ng-hide link' href='/my.friends.php?act=application' ng-bind="str.friends"><?= __("Друзья") ?></a>
+                            <a ng-show="+ user.mail_new_count" class='ng-hide link' href='/my.mail.php?from=new' ng-bind="str.mail"><?= __("Почта") ?></a>
                             <a ng-show="+ user.not_new_count" class='ng-hide link' href='/my.notification.php' ng-bind="str.notification"><?= __("Уведомления") ?></a>
                             <a ng-hide="+ user.group" class="ng-hide link" href="/login.php?return={{URL}}" ng-bind="translates.auth"><?= __("Авторизация") ?></a>
                             <a ng-hide="+ user.group" class="ng-hide link" href="/reg.php?return={{URL}}" ng-bind="translates.reg"><?= __("Регистрация") ?></a>

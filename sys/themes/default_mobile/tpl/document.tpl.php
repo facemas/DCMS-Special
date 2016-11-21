@@ -60,9 +60,9 @@
             <a class="<?= ($head == 'home' ? 'item active' : 'item') ?>" id="home"><i class="fa fa-bars fa-lg"></i></a>
 
             <?php if ($user->group) { ?>
-                <span class="tIcon mail"><a class="<?= ($head == 'mail' ? 'item active' : 'item') ?>" href="/my.mail.php"><span class="blink"><i class="fa fa-envelope fa-lg"></i></span></a></span>
+                <span class="tIcon mail"><a class="<?= ($head == 'mail' ? 'item active' : 'item') ?>" href="/my.mail.php?from=new"><span class="blink"><i class="fa fa-envelope fa-lg"></i></span></a></span>
                 <span class="tIcon notification" id="blink"><a class="<?= ($head == 'notification' ? 'item active' : 'item') ?>" href="/my.notification.php"><span class="blink"><i class="fa fa-bell fa-lg"></i></span></a></span>
-                <span class="tIcon friend"><a class="<?= ($head == 'friends' ? 'item active' : 'item') ?>" href="/my.friends.php"><span class="blink"><i class="fa fa-user-plus fa-lg"></i></span></a></span>
+                <span class="tIcon friend"><a class="<?= ($head == 'friends' ? 'item active' : 'item') ?>" href="/my.friends.php?act=application"><span class="blink"><i class="fa fa-user-plus fa-lg"></i></span></a></span>
 
             <?php } ?>
 

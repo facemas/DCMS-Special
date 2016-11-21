@@ -34,12 +34,13 @@ if ($head) {
         if ($feed) {
             echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
         }
+        echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
     }
     ?>
     <div class="content">
         <?php
         if ($image) {
-            $i = "<img src='$image' alt='' $img_class/>";
+            $i = "<img src='$image' alt='' " . ($image_class ? "class='$image_class'" : '') . " />";
         } elseif ($icon) {
             $i = "<i class='fa fa-$icon fa-fw'></i>";
         } else {
@@ -91,6 +92,8 @@ if ($head) {
         if ($content) {
             if ($comments || $list) {
                 echo "<div class='text'><p>$content</p></div>";
+            } else {
+                echo $content;
             }
         }
 

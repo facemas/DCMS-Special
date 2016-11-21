@@ -30,7 +30,13 @@ $img_a_class = ($image_a_class ? "<a class='$image_a_class'>" : null);
 echo '<div class="' . implode(' ', $classes) . '" id="' . $id . '">';
 
 if ($avatar) {
-    echo ($image_a_class ? "<span class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class />" . ($image_a_class ? "</span>" : null);
+    if ($comments) {
+        echo ($image_a_class ? "<a class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</a>" : null);
+    }
+    if ($feed) {
+        echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
+    }
+    echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
 }
 if ($counter || $url && $title || $url && $login || $image || $content || $title || $bottom) {
     ?>
@@ -89,6 +95,8 @@ if ($counter || $url && $title || $url && $login || $image || $content || $title
         if ($content) {
             if ($comments || $list) {
                 echo "<div class='text'><p>$content</p></div>";
+            } else {
+                echo $content;
             }
         }
         if ($actions) {

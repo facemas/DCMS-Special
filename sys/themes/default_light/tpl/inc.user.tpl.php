@@ -3,7 +3,7 @@
     if ($user->id) {
         ?>
         <?php if ($user->friend_new_count) { ?>
-            <a id='user_friend' href='/my.friends.php'><?= __("Друзья") ?> +<span><?= $user->friend_new_count ?></span></a>
+            <a id='user_friend' href='/my.friends.php?act=application'><?= __("Друзья") ?> +<span><?= $user->friend_new_count ?></span></a>
         <?php } ?>
         <?php if ($user->mail_new_count) { ?>
             <a id='user_mail' href='/my.mail.php?from=new'><?= __("Почта") ?> +<span><?= $user->mail_new_count ?></span></a>
