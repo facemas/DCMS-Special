@@ -7,15 +7,15 @@ $doc->tab(__('Активность'), '?act=activity&amp;id=' . $ank->id, $from 
 $doc->tab(__('Анкета'), '?act=anketa&amp;id=' . $ank->id, $from === 'anketa');
 $doc->tab(__('Основное'), '?id=' . $ank->id, $from === 'default');
 
-$listing = new ui_components();
-$listing->ui_segment = true; //подключаем css segments
-$listing->class = 'ui segments';
 # Выводим подарки если есть
 $res = $db->prepare("SELECT COUNT(*) FROM `present_users` WHERE `id_user` = ?");
 $res->execute(Array($ank->id));
 $gift = $res->fetchColumn();
 
 if ($gift > 0) {
+    $listing = new ui_components();
+    $listing->ui_segment = true; //подключаем css segments
+    $listing->class = 'ui segments';
 
     $post = $listing->post();
     $post->class = 'ui secondary segment';
@@ -41,8 +41,8 @@ if ($gift > 0) {
             $post->content .= '<img class="podarki_photo" src="' . $screen . '" width="50"/>';
         }
     }
+    $listing->display();
 }
-$listing->display();
 
 $listing = new ui_components();
 $listing->ui_segment = true; //подключаем css segment
