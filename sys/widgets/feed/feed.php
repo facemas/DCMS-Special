@@ -10,13 +10,11 @@ if (!defined('SOCCMS')) {
  * @param widget_feed_post $post2
  * @return int
  */
-function widget_feed_sort_callback($post1, $post2)
-{
+function widget_feed_sort_callback($post1, $post2) {
     return $post1->sort_time_field == $post2->sort_time_field ? 0 : $post1->sort_time_field > $post2->sort_time_field ? -1 : 1;
 }
 
-function widget_feed_start_with($haystack, $needle)
-{
+function widget_feed_start_with($haystack, $needle) {
     return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
 }
 

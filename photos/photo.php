@@ -70,9 +70,7 @@ if ($photo->id_user && $photo->id_user == $user->id) {
     if (!empty($_GET ['act']) && $_GET ['act'] === 'delete') {
 
         if (!empty($_POST ['delete'])) {
-            if (empty($_POST ['captcha']) || empty($_POST ['captcha_session']) || !captcha::check($_POST ['captcha'], $_POST ['captcha_session'])) {
-                $doc->err(__('Проверочное число введено неверно'));
-            } elseif ($photo->delete()) {
+            if ($photo->delete()) {
                 $doc->msg(__('Фото успешно удалено'));
                 $doc->ret(__('Альбом %s', $album->name), 'photos.php?id=' . $ank->id . '&amp;album=' . urlencode($album->name));
                 $doc->ret(__('Альбомы %s', $ank->nick), 'albums.php?id=' . $ank->id);
@@ -90,8 +88,8 @@ if ($photo->id_user && $photo->id_user == $user->id) {
         }
 
         $form = new form(new url(null, array('id' => $ank->id, 'album' => $album->name, 'photo' => $photo->name)));
-        $form->captcha();
-        $form->button(__('Удалить фото'), 'delete');
+        $form->block('<div class="ui mini yellow message">' . __('Вы действительно хотите удалить фото?') . '</div>');
+        $form->block('<input type="submit" name="delete" value="' . __('Удалить фото') . '" class="tiny ui blue button" />');
         $form->display();
 
         $doc->ret(__('К фото'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name));
@@ -100,7 +98,7 @@ if ($photo->id_user && $photo->id_user == $user->id) {
         exit();
     }
 
-    $doc->act(__('Удалить фото'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;act=delete');
+    $doc->opt(__('Удалить фото'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;act=delete');
 }
 
 if ($screen = $photo->getScreen($doc->img_max_width(), 0)) {
@@ -146,7 +144,7 @@ if ($can_write && $pages->this_page == 1) {
                     }
                     $ank_in_message = new user($user_id_in_message);
                     if ($ank_in_message->notice_mention) {
-                        $ank_in_message->not("Упомянул" . ($user->sex ? '' : 'а') . " о Вас в комментарии к файлу [url=/photos/photo.php?id=$ank->id&album=$album->name&photo=$photo->name]$photo->runame[/url]", $user->id);
+                        $ank_in_message->not(($user->sex ? 'упомянул' : 'упомянула') . " о вас в комментарии к фото [url=/photos/photo.php?id=$ank->id&album=$album->name&photo=$photo->name]$photo->runame[/url]", $user->id);
                     }
                 }
             }
@@ -155,7 +153,7 @@ if ($can_write && $pages->this_page == 1) {
 
             if ($photo->id_user && $photo->id_user != $user->id) { // уведомляем автора о комментарии
                 $ank = new user($photo->id_user);
-                $ank->not("Оставил" . ($user->sex ? '' : 'а') . " комментарий к Вашему фото [url=/photos/photo.php?id=$ank->id&album=$album->name&photo=$photo->name]{$photo->runame}[/url]", $user->id);
+                $ank->not(($user->sex ? 'оставил' : 'оставила') . " комментарий к вашему фото [url=/photos/photo.php?id=$ank->id&album=$album->name&photo=$photo->name]{$photo->runame}[/url]", $user->id);
             }
             if ($doc instanceof document_json) {
                 $doc->form_value('message', '');
@@ -205,16 +203,22 @@ if (!empty($_GET ['delete_comm']) && $user->group >= $photo->group_edit) {
     $res = $db->prepare("SELECT COUNT(*) FROM `files_comments` WHERE `id` = ? AND `id_file` = ? LIMIT 1");
     $res->execute(Array($delete_comm, $photo->id));
     $k = $res->fetchColumn();
+
     if ($k) {
         $res = $db->prepare("DELETE FROM `files_comments` WHERE `id` = ? LIMIT 1");
         $res->execute(Array($delete_comm));
         $photo->comments--;
         $doc->msg(__('Комментарий успешно удален'));
-    } else
+    } else {
         $doc->err(__('Комментарий уже удален'));
+    }
 }
 
-$listing = new listing();
+$listing = new ui_components();
+$listing->ui_comment = true; //подключаем css comments
+$listing->ui_segment = true; //подключаем css segments
+$listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments small comments';
+
 
 if (!empty($form)) {
     $listing->setForm($form);
@@ -227,19 +231,23 @@ if ($arr = $q->fetchAll()) {
     foreach ($arr AS $comment) {
         $ank2 = new user($comment['id_user']);
         $post = $listing->post();
+        $post->class = 'ui segment comment';
+        $post->comments = true;
         $post->id = 'photo_post_' . $comment['id'];
-        $post->title = $ank2->nick();
+        $post->login = $ank2->nick();
         $post->time = misc::when($comment['time']);
-        $post->image = $ank2->getAvatar();
+        $post->avatar = $ank2->getAvatar();
+        $post->image_a_class = 'ui avatar';
         $post->content = text::toOutput($comment['text']);
 
-        if ($user->group) {
-            $post->action('pencil', '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;message=' . $comment['id'] . '&amp;reply');
-            $post->action('quote-left', '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;message=' . $comment['id'] . '&amp;quote');
+        if ($user->group && ($user->id != $ank2->id)) {
+            $post->action(false, '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;message=' . $comment['id'] . '&amp;reply', __('Ответить'));
         }
-
+        if ($user->group) {
+            $post->action(false, '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;message=' . $comment['id'] . '&amp;quote', __('Цитировать'));
+        }
         if ($user->group >= $photo->group_edit) {
-            $post->action('trash-o', '?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;photo=' . urlencode($photo->name) . '&amp;delete_comm=' . $comment ['id']);
+            $post->action(false, "?id=$ank->id&amp;album=" . urlencode($album->name) . "&amp;photo=" . urlencode($photo->name) . "&amp;delete_comm=$comment[id]", __('Удалить'));
         }
 
         if ($doc instanceof document_json) {

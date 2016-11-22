@@ -19,8 +19,9 @@ if (cache_events::get('system.update.work')) {
 /**
  * @const USER_AGENT
  */
-if (!defined('USER_AGENT'))
+if (!defined('USER_AGENT')) {
     define('USER_AGENT', @$_SERVER['HTTP_USER_AGENT']);
+}
 
 /**
  * загрузка системных параметров

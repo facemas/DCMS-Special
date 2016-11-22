@@ -8,6 +8,7 @@
     '<form id="' . $id . '" ng-controller="FormCtrl" ng-submit="form.onSubmit($event)" data-url="' . $ajax_url . '" ng-disabled="form.sending"' .
     ($method ? ' method="' . $method . '"' : '') .
     ($action ? ' action="' . $action . '"' : '') .
+    ($atr ? ' ' . $atr . '' : '') .
     ($files ? ' enctype="multipart/form-data"' : '') .
     ($limit_files ? ' data-limit-files="' . $limit_files . '"' : '') .
     ($limit_size ? ' data-limit-size="' . $limit_size . '"' : '')
@@ -99,12 +100,12 @@
             ' /><label>' . ($element['info']['text'] ? ' ' . $element['info']['text'] : '') . '</label></div>';
             break;
         case 'submit':
-            echo '<button type="submit" ' .
-            ($element['info']['name'] ? ' name="' . $element['info']['name'] . '"' : '') .
-            ($element['info']['class'] ? ' class="' . $element['info']['class'] . '"' : '') . '>
-                ' . ($element['info']['icon'] ? '<i class="' . ($element['info']['icon']) . '"></i> ' : '') . '
-                ' . ($element['info']['value'] ? text::toValue($element['info']['value']) : '') . '
-                </button>';
+            echo "<button type='submit' " .
+            ($element['info']['name'] ? " name='" . $element['info']['name'] . "'" : "") .
+            ($element['info']['class'] ? " class='" . $element['info']['class'] . "'" : "") . ">" .
+            ($element['info']['icon'] ? "<i class='" . ($element['info']['icon']) . "'></i> " : "") . " " .
+            ($element['info']['value'] ? text::toValue($element['info']['value']) : "") . "
+                </button>";
             break;
         case 'file':
             echo '<div class="field">';

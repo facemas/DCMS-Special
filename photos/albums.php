@@ -44,11 +44,11 @@ if (!@is_dir($albums_path)) {
 $albums_dir = new files($albums_path);
 
 // создание альбома
-if ($ank->id == $user->id && !empty($_GET ['act']) && $_GET ['act'] == 'create') {
-    $doc->title .= ' - ' . __('Создать альбом');
+if ($ank->id == $user->id && !empty($_GET['act']) && $_GET['act'] == 'create') {
+    $doc->title .= ' - ' . __('Новый альбом');
 
-    if (!empty($_POST ['name'])) {
-        $name = text::for_name($_POST ['name']);
+    if (!empty($_POST['name'])) {
+        $name = text::for_name($_POST['name']);
 
         if (!$name) {
             $doc->err(__('Название состоит из запрещенных символов'));
@@ -84,7 +84,8 @@ for ($i = 0; $i < count($dirs); $i++) {
     $post->class = 'ui segment';
     $post->list = true;
     $post->icon($dirs[$i]->icon());
-    $post->title = text::toValue($dirs [$i]->runame);
+    $post->title = text::toValue($dirs[$i]->runame);
+    $post->content = text::toValue($dirs[$i]->description);
     $post->url = "photos.php?id={$ank->id}&amp;album=" . urlencode($dirs [$i]->name);
 }
 $listing->display(__('Фотоальбомы отсутствуют'));
@@ -92,5 +93,5 @@ $listing->display(__('Фотоальбомы отсутствуют'));
 
 
 if ($user->id == $ank->id) {
-    $doc->opt(__('Создать альбом'), '?id=' . $ank->id . '&amp;act=create', false, '<i class="fa fa-plus fa-fw"></i>');
+    $doc->opt(__('Новый альбом'), '?id=' . $ank->id . '&amp;act=create', false, '<i class="fa fa-plus fa-fw"></i>');
 }

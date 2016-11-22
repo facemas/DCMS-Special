@@ -150,6 +150,12 @@ spl_autoload_register('dcmsAutoload');
 
 include_once (H . '/sys/plugins/classes/cache.class.php');
 
+require_once (H . '/sys/lib/Twig/Autoloader.php');
+Twig_Autoloader::register();
+
+$loader = new Twig_Loader_Filesystem(H . '/sys/templates');
+$twig = new Twig_Environment($loader);
+
 /**
  * Генератор пароля
  * @param int $len Длина пароля

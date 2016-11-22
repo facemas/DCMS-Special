@@ -113,8 +113,7 @@
 [data-position="right center"][data-tooltip]:before {-webkit-transform-origin: right center;transform-origin: right center;}
 [data-position="right center"][data-tooltip]:after {-webkit-transform-origin: left center;transform-origin: left center;}
 
-/*-------------- Spacing
----------------*/
+/* Spacing */
 
 .ui.popup {margin: 0em;}
 

@@ -104,7 +104,7 @@
                 <?php echo "$realname $lastname"; ?>
                 <span class="<?= $online ?>"></span>
                 <?php if ($verify) { ?>
-                    <span class="_2y7Q7Itc" data-tooltip='<?= __('Данная отметка означает, что страница %s была подтверждена администрацией.', $login) ?>' data-position='top center' data-variation="very wide"><i class="fa fa-check"></i></span>
+                    <span class="_2y7Q7Itc wide" data-tooltip='<?= __('Профиль %s подтвержден.', $login) ?>' data-variation="wide"><i class="fa fa-check"></i></span>
                 <?php } ?>
             </h1>
             <span class="Fe7ul3Lt Z5IeoGpY _2DggF3sL">

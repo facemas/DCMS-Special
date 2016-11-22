@@ -51,6 +51,29 @@ if ($user->group && $file->id_user != $user->id && isset($_POST['rating'])) {
     }
 }
 
+if ($access_edit) {
+    $listing = new ui_components();
+    $listing->ui_menu = true;
+
+    $post = $listing->post();
+    $post->head = '<div class="ui icon menu">
+        <span data-tooltip="' . __('Скриншоты') . '" data-position="bottom left">
+        <a class="item" href="?order=' . $order . '&amp;act=edit_screens"><i class="fa fa-image fa-fw"></i></a>
+            </span>
+            <span data-tooltip="' . __('Параметры файла') . '" data-position="bottom left">
+        <a class="item" href="?order=' . $order . '&amp;act=edit_prop"><i class="fa fa-cog fa-fw"></i></a>
+            </span>
+            <span data-tooltip="' . __('Переместить файл') . '" data-position="bottom left">
+        <a class="item" href="?order=' . $order . '&amp;act=edit_path"><i class="fa fa-arrows fa-fw"></i></a>
+            </span>
+            <span data-tooltip="' . __('Удалить файл') . '" data-position="bottom left">
+        <a class="item" href="?order=' . $order . '&amp;act=edit_unlink"><i class="fa fa-trash-o fa-fw"></i></a>
+            </span>
+        </div>';
+
+    $listing->display();
+}
+
 if (empty($_GET['act'])) {
     $screens_count = $file->getScreensCount();
     $query_screen = (int) @$_GET['screen_num'];
@@ -75,23 +98,29 @@ if (empty($_GET['act'])) {
         }
     }
 
-    $listing = new listing();
+    $listing = new ui_components();
+    $listing->ui_segment = true; //подключаем css segments
+    $listing->class = 'ui segments';
 
     if ($description = $file->description) {
         $post = $listing->post();
-        $post->title = __('Описание');
-        $post->icon('info');
-        $post->content[] = $description;
+        $post->class = 'ui segment';
+        $post->list = true;
+        $post->title = $description;
     }
 
     if ($title = $file->title) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Заголовок');
         $post->content[] = $title;
     }
 
     if ($artist = $file->artist) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Исполнители');
         $post->content[] = $artist;
         $doc->keywords[] = $artist;
@@ -99,6 +128,8 @@ if (empty($_GET['act'])) {
 
     if ($band = $file->band) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Группа');
         $post->content[] = $band;
         $doc->keywords[] = $band;
@@ -106,6 +137,8 @@ if (empty($_GET['act'])) {
 
     if ($album = $file->album) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Альбом');
         $post->content[] = $album;
         $doc->keywords[] = $album;
@@ -113,122 +146,140 @@ if (empty($_GET['act'])) {
 
     if ($year = $file->year) {
         $post = $listing->post();
-        $post->title = __('Год');
-        $post->content[] = $year;
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Год') . ": $year";
     }
 
     if ($genre = $file->genre) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Жанр');
         $post->content[] = $genre;
     }
 
     if ($comment = $file->comment) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Комментарий');
         $post->content[] = $comment;
     }
 
     if ($track_number = (int) $file->track_number) {
         $post = $listing->post();
-        $post->title = __('Номер трека');
-        $post->content[] = $track_number;
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Номер трека') . ": $track_number";
     }
 
     if ($language = $file->language) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Язык');
         $post->content[] = $language;
     }
 
     if ($url = $file->url) {
         $post = $listing->post();
+        $post->list = true;
+        $post->class = 'ui segment';
         $post->title = __('Ссылка');
         $post->content[] = $url;
     }
 
     if ($copyright = $file->copyright) {
         $post = $listing->post();
+        $post->class = 'ui segment';
+        $post->list = true;
         $post->title = __('Копирайт');
         $post->content[] = $copyright;
     }
 
     if ($vendor = $file->vendor) {
         $post = $listing->post();
+        $post->class = 'ui segment';
+        $post->list = true;
         $post->title = __('Производитель');
         $post->content[] = $vendor;
     }
 
     if (($width = (int) $file->width) && ($height = (int) $file->height)) {
         $post = $listing->post();
-        $post->title = __('Разрешение');
-        $post->content[] = $width . 'x' . $height;
+        $post->class = 'ui segment';
+        $post->list = true;
+        $post->title = __('Разрешение') . ": $width x $height";
     }
 
     if ($frames = (int) $file->frames) {
         $post = $listing->post();
-        $post->title = __('Кол-во кадров');
-        $post->content[] = $frames;
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Кол-во кадров') . ": $frames";
     }
 
     if ($playtime_string = $file->playtime_string) {
         $post = $listing->post();
-        $post->title = __('Продолжительность');
-        $post->content[] = $playtime_string;
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Продолжительность') . ": $playtime_string";
     }
 
     if (($video_bitrate = (int) $file->video_bitrate) && ($video_bitrate_mode = $file->video_bitrate_mode)) {
         $post = $listing->post();
-        $post->title = __('Видео битрейт');
-        $post->content[] = misc::getDataCapacity($video_bitrate) . "/s (" . $video_bitrate_mode . ")";
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Видео битрейт') . ": " . misc::getDataCapacity($video_bitrate) . "/s (" . $video_bitrate_mode . ")";
     }
 
     if ($video_codec = $file->video_codec) {
         $post = $listing->post();
-        $post->title = __('Видео кодек');
-        $post->content[] = $video_codec;
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Видео кодек') . ": $video_codec";
     }
 
     if ($video_frame_rate = $file->video_frame_rate) {
         $post = $listing->post();
-        $post->title = __('Частота');
-        $post->content[] = __('%s кадров в секунду', round($video_frame_rate / 60));
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Частота') . ": " . __('%s кадров в секунду', round($video_frame_rate / 60));
     }
 
     if (($audio_bitrate = (int) $file->audio_bitrate) && ($audio_bitrate_mode = $file->audio_bitrate_mode)) {
         $post = $listing->post();
-        $post->title = __('Аудио битрейт');
-        $post->content[] = misc::getDataCapacity($audio_bitrate) . "/s (" . $audio_bitrate_mode . ")";
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Аудио битрейт') . ": " . misc::getDataCapacity($audio_bitrate) . "/s (" . $audio_bitrate_mode . ")";
     }
 
     if ($audio_codec = $file->audio_codec) {
         $post = $listing->post();
-        $post->title = __('Аудио кодек');
-        $post->content[] = $audio_codec;
+        $post->list = true;
+        $post->class = 'ui segment';
+        $post->title = __('Аудио кодек') . ": $audio_codec";
     }
 
     if ($file->id_user) {
         $ank = new user($file->id_user);
 
         $post = $listing->post();
-        $post->title = __('Файл загрузил' . ($ank->sex ? '' : 'а'));
-
-        $post->content = $ank->nick;
+        $post->class = 'ui segment';
+        $post->list = true;
+        $post->title = __('Файл загрузил' . ($ank->sex ? '' : 'а')) . " $ank->nick " . misc::times($file->time_add);
         $post->url = '/profile.view.php?id=' . $ank->id;
-        $post->time = misc::when($file->time_add);
     }
 
-    /*
-      $post = $listing->post();
-      $post->title = __('Кол-во скачиваний');
-      $post->content[] = intval($file->downloads) . ' ' . __(misc::number($file->downloads, 'раз', 'раза', 'раз'));
-     */
+    $post = $listing->post();
+    $post->class = 'ui segment';
+    $post->list = true;
+    $post->title = __('Размер файла') . ": " . misc::getDataCapacity($file->size);
 
     $post = $listing->post();
-    $post->title = __('Размер файла');
-    $post->content[] = misc::getDataCapacity($file->size);
-
-    $post = $listing->post();
+    $post->list = true;
+    $post->class = 'ui segment';
     $post->title = __('Общая оценка');
     $post->content[] = $file->rating_name . ' (' . round($file->rating, 1) . '/' . $file->rating_count . ")";
 
@@ -474,10 +525,10 @@ if ($count > 1) {
     }
 }
 
-$doc->act($dir->runame, './?order=' . $order); // возвращение в папку
+$doc->ret($dir->runame, './?order=' . $order); // возвращение в папку
 $return = $dir->ret(5); // последние 5 ссылок пути
 for ($i = 0; $i < count($return); $i++) {
-    $doc->act($return[$i]['runame'], '/files' . $return[$i]['path']);
+    $doc->ret($return[$i]['runame'], '/files' . $return[$i]['path']);
 }
 
 if ($access_edit) {

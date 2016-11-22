@@ -36,7 +36,9 @@ if ($avatar) {
     if ($feed) {
         echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
     }
-    echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
+    if (!$comments && !$feed) {
+        echo ($image_a_class ? "<div class='$image_a_class'>" : null) . "<img src='$avatar' alt='' $img_class>" . ($image_a_class ? "</div>" : null);
+    }
 }
 if ($counter || $url && $title || $url && $login || $image || $content || $title || $bottom) {
     ?>
@@ -64,17 +66,17 @@ if ($counter || $url && $title || $url && $login || $image || $content || $title
                 echo "<p><a class='item' href='$url'>$i $title</a></p>";
             }
             if ($feed) {
-                echo "<div class='summary'><a class='user' href='$url'>$i $login</a> $content </div>";
+                echo "<div class='summary'><a class='user' href='$url'>$i $login</a> $title </div>";
             }
         } else {
             if ($comments) {
                 echo "<a class='author'>$i $login</a>";
             }
             if ($list) {
-                echo "<p><a class='item'>$i $title</a> " . ($time ? $time : null) . "</p>";
+                echo "<p><span class='item'>$i $title</span> " . ($time ? $time : null) . "</p>";
             }
             if ($feed) {
-                echo "<div class='summary'><a class='user'>$i $login</a> $content </div>";
+                echo "<div class='summary'><a class='user'>$i $login</a> $title </div>";
             }
             # Обычно используется в пустых значениях
             if ($icon && $title) {

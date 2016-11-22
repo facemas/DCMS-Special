@@ -51,7 +51,7 @@ $doc->keywords [] = $ank->login;
 if (!empty($_GET ['act']) && $ank->id == $user->id) {
     switch ($_GET ['act']) {
         case 'prop' :
-            $doc->title .= ' - Параметры';
+            $doc->title .= ' - ' . __('Параметры');
 
             if (!empty($_POST ['prop'])) {
                 if ($album->id_user = $user->id) {
@@ -60,8 +60,8 @@ if (!empty($_GET ['act']) && $ank->id == $user->id) {
                         $album->group_show = $_POST['group_show'];
                     }
 
-                    $album->runame = text::input_text(@$_POST ['name']);
-                    $album->description = text::input_text(@$_POST ['description']);
+                    $album->runame = text::input_text(@$_POST['name']);
+                    $album->description = text::input_text(@$_POST['description']);
                     $doc->msg(__('Изменения сохранены'));
                     $doc->ret(__('Альбомы %s', $ank->login), 'albums.php?id=' . $ank->id);
                 } else {
@@ -75,10 +75,10 @@ if (!empty($_GET ['act']) && $ank->id == $user->id) {
             $form->text('name', 'Название', $album->runame);
             $form->textarea('description', 'Описание', $album->description);
             $options = array();
-            $options [] = array('0', __('Всем'), $album->group_show == "0");
-            $options [] = array('1', __('Зарегистрированным'), $album->group_show == "1");
-            $form->select('group_show', __('Показывать папку:'), $options);
-            $form->button('Сохранить', 'prop');
+            $options [] = array('0', __('Все'), $album->group_show == "0");
+            $options [] = array('1', __('Зарегистрированные'), $album->group_show == "1");
+            $form->select('group_show', __('Кто видит альбом'), $options);
+            $form->block('<input type="submit" name="prop" value="' . __('Сохранить') . '" class="tiny ui blue button" />');
             $form->display();
 
             $doc->ret(__('В альбом'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name));
@@ -120,13 +120,11 @@ if (!empty($_GET ['act']) && $ank->id == $user->id) {
             $doc->ret(__('В альбом'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name));
             exit();
         case 'delete' :
-            $doc->title .= ' - Удаление';
+            $doc->title .= ' - ' . __('Удаление');
 
             if (!empty($_POST ['delete'])) {
 
-                if (empty($_POST ['captcha']) || empty($_POST ['captcha_session']) || !captcha::check($_POST ['captcha'], $_POST ['captcha_session']))
-                    $doc->err(__('Проверочное число введено неверно'));
-                elseif ($album->delete()) {
+                if ($album->delete()) {
                     $doc->msg(__('Альбом успешно удален'));
                     $doc->ret(__('Альбомы %s', $ank->login), 'albums.php?id=' . $ank->id);
                     header('Refresh: 1; url=albums.php?id=' . $ank->id . '&' . passgen());
@@ -141,8 +139,9 @@ if (!empty($_GET ['act']) && $ank->id == $user->id) {
             }
 
             $form = new form(new url(null, array('act' => 'delete')));
-            $form->captcha();
-            $form->button(__('Удалить альбом'), 'delete');
+            $form->block('<div class="ui mini yellow message">' . __('Все данные, относящиеся к данному альбому будут безвозвратно удалены.') . '</div>');
+            $form->block('<input type="submit" name="delete" value="' . __('Удалить альбом') . '" class="tiny ui blue button" />');
+
             $form->display();
 
             $doc->ret(__('В альбом'), '?id=' . $ank->id . '&amp;album=' . urlencode($album->name));
@@ -199,7 +198,7 @@ for ($i = $start; $i < $end && $i < $pages->posts; $i++) {
 
     echo "<a href='photo.php?id=$ank->id&amp;album=" . urlencode($album->name) . "&amp;photo=" . urlencode($files [$i]->name) . "'>";
     echo "<img class='ui image' src='" . $files[$i]->image() . "' />";
-    //$post->title = text::toValue($files [$i]->runame);
+    //$post->title = text::toValue($files[$i]->runame);
 
     if ($comments = $files [$i]->comments) {
         //$post->content[] = __('%s комментари' . misc::number($comments, 'й', 'я', 'ев'), $comments);
@@ -221,5 +220,4 @@ echo "</div>";
 
 $pages->display('?id=' . $ank->id . '&amp;album=' . urlencode($album->name) . '&amp;'); // вывод страниц
 
-
-$doc->act(__('Альбомы %s', $ank->login), 'albums.php?id=' . $ank->id);
+$doc->ret(__('Альбомы %s', $ank->login), 'albums.php?id=' . $ank->id);

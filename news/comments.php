@@ -74,13 +74,42 @@ if (isset($_GET['likes']) && $user->id) {
     }
 }
 
+$ank = new user((int) $news['id_user']);
+
+if ($user->group >= max($ank->group, 4)) {
+    $listing = new ui_components();
+    $listing->ui_menu = true;
+
+    $post = $listing->post();
+    $post->head = '<div class="ui icon menu">
+        ' . (!$news['id_vote'] ? '
+        <span data-tooltip="' . __('Создать голосование') . '" data-position="bottom left">
+        <a class="item" href="vote.new.php?id=' . $news['id'] . '"><i class="fa fa-bar-chart fa-fw"></i></a>
+            </span>' : '
+        <span data-tooltip="' . __('Редактировать голосование') . '" data-position="bottom left">
+        <a class="item" href="vote.edit.php?id=' . $news['id'] . '"><i class="fa fa-bar-chart fa-fw"></i></a>
+            </span>') . '
+            <span data-tooltip="' . __('Редактировать новость') . '" data-position="bottom left">
+        <a class="item" href="news.edit.php?id=' . $news['id'] . '"><i class="fa fa-cog fa-fw"></i></a>
+            </span>
+            <span data-tooltip="' . __('Удалить новость') . '" data-position="bottom left">
+        <a class="item" href="news.delete.php?id=' . $news['id'] . '"><i class="fa fa-trash-o fa-fw"></i></a>
+            </span>
+            ' . (!$news['sended'] ? '
+            <span data-tooltip="' . __('Рассылка') . '" data-position="bottom left">
+        <a class="item" href="news.send.php?id=' . $news['id'] . '"><i class="fa fa-send-o fa-fw"></i></a>
+            </span>' : null) . '
+        </div>';
+
+    $listing->display();
+}
+
 $listing = new ui_components();
 $listing->ui_comment = true; //подключаем css comments
 $listing->ui_segment = true; //подключаем css segment
 $listing->ui_list = true; //подключаем css segment
 $listing->class = $dcms->browser_type == 'full' ? 'segments minimal comments' : 'segments comments';
 
-$ank = new user((int) $news['id_user']);
 $post = $listing->post();
 
 $post->class = 'ui segment comment';
@@ -128,18 +157,6 @@ if ($user->id && $user->id != $ank->id && !$stt) {
 $post->bottom .= '<div class="item"><div class="content"><a href="/profile.view.php?id=' . $news['id_user'] . '" class="header" data-tooltip="' . __('Автор') . '" data-position="top center">' . $ank->nick() . '</a></div></a></div>';
 $post->bottom .= '</div>';
 
-if ($user->group >= max($ank->group, 4)) {
-    if (!$news['sended']) {
-        $doc->opt(__('Рассылка'), 'news.send.php?id=' . $news['id']);
-    }
-    if ($news['id_vote']) {
-        $doc->opt(__('Ред. голосование'), 'vote.edit.php?id=' . $news['id']);
-    } else {
-        $doc->opt(__('Создать голосование'), 'vote.new.php?id=' . $news['id']);
-    }
-    $doc->opt(__('Редактировать'), 'news.edit.php?id=' . $news['id']);
-    $doc->opt(__('Удалить'), 'news.delete.php?id=' . $news['id']);
-}
 
 $listing->display();
 
@@ -261,7 +278,7 @@ if ($arr = $q->fetchAll()) {
         $post->time = misc::times($message['time']);
         $post->login = $ank->nick();
         $post->avatar = $ank->getAvatar();
-        $post->image_a_class = 'avatar';
+        $post->image_a_class = 'ui avatar';
         $post->content = text::toOutput($message['text']);
 
         if ($user->group && ($user->id != $ank->id)) {

@@ -27,7 +27,7 @@ switch (@$_GET['act']) {
             $form->textarea('meta_keywords', __('Ключевые слова (через запятую)') . ' [META]', $file->meta_keywords);
 
             $form->bbcode('* ' . __('На сервере имя файла будет на транслите'));
-            $form->button(__('Применить'), 'edit_prop');
+            $form->button(__('Сохранить'), 'edit_prop');
             $form->display();
         }
         break;
@@ -75,8 +75,9 @@ switch (@$_GET['act']) {
         break;
     case 'edit_unlink': {
             $form = new form(new url());
-            if ($file->id_user && $file->id_user != $user->id)
+            if ($file->id_user && $file->id_user != $user->id) {
                 $form->textarea('reason', __('Причина удаления'));
+            }
             $form->bbcode(__('Подтвердите удаление файла'));
             $form->button(__('Удалить'), 'edit_unlink');
             $form->display();
@@ -84,8 +85,3 @@ switch (@$_GET['act']) {
         break;
 }
 
-
-$doc->opt(__('Скриншоты'), '?order=' . $order . '&amp;act=edit_screens', false, '<i class="fa fa-image fa-fw"></i>');
-$doc->opt(__('Параметры файла'), '?order=' . $order . '&amp;act=edit_prop', false, '<i class="fa fa-cog fa-fw"></i>');
-$doc->opt(__('Переместить'), '?order=' . $order . '&amp;act=edit_path', false, '<i class="fa fa-exchange fa-fw"></i>');
-$doc->opt(__('Удалить файл'), '?order=' . $order . '&amp;act=edit_unlink', false, '<i class="fa fa-trash-o fa-fw"></i>');
