@@ -16,10 +16,7 @@ if (!$ank->group) {
 
 $doc->title = ($user->id && $ank->id == $user->id) ? __('Мои подарки') : __('Подарки "%s"', $ank->nick);
 
-$res = $db->prepare("SELECT COUNT(*) FROM `present_users` WHERE `id_user` = ?");
-$res->execute(Array($ank->id));
-$pages = new pages;
-$pages->posts = $res->fetchColumn();
+$pages = new pages($db->query("SELECT COUNT(*) FROM `present_users` WHERE `id_user` = '$ank->id'")->fetchColumn());
 
 $listing = new ui_components();
 $listing->ui_segment = true; //подключаем css segments
@@ -30,7 +27,7 @@ $q = $db->prepare("SELECT * FROM `present_users` WHERE `id_user` = ? ORDER BY `i
 $q->execute(Array($ank->id));
 
 while ($item = $q->fetch()) {
-    $ank = new user($item['id_ank']);
+    $anks = new user($item['id_ank']);
 
     $post = $listing->post();
     $post->class = 'ui segment item';
@@ -42,13 +39,13 @@ while ($item = $q->fetch()) {
         $post->image_class = 'ui tiny image';
     }
     $post->content = '
-        <a class="header" href="/profile.view.php?id=' . $ank->id . '">' . $ank->nick() . '</a>
+        <a class="header" href="/profile.view.php?id=' . $anks->id . '">' . $anks->nick() . '</a>
         <div class="description">' . text::toOutput($item['text']) . '</div>
         <div class="description" style="color: grey;">' . misc::times($item['time']) . '</div>';
 
-    $post->url = '/profile.view.php?id=' . $ank->id;
+    $post->url = '/profile.view.php?id=' . $anks->id;
 
-    if ($user->id == $ank->id) {
+    if ($user->id == $anks->id) {
         //$post->action('delete', 'item.delete.php?id=' . $item['id'] . "&amp;return=" . URL);
     }
 }
