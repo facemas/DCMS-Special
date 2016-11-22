@@ -11,6 +11,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 
 $id_category = (int) $_GET['id'];
+
 $q = $db->prepare("SELECT * FROM `blog_cat` WHERE `id` = ? AND `group_edit` <= ?");
 $q->execute(Array($id_category, $user->group));
 
@@ -19,25 +20,24 @@ if (!$category = $q->fetch()) {
     $doc->err(__('Категория не доступна для чистки'));
     exit;
 }
+
 $doc->title = __('Чистка категории "%s"', $category['name']);
+
 $res = $db->prepare("SELECT COUNT(*) FROM `blog` WHERE `id_cat` = ?");
 $res->execute(Array($category['id']));
+
 $count = $res->fetchColumn();
+
 if (isset($_POST['clear'])) {
-    if (empty($_POST['captcha']) || empty($_POST['captcha_session'])) {
-        $doc->err(__('Проверочное число введено неверно'));
-    } else {
-        $q = $db->prepare("DELETE FROM `blog` WHERE `id_cat` = ?");
-        $q->execute(Array($category['id']));
-        $doc->msg('' . $count . ' из ' . $count . ' записей были удалены из категории');
-    }
+    $q = $db->prepare("DELETE FROM `blog` WHERE `id_cat` = ?");
+    $q->execute(Array($category['id']));
+    $doc->msg('' . $count . ' из ' . $count . ' записей были удалены из категории');
 }
 
 $form = new form(new url());
 
 $form->bbcode(__('Всего записей в категории: %s', '[b]' . $count . '[/b]'));
-$form->captcha();
-$form->bbcode('* ' . __('Данные будут безвозвратно удалены'));
+$form->block("<div class='ui mini info message'>" . __('Данные будут безвозвратно удалены') . "</div>");
 $form->button(__('Очистить'), 'clear');
 $form->display();
 $doc->opt(__('Параметры категории'), 'category.edit.php?id=' . $category['id']);

@@ -9,6 +9,7 @@ if (!isset($_GET ['id']) || !is_numeric($_GET ['id'])) {
     $doc->err(__('Ошибка выбора сообщения'));
     exit();
 }
+
 $id_message = (int) $_GET['id'];
 $id_blog = (int) $_GET['idblog'];
 

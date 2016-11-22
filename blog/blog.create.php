@@ -24,7 +24,7 @@ if (isset($_POST['message']) && isset($_POST['name'])) {
     $message = text::input_text($_POST ['message']);
     $name = text::for_name($_POST['name']);
     $users_in_message = text::nickSearch($message);
-    
+
     if ($dcms->censure && $mat = is_valid::mat($message)) {
         $doc->err(__('Обнаружен мат: %s', $mat));
     } elseif ($dcms->censure && $mat = is_valid::mat($name)) {
@@ -49,5 +49,5 @@ $form->textarea('message', __('Содержимое'));
 $form->button(__('Опубликовать'));
 $form->display();
 
-$doc->act(__('Категории'), 'index.php');
+$doc->ret(__('Категории'), 'index.php');
 ?>

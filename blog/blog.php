@@ -31,15 +31,16 @@ $doc->title = $blogs['name'];
 $doc->description = $blogs['message'];
 
 if ($blogs['block'] == 0) {
-    $res = $db->prepare("SELECT COUNT(*) FROM `blog_view` WHERE `blog` = ? AND `id_user` = ? LIMIT 1");
-    $res->execute(Array($blogs['id'], $user->id));
-    $n = $res->fetchColumn();
-
-    if ($user->group && ($n == 0)) {
-        $q = $db->prepare("INSERT INTO `blog_view` (`id_user`, `blog`) VALUES (?,?)");
-        $q->execute(array($user->id, $blogs['id']));
-        $res = $db->prepare("UPDATE `blog` SET `view` = `view` + '1' WHERE `id` = ? LIMIT 1");
-        $res->execute(Array($blogs['id']));
+    if ($user->group) {
+        $q = $db->prepare("SELECT * FROM `blog_views` WHERE `id_blog` = ? AND `id_user` = ? AND `time` > ?");
+        $q->execute(Array($blogs['id'], $user->id, DAY_TIME));
+        if (!$q->fetch()) {
+            $res = $db->prepare("INSERT INTO `blog_views` (`id_blog`, `id_user`, `time`) VALUES (?, ?, ?)");
+            $res->execute(Array($blogs['id'], $user->id, (TIME + 1)));
+        } else {
+            $res = $db->prepare("UPDATE `blog_views` SET `time` = ? WHERE `id_blog` = ? AND `id_user` = ? ORDER BY `time` DESC LIMIT 1");
+            $res->execute(Array((TIME + 1), $blogs['id'], $user->id));
+        }
     }
 
     $ank = new user((int) $blogs['autor']);
@@ -53,83 +54,146 @@ if ($blogs['block'] == 0) {
             $res = $db->prepare("INSERT INTO `blog_like` (`id_user`, `time`, `id_blog`) VALUES (?, ?, ?)");
             $res->execute(Array(intval($user->id), TIME, intval($blogs['id'])));
             #Уведомление
-            $ank->not(($user->sex ? 'Оценил' : 'Оценила') . " Ваш блог [url=/blog/blog.php?blog=" . $blogs['id'] . "]$blogs[name][/url]", $user->id);
-            $doc->msg(__('Вам понравилось'));
+            $ank->not(($user->sex ? 'оценил' : 'оценила') . " ваш блог [url=/blog/blog.php?blog=" . $blogs['id'] . "]$blogs[name][/url]", $user->id);
+            $doc->msg(__('Вы успешно оценили блог'));
 
             if (isset($_GET['return'])) {
-                $doc->ret('В тему', text::toValue($_GET['return']));
+                $doc->ret('В блог', text::toValue($_GET['return']));
             }
         } else {
             $doc->err(__('Лайк уже засчитан'));
 
             if (isset($_GET['return'])) {
-                $doc->ret('В тему', text::toValue($_GET['return']));
+                $doc->ret('В блог', text::toValue($_GET['return']));
             }
         }
     }
 
-    $listing = new listing();
-    $post = $listing->post();
-
     if ($user->group >= 2 || $user->id == $ank->id) {
-        $post->action('edit', "edit.blog.php?id=" . $blogs['id']);
-        $post->action('trash-o', "delete.blog.php?id=" . $blogs['id']);
+
+        $listing = new ui_components();
+        $listing->ui_menu = true;
+
+        $post = $listing->post();
+        $post->head = '<div class="ui icon menu">
+            ' . (!$blogs['id_vote'] ? '
+            <span data-tooltip="' . __('Создать голосование') . '" data-position="bottom left">
+                <a class="item" href="vote.new.php?id=' . $blogs['id'] . '"><i class="fa fa-bar-chart fa-fw"></i></a>
+            </span>
+            ' : '
+            <span data-tooltip="' . __('Редактировать голосование') . '" data-position="bottom left">
+                <a class="item" href="vote.edit.php?id=' . $blogs['id'] . '"><i class="fa fa-bar-chart fa-fw"></i></a>
+            </span>
+            ') . '
+            
+            <span data-tooltip="' . __('Файлы блога') . '" data-position="bottom left">
+                <a class="item" href="blog.files.php?id=' . $blogs['id'] . '"><i class="fa fa-file fa-fw"></i></a>
+            </span>
+            
+            <span data-tooltip="' . __('Очистить блог') . '" data-position="bottom left">
+                <a class="item" href="message.delete_all.php?id=' . $blogs['id'] . '"><i class="fa fa-window-close-o fa-fw"></i></a>
+            </span>
+            
+            <span data-tooltip="' . __('Редактировать блог') . '" data-position="bottom left">
+                <a class="item" href="blog.edit.php?id=' . $blogs['id'] . '"><i class="fa fa-cog fa-fw"></i></a>
+            </span>
+            
+            <span data-tooltip="' . __('Удалить блог') . '" data-position="bottom left">
+                <a class="item" href="blog.delete.php?id=' . $blogs['id'] . '"><i class="fa fa-trash-o fa-fw"></i></a>
+            </span>
+            ' . ($user->group >= 2 ? '
+            <span data-tooltip="' . __('Заблокировать блог') . '" data-position="bottom left">
+                <a class="item" href="blog.block.php?id=' . $blogs['id'] . '"><i class="fa fa-lock fa-fw"></i></a>
+            </span>
+            ' : null) . '
+        </div>';
+
+        $listing->display();
     }
-    $post->content = text::toOutput($blogs['message']);
-    $post->title = "<b>" . text::toValue($blogs['name']) . "</b>";
-    $post->time = misc::when($blogs['time_create']);
-    $post->image = $ank->getAvatar();
+
+    $listing = new ui_components();
+    $listing->ui_comment = true; //подключаем css comments
+    $listing->ui_segment = true; //подключаем css segment
+    $listing->ui_list = true; //подключаем css list
+    $listing->class = $dcms->browser_type == 'full' ? 'segments minimal comments' : 'segments comments';
 
     $post = $listing->post();
+    $post->class = 'ui segment comment';
+    $post->comments = true;
+
+    $post->content = text::toOutput($blogs['message']);
+    $post->login = "<b>" . text::toValue($blogs['name']) . "</b>";
+    $post->time = misc::when($blogs['time_create']);
+    $post->avatar = $ank->getAvatar(80);
+    $post->image_a_class = 'ui avatar';
+
+    $post = $listing->post();
+    $post->class = 'ui secondary segment comment';
+    $post->comments = true;
+    $autor = $ank->nick();
 
     # Счетчик лайков
     $res = $db->prepare("SELECT COUNT(*) FROM `blog_like` WHERE `id_blog` = ?");
     $res->execute(Array(intval($blogs['id'])));
     $like = $res->fetchColumn();
 
-    $autor = $ank->nick();
+    # Счетчик просмотров
+    $res = $db->prepare("SELECT COUNT(*) FROM `blog_views` WHERE `id_blog` = ?");
+    $res->execute(Array(intval($blogs['id'])));
+    $views = $res->fetchColumn();
+
+    $post->bottom .= '<div class="ui very relaxed horizontal list"> ';
 
     # Комментарии
-    $post->title .= ' <a class="btn btn-secondary btn-sm"><i class="fa fa-comments-o fa-fw"></i> ' . __('%s', $blogs['comm']) . '</a> ';
+    $post->bottom .= '<div class="item"><div class="content"><a class="header" data-tooltip="' . __('Комментариев %s', $blogs['comm']) . '" data-position="top left"><i class="fa fa-comments fa-fw"></i> ' . $blogs['comm'] . '</a></div></div> ';
     # Просмотры
-    $post->title .= ' <a class="btn btn-secondary btn-sm"><i class="fa fa-eye fa-fw"></i> ' . __('%s', $blogs['view']) . '</a> ';
+    $post->bottom .= '<div class="item"><div class="content"><a href="blog.views.php?id=' . $blogs['id'] . '" class="header" data-tooltip="' . __('Просмотров %s', $views) . '" data-position="top center"><i class="fa fa-eye fa-fw"></i> ' . $views . '</a></div></div> ';
     # Мне нравится
     $stt = $db->query("SELECT * FROM `blog_like` WHERE `id_user` = '$user->id' AND `id_blog` = '" . intval($blogs['id']) . "' LIMIT 1")->fetch();
 
     if ($user->id && $user->id != $ank->id && !$stt) {
-        $post->title .= '<a href="?blog=' . $blogs['id'] . '&amp;like" class="btn btn-secondary btn-sm">' . __('Мне нравится') . '</a> <a href="like.php?id=' . $blogs['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+        $post->bottom .= '<div class="item"><div class="content"><a href="?blog=' . $blogs['id'] . '&amp;like" data-tooltip="' . __('Мне нравится') . '" data-position="top center" class="header"><i class="fa fa-heart-o fa-fw"></i> ' . $like . '</a></div></div>';
     } elseif ($user->id && $user->id != $ank->id) {
-        $post->title .= '<a href="like.php?id=' . $blogs['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+        $post->bottom .= '<div class="item"><div class="content"><a href="blog.like.php?id=' . $blogs['id'] . '" class="header" data-tooltip="' . __('Вам понравилось') . '" data-position="top center"><span style="color: #e81c4f"><i class="fa fa-heart fa-fw"></i> ' . $like . '</span></a></div></div>';
     } else {
-        $post->title .= '<a href="like.php?id=' . $blogs['id'] . '" class="btn btn-secondary btn-sm"><i class="fa fa-thumbs-o-up fa-fw"></i> ' . __('%s', $like) . '</a>';
+        $post->bottom .= '<div class="item"><div class="content"><a href="blog.like.php?id=' . $blogs['id'] . '" class="header" data-tooltip="' . __('Оценили %s', $like) . '" data-position="top center"><i class="fa fa-heart fa-fw"></i> ' . $like . '</a></div></div>';
     }
-    $post->title .= ' <a href="/profile.view.php?id=' . $ank->id . '" class="btn btn-secondary btn-sm" style="float: right;">' . $autor . '</a>';
+    $post->bottom .= '<div class="item"><div class="content"><a href="/profile.view.php?id=' . $ank->id . '" class="header" data-tooltip="' . __('Автор') . '" data-position="top center">' . $autor . '</a></div></a></div>';
+    $post->bottom .= '</div>';
+    $listing->display();
 
     $post_dir_path = H . '/sys/files/.blog/' . $blogs['id'];
     if (@is_dir($post_dir_path)) {
-        $listing_files = new listing();
         $dir = new files($post_dir_path);
         $content = $dir->getList('time_add:asc');
         $files = &$content['files'];
         $count = count($files);
-        for ($i = 0; $i < $count; $i++) {
-            $file = $listing_files->post();
-            $file->title = text::toValue($files[$i]->runame) . ' - ' . misc::getDataCapacity($files[$i]->size) . ' &nbsp; ' . $files[$i]->properties;
-            $file->url = "/files" . $files[$i]->getPath() . ".htm?order=time_add:asc";
-            $file->icon($files[$i]->icon());
-            $file->image = $files[$i]->image();
-        }
+
         if ($files) {
-            $post = $listing->post();
-            $post->title = __('Прикрепленные файлы:');
-            $post->icon('file');
-            $post->highlight = true;
+            $listing = new ui_components();
+            $listing->ui_segment = true; //подключаем css segment
+            $listing->ui_list = true; //подключаем css list
+            $listing->class = 'ui segments';
 
             $post = $listing->post();
-            $post->title = $listing_files->fetch();
+            $post->class = 'ui secondary segment';
+            $post->title = __('Прикрепленные файлы:');
+            $post->icon('file');
+
+            for ($i = 0; $i < $count; $i++) {
+                $post = $listing->post();
+                $post->class = 'ui segment';
+                $post->list = true;
+                $post->title = text::toValue($files[$i]->runame) . ' - <span style="color: green">' . misc::getDataCapacity($files[$i]->size) . '</span> ';
+                $post->url = "/files" . $files[$i]->getPath() . ".htm?order=time_add:asc";
+                $post->icon($files[$i]->icon());
+                $post->image = $files[$i]->image();
+            }
+
+
+            $listing->display();
         }
     }
-    $listing->display();
 
     # Выводим голосования, если есть
     include 'blog.votes.php';
@@ -223,7 +287,11 @@ if ($blogs['block'] == 0) {
         }
     }
 
-    $listing = new listing();
+    $listing = new ui_components();
+    $listing->ui_comment = true; //подключаем css comments
+    $listing->ui_segment = true; //подключаем css segments
+    $listing->class = $dcms->browser_type == 'full' ? 'segments minimal large comments' : 'segments small comments';
+
 
     if (!empty($form)) {
         $listing->setForm($form);
@@ -237,13 +305,28 @@ if ($blogs['block'] == 0) {
     if ($arr = $q->fetchAll()) {
         foreach ($arr AS $message) {
             $anks = new user($message['id_user']);
+
             $post = $listing->post();
-            $post->id = 'blog_comment_' . $message['id'];
+            $post->class = 'ui segment comment';
+            $post->comments = true;
+
+            $post->id = 'chat_post_' . $message['id'];
             $post->url = 'actions.php?idblog=' . $id_blog . '&amp;id=' . $message['id'];
-            $post->time = misc::when($message['time']);
-            $post->title = $anks->nick();
-            $post->image = $anks->getAvatar();
-            $post->post = text::toOutput($message['mess']);
+            $post->avatar = $anks->getAvatar();
+            $post->image_a_class = 'ui avatar';
+            $post->time = misc::timek($message['time']);
+            $post->login = $anks->nick();
+            $post->content = text::toOutput($message['mess']);
+
+            if ($user->group && ($user->id != $anks->id)) {
+                $post->action(false, "?blog=$blogs[id]&amp;message=$message[id]&amp;reply", __('Ответить'));
+            }
+            if ($user->group) {
+                $post->action(false, "?blog=$blogs[id]&amp;message=$message[id]&amp;quote", __('Цитировать'));
+            }
+            if ($user->group >= 2) {
+                $post->action(false, "message.delete.php?idblog=$blogs[id]&amp;id=$message[id]", __('Удалить'));
+            }
 
             if (!$doc->last_modified) {
                 $doc->last_modified = $message['time'];
@@ -258,7 +341,7 @@ if ($blogs['block'] == 0) {
     }
 
     if ($doc instanceof document_json && !$arr) {
-        $post = new listing_post(__('Нет результатов'));
+        $post = new ui_compost(__('Нет результатов'));
         $post->icon('clone');
         $doc->add_post($post);
     }
@@ -270,37 +353,48 @@ if ($blogs['block'] == 0) {
     if ($doc instanceof document_json) {
         $doc->set_pages($pages);
     }
-
-    if ($user->group >= 2 || $user->id == $ank->id) {
-        if ($blogs['id_vote']) {
-            $doc->opt(__('Ред. голосование'), 'vote.edit.php?id=' . $blogs['id']);
-        } else {
-            $doc->opt(__('Создать голосование'), 'vote.new.php?id=' . $blogs['id']);
-        }
-
-        $doc->opt(__('Добавить файл'), 'files.blog.php?id=' . $blogs['id']);
-        $doc->opt(__('Очистить блог'), 'message.delete_all.php?id=' . $blogs['id']);
-    }
 } else {
-    $listing = new listing();
+
+    if ($user->group >= 2) {
+
+        $listing = new ui_components();
+        $listing->ui_menu = true;
+
+        $post = $listing->post();
+        $post->head = '<div class="ui icon menu">
+            <span data-tooltip="' . __('Редактировать блог') . '" data-position="bottom left">
+                <a class="item" href="blog.edit.php?id=' . $blogs['id'] . '"><i class="fa fa-cog fa-fw"></i></a>
+            </span>
+            
+            <span data-tooltip="' . __('Удалить блог') . '" data-position="bottom left">
+                <a class="item" href="blog.delete.php?id=' . $blogs['id'] . '"><i class="fa fa-trash-o fa-fw"></i></a>
+            </span>
+
+            <span data-tooltip="' . __('Разблокировать блог') . '" data-position="bottom left">
+                <a class="item" href="blog.block.php?id=' . $blogs['id'] . '"><i class="fa fa-unlock fa-fw"></i></a>
+            </span>
+        </div>';
+
+        $listing->display();
+    }
+
+    $listing = new ui_components();
+    $listing->ui_segment = true; //подключаем css segments
+    $listing->class = 'ui segments';
+
     $post = $listing->post();
-    $post->hightlight = true;
+    $post->class = 'ui secondary segment';
     $post->icon('book');
     $post->title = __('Запись заблокирована');
-    $post->post = 'Причина блокировки: ' . text::toOutput($blogs['prichina']);
+
+    $post = $listing->post();
+    $post->class = 'ui segment';
+    $post->list = true;
+    $post->title = __('Причина') . ': ' . text::toOutput($blogs['prichina']);
+
     $listing->display();
 }
-if ($user->group >= 2) {
-    if ($blogs['block'] == 0) {
-        $doc->opt(__('Заблокировать'), 'block.blog.php?id=' . $blogs['id']);
-    } else {
 
-        $doc->opt(__('Редактировать'), 'edit.blog.php?id=' . $blogs['id']);
-        $doc->opt(__('Удалить'), 'delete.blog.php?id=' . $blogs['id']);
-        $doc->opt(__('Разблокировать'), 'block.blog.php?id=' . $blogs['id']);
-    }
-}
-
-$doc->act($blogs['cat_name'], 'category.php?id=' . $blogs['id_cat']);
-$doc->act(__('Блоги'), 'index.php');
+$doc->ret($blogs['cat_name'], 'category.php?id=' . $blogs['id_cat']);
+$doc->ret(__('Блоги'), 'index.php');
 ?>

@@ -3,28 +3,34 @@
 include_once '../sys/inc/start.php';
 $doc = new document(1);
 
-
 if (!isset($_GET ['id']) || !is_numeric($_GET ['id'])) {
-    if (isset($_GET ['return']))
+    if (isset($_GET ['return'])) {
         header('Refresh: 1; url=' . $_GET ['return']);
-    else
+    } else {
         header('Refresh: 1; url=./');
+    }
     $doc->err(__('Запись не выбрана'));
     exit();
 }
+
 $id_blog = (int) $_GET ['id'];
+
 $q = $db->prepare("SELECT * FROM `blog` WHERE `id` = ?");
 $q->execute(Array($id_blog));
+
 if (!$blogs = $q->fetch()) {
-    if (isset($_GET ['return']))
+    if (isset($_GET ['return'])) {
         header('Refresh: 1; url=' . $_GET ['return']);
-    else
+    } else {
         header('Refresh: 1; url=./');
+    }
     $doc->err(__('Записи не существует'));
     exit;
 }
 $doc->title = __($blogs['name'] . ' : Голосование');
+
 $autor = new user((int) $blogs['autor']);
+
 if ($autor->id == $user->id || $user->group >= 2) {
     if (!empty($blogs['id_vote'])) {
         $doc->toReturn(new url('/blog/blog.php?blog=' . $blogs['id']));
@@ -61,7 +67,7 @@ if ($autor->id == $user->id || $user->group >= 2) {
                     $res->execute(Array($id_vote, $blogs['id']));
                     $doc->msg('Голосование успешно создано');
 
-                    $dcms->log('Форум', 'Создание голосования в теме [url=/blog/blog.php?blog=' . $blogs['id'] . ']' . $blogs['name'] . '[/url]');
+                    $dcms->log('Блоги', 'Создание голосования в блоге [url=/blog/blog.php?blog=' . $blogs['id'] . ']' . $blogs['name'] . '[/url]');
 
                     if (isset($_GET['return'])) {
                         $doc->ret(__('Вернуться'), text::toValue($_GET['return']));

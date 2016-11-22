@@ -97,10 +97,11 @@ if ($autor->id == $user->id || $user->group >= 2) {
                     $doc->msg(__('Параметры успешно изменены'));
                 }
 
-                if (isset($_GET['return']))
+                if (isset($_GET['return'])) {
                     $doc->ret('В тему', text::toValue($_GET['return']));
-                else
+                } else {
                     $doc->ret(__('Вернуться'), '/blog/blog.php?blog=' . $blogs['id']);
+                }
                 exit;
             }
         }
@@ -115,7 +116,7 @@ if ($autor->id == $user->id || $user->group >= 2) {
     $form->checkbox('finish', __('Окончить голосование'));
     $form->checkbox('clear', __('Начать заново'));
     $form->checkbox('delete', __('Удалить голосование'));
-    $form->button(__('Применить'));
+    $form->button(__('Сохранить'));
     $form->display();
 } else {
     $doc->err(__('Доступ ограничен'));

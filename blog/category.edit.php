@@ -25,7 +25,7 @@ if (isset($_POST['save'])) {
     if (isset($_POST['name']) && isset($_POST['description'])) {
         $name = text::for_name($_POST['name']);
         $description = text::input_text($_POST['description']);
-        
+
         if ($name && $name != $category['name']) {
             $dcms->log('Блоги', 'Изменение названия категории "' . $category['name'] . '" на [url=/blog/category.php?id=' . $category['id'] . ']"' . $name . '"[/url]');
             $category['name'] = $name;
@@ -102,26 +102,26 @@ $options = array();
 foreach ($groups as $type => $value) {
     $options[] = array($type, $value['name'], $type == $category['group_show']);
 }
-$form->select('group_show', __('Просмотр разделов'), $options);
+$form->select('group_show', __('Просмотр разделов'), $options, false);
 
 $options = array();
 foreach ($groups as $type => $value) {
     $options[] = array($type, $value['name'], $type == $category['group_write']);
 }
 
-$form->select('group_write', __('Создание разделов'), $options);
+$form->select('group_write', __('Создание разделов'), $options, false);
 
 $options = array();
 foreach ($groups as $type => $value) {
     $options[] = array($type, $value['name'], $type == $category['group_edit']);
 }
-$form->select('group_edit', __('Изменение параметров'), $options);
+$form->select('group_edit', __('Изменение параметров'), $options, false);
 
 $form->bbcode('* ' . __('Будьте внимательнее при установке доступа выше своего.'));
 $form->button(__('Сохранить'), 'save');
 $form->display();
 
-$doc->opt(__('Оцистить категорию'), 'category.clear.php?id=' . $category['id']);
+$doc->opt(__('Очистить категорию'), 'category.clear.php?id=' . $category['id']);
 $doc->opt(__('Удалить категорию'), 'category.del.php?id=' . $category['id']);
 
 if (isset($_GET['return'])) {

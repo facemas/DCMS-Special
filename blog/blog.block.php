@@ -3,17 +3,22 @@
 include_once '../sys/inc/start.php';
 $doc = new document(2);
 $doc->title = __('Блокировка записи');
+
 if (!isset($_GET ['id']) || !is_numeric($_GET ['id'])) {
-    if (isset($_GET ['return']))
+    if (isset($_GET ['return'])) {
         header('Refresh: 1; url=' . $_GET ['return']);
-    else
+    } else {
         header('Refresh: 1; url=./');
+    }
     $doc->err(__('Запись не выбрана'));
     exit();
 }
+
 $id_blog = (int) $_GET ['id'];
+
 $q = $db->prepare("SELECT * FROM `blog` WHERE `id` = ?");
 $q->execute(Array($id_blog));
+
 if (!$blogs = $q->fetch()) {
     if (isset($_GET ['return'])) {
         header('Refresh: 1; url=' . $_GET ['return']);
@@ -44,12 +49,12 @@ if (isset($_POST['on'])) {
 if ($blogs['block'] == 0) {
     $form = new form('?id=' . $id_blog . '&amp;' . passgen());
     $form->textarea('prichina', __('Причина блокировки'));
-    $form->captcha();
     $form->button(__('Заблокировать'), 'off', false);
     $form->display();
 } else {
     $form = new form('?id=' . $id_blog . '&amp;' . passgen());
-    $form->captcha();
     $form->button(__('Разблокировать'), 'on', false);
     $form->display();
 }
+
+$doc->ret(__('Блоги'), 'index.php');

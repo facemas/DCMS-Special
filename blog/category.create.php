@@ -1,6 +1,7 @@
 <?php
 
 include_once '../sys/inc/start.php';
+
 $doc = new document(5);
 $doc->title = __('Новая категория');
 

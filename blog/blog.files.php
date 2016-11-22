@@ -1,30 +1,39 @@
 <?php
 
 include_once '../sys/inc/start.php';
+
 $doc = new document(1);
+
 $doc->title = __('Файлы');
+
 if (!isset($_GET ['id']) || !is_numeric($_GET ['id'])) {
     if (isset($_GET ['return'])) {
         header('Refresh: 1; url=' . $_GET ['return']);
     } else {
         header('Refresh: 1; url=./');
     }
+
     $doc->err(__('Запись не выбрана'));
     exit();
 }
+
 $id_blog = (int) $_GET ['id'];
+
 $q = $db->prepare("SELECT * FROM `blog` WHERE `id` = ?");
 $q->execute(Array($id_blog));
+
 if (!$blog = $q->fetch()) {
     if (isset($_GET ['return'])) {
         header('Refresh: 1; url=' . $_GET ['return']);
     } else {
         header('Refresh: 1; url=./');
     }
+
     $doc->err(__('Запись не существует'));
     exit;
 }
-$theme = $db->query("SELECT * FROM `blog_cfg` WHERE `id`= '1' ")->fetch();
+
+$b_file = $db->query("SELECT * FROM `blog_cfg` WHERE `id`= '1' ")->fetch();
 $autor = new user((int) $blog['autor']);
 if ($autor->id == $user->id || $user->group >= 2) {
 
@@ -32,7 +41,7 @@ if ($autor->id == $user->id || $user->group >= 2) {
     $blog_dir_path = FILES . '/.blog/' . $id_blog;
     if (!@is_dir($blog_dir_path)) {
         if (!$th_dir = $blog_dir->mkdir(__('Файлы записи #%d', $id_blog), $id_blog)) {
-            $doc->access_denied(__('Не удалось создать папку под файлы Блог'));
+            $doc->access_denied(__('Не удалось создать папку под файлы .blog'));
         }
         $th_dir->group_show = 0;
         $th_dir->group_write = max(1, 2);
@@ -41,13 +50,13 @@ if ($autor->id == $user->id || $user->group >= 2) {
     }
     $dir = new files($blog_dir_path);
     if (!empty($_FILES['file'])) {
-        if ($_FILES['file']['error'])
+        if ($_FILES['file']['error']) {
             $doc->err(__('Ошибка при загрузке'));
-        elseif (!$_FILES['file']['size'])
+        } elseif (!$_FILES['file']['size']) {
             $doc->err(__('Содержимое файла пусто'));
-        elseif ($theme['file'] && $_FILES['file']['size'] > $theme['file'])
+        } elseif ($b_file['file'] && $_FILES['file']['size'] > $b_file['file']) {
             $doc->err(__('Размер файла превышает установленные ограниченияя'));
-        else {
+        } else {
             if ($files_ok = $dir->filesAdd(array($_FILES['file']['tmp_name'] => $_FILES['file']['name']))) {
                 $files_ok[$_FILES['file']['tmp_name']]->id_user = $user->id;
                 $files_ok[$_FILES['file']['tmp_name']]->group_show = $dir->group_show;
@@ -59,13 +68,14 @@ if ($autor->id == $user->id || $user->group >= 2) {
             }
         }
     }
+
     if (isset($_GET['delete'])) {
         $name = text::input_text($_GET['name']);
         if ($dir->is_file($name)) {
             $file = new files_file($blog_dir_path, $name);
             if ($file->delete()) {
-                $doc->err(__('Файл %s успешно удален', $name));
-                header('Refresh: 1; url=/blog/files.blog.php?id=' . $blog['id']);
+                $doc->msg(__('Файл %s успешно удален', $name));
+                header('Refresh: 1; url=/blog/blog.files.php?id=' . $blog['id']);
             }
         }
         exit();
@@ -79,21 +89,22 @@ if ($autor->id == $user->id || $user->group >= 2) {
         $post->image = $file->image();
         $post->title = $file->runame;
         $post->url = "/files{$dir->path_rel}/" . urlencode($file->name) . ".htm";
-        $post->action('delete', "?id=" . $blog['id'] . "&amp;delete&amp;name=" . urlencode($file->name));
+        $post->action('trash-o', "?id=" . $blog['id'] . "&amp;delete&amp;name=" . urlencode($file->name));
         $post->content[] = $file->properties;
     }
     $listing->display(__('Файлы отсутствуют'));
-    $smarty = new design();
-    $smarty->assign('method', 'post');
-    $smarty->assign('files', 1);
-    $smarty->assign('action', "/blog/files.blog.php?id=$blog[id]&amp;" . passgen() . (isset($_GET['return']) ? '&amp;return=' . urlencode($_GET['return']) : null));
+
+    $form = new design();
+    $form->assign('method', 'post');
+    $form->assign('files', 1);
+    $form->assign('action', "/blog/blog.files.php?id=$blog[id]&amp;" . passgen() . (isset($_GET['return']) ? '&amp;return=' . urlencode($_GET['return']) : null));
     $elements = array();
-    $elements[] = array('type' => 'file', 'title' => 'Файл', 'br' => 1, 'info' => array('name' => 'file'));
-    $elements[] = array('type' => 'submit', 'br' => 0, 'info' => array('value' => __('Прикрепить'))); // кнопка
-    $smarty->assign('el', $elements);
-    $smarty->display('input.form.tpl');
+    $elements[] = array('type' => 'file', 'title' => 'Файл', 'br' => 0, 'info' => array('name' => 'file'));
+    $elements[] = array('type' => 'submit', 'br' => 0, 'info' => array('value' => __('Прикрепить'), 'class' => 'tiny ui blue button')); // кнопка
+    $form->assign('el', $elements);
+    $form->display('input.form.tpl');
 } else {
     $doc->err(__('Доступ ограничен'));
 }
-$doc->ret(__('Вернуться к записи'), 'blog.php?blog=' . $blog['id']);
-?>
+
+$doc->ret(__('К записи'), 'blog.php?blog=' . $blog['id']);
