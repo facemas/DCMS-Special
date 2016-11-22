@@ -80,7 +80,11 @@ foreach ($messages AS $message) {
     $doc->description = $message['message'];
 
     $post = $listing->post();
-    $post->class = 'segment comment';
+    if ($message['group_show'] <= 1) {
+        $post->class = 'ui segment comment';
+    } else {
+        $post->class = 'ui secondary segment comment';
+    }
     $post->comments = true;
 
     $post->id = 'message' . $message['id'];
@@ -99,7 +103,7 @@ foreach ($messages AS $message) {
             } else {
                 $post->action(false, "message.edit.php?id=$message[id]&amp;return=" . URL . "&amp;act=show&amp;" . passgen(), __('Показать')); // показ
 
-                $post->bottom = __('Сообщение скрыто');
+                $post->bottom .= __('Сообщение скрыто');
             }
         }
         $post->action(false, "message.edit.php?id=$message[id]&amp;return=" . URL, __('Ред')); // редактирование
