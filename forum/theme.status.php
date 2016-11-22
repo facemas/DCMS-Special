@@ -79,9 +79,9 @@ $form = new form(new url());
 $form->textarea('reason', $is_open ? __('Причина закрытия') : __('Причина открытия'));
 
 if ($is_open) {
-    $form->button(__('Закрыть для обсуждения'), 'close');
+    $form->block('<input type="submit" name="close" value="' . __('Закрыть для обсуждения') . '" class="tiny ui blue button" />');
 } else {
-    $form->button(__('Открыть для обсуждения'), 'open');
+    $form->block('<input type="submit" name="open" value="' . __('Открыть для обсуждения') . '" class="tiny ui blue button" />');
 }
 
 $form->display();
