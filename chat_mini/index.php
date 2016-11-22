@@ -101,7 +101,7 @@ if ($arr = $q->fetchAll()) {
         $post->id = 'chat_post_' . $message['id'];
         $post->url = 'actions.php?id=' . $message['id'];
         $post->avatar = $ank->getAvatar();
-        $post->image_a_class = 'avatar';
+        $post->image_a_class = 'ui avatar';
         $post->time = misc::timek($message['time']);
         $post->login = $ank->nick();
         $post->content = text::toOutput($message['message']);

@@ -31,7 +31,7 @@ $post->time = misc::when($message['time']);
 $post->image = $ank->getAvatar();
 
 $post = $listing->post();
-$post->title = __('Посмотреть анкету');
+$post->title = __('Посмотреть профиль');
 $post->icon('vcard-o');
 $post->url = '/profile.view.php?id=' . $ank->id;
 
@@ -54,7 +54,6 @@ if ($user->group >= 2) {
     $post->icon('trash-o');
     $post->url = 'message.delete.php?id=' . $id_message;
 }
-
 
 $listing->display();
 
