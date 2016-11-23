@@ -90,6 +90,7 @@ while ($category = $q->fetch()) {
 $form->select('topic', __('Раздел'), $options);
 $form->textarea('reason', __('Причина перемещения темы'));
 $form->button(__('Сохранить'), 'save');
+
 $form->display();
 
 $doc->ret(__('Действия'), 'theme.actions.php?id=' . $theme['id']);

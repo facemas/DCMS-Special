@@ -11,11 +11,11 @@ if (!empty($_GET['id_ank']) && !empty($_GET['code'])) {
 
     $codes = new menu_code('code');
 
-    if (!$ank->id)
+    if (!$ank->id) {
         $doc->err(__('Не выбран пользователь'));
-    elseif (!isset($codes->menu_arr[$code]))
+    } elseif (!isset($codes->menu_arr[$code])) {
         $doc->err(__('Не выбрано нарушение'));
-    else {
+    } else {
         $doc->title = __('Жалобы на "%s"', $ank->login);
 
         if (isset($_GET['delete'])) {
@@ -32,7 +32,7 @@ if (!empty($_GET['id_ank']) && !empty($_GET['code'])) {
         $res->execute(Array($ank->id, $code));
         $pages->posts = $res->fetchColumn();
 
-        $q = $db->prepare("SELECT `comment`, `link`, COUNT(*) as `count`, MAX(`time`) as `time` FROM `complaints` WHERE `processed` = '0' AND `id_ank` = ? AND `code` = ? GROUP BY `link` ORDER BY `count` DESC LIMIT ".$pages->limit);
+        $q = $db->prepare("SELECT `comment`, `link`, COUNT(*) as `count`, MAX(`time`) as `time` FROM `complaints` WHERE `processed` = '0' AND `id_ank` = ? AND `code` = ? GROUP BY `link` ORDER BY `count` DESC LIMIT " . $pages->limit);
         $q->execute(Array($ank->id, $code));
         while ($c = $q->fetch()) {
             $post = $listing->post();
@@ -51,7 +51,7 @@ if (!empty($_GET['id_ank']) && !empty($_GET['code'])) {
         $pages->display("?id_ank=$ank->id&amp;code=" . urlencode($c['code']) . '&amp;'); // вывод страниц
 
         $doc->ret(__('Все жалобы'), '?');
-        $doc->ret(__('Админка'), './');
+        $doc->ret(__('Управление'), './');
         exit;
     }
 }
@@ -62,7 +62,7 @@ $res = $db->query("SELECT COUNT(DISTINCT `id_ank`, `code`) FROM `complaints` WHE
 $pages = new pages;
 $pages->posts = $res->fetchColumn();
 
-$q = $db->query("SELECT *, COUNT(*) as `count` FROM `complaints` WHERE `processed` = '0' GROUP BY `id_ank`, `code` ORDER BY `count` DESC LIMIT ".$pages->limit);
+$q = $db->query("SELECT *, COUNT(*) as `count` FROM `complaints` WHERE `processed` = '0' GROUP BY `id_ank`, `code` ORDER BY `count` DESC LIMIT " . $pages->limit);
 if ($arr = $q->fetchAll()) {
     foreach ($arr AS $c) {
         $post = $listing->post();
@@ -77,4 +77,4 @@ if ($arr = $q->fetchAll()) {
 $listing->display(__('Жалобы отсутствуют'));
 
 $pages->display("?");
-$doc->ret(__('Админка'), './');
+$doc->ret(__('Управление'), './');

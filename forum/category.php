@@ -3,7 +3,7 @@
 include_once '../sys/inc/start.php';
 $doc = new document();
 $doc->title = __('Форум');
-$doc->act(__('К категориям'), './');
+$doc->ret(__('К категориям'), './');
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header('Refresh: 1; url=./');
@@ -35,10 +35,10 @@ $q = $db->prepare("SELECT * FROM `forum_topics` WHERE `id_category` = ? AND `gro
 $q->execute(Array($category['id'], $user->group));
 $listing = new listing();
 while ($topics = $q->fetch()) {
-$res = $db->prepare("SELECT COUNT(*) FROM `forum_themes` WHERE `id_topic` = ? AND `group_show` <= ?");
-$res->execute(Array($topics['id'], $user->group));
+    $res = $db->prepare("SELECT COUNT(*) FROM `forum_themes` WHERE `id_topic` = ? AND `group_show` <= ?");
+    $res->execute(Array($topics['id'], $user->group));
     $themesCount = $res->fetchColumn();
-    
+
     $post = $listing->post();
     $post->icon('object-ungroup');
     $post->title = text::toValue($topics['name']);

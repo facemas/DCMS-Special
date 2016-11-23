@@ -79,5 +79,5 @@ if ($topic['group_edit'] <= $user->group) {
     $doc->opt(__('Параметры раздела'), 'topic.edit.php?id=' . $topic['id'] . "&amp;return=" . URL, false, '<i class="fa fa-edit fa-fw"></i>');
 }
 
-$doc->act($topic['category_name'], 'category.php?id=' . $topic['id_category']);
-$doc->act(__('Форум'), './');
+$doc->ret($topic['category_name'], 'category.php?id=' . $topic['id_category']);
+$doc->ret(__('Форум'), './');

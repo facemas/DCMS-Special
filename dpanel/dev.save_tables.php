@@ -53,8 +53,8 @@ foreach ($tables->tables as $table) {
 $form = new form('?' . passgen());
 $form->html($listing->fetch());
 $form->bbcode('[notice] ' . __('Структура и данные таблиц сохранятся в папке sys/preinstall и в дальнейшем могут быть использованы для установки движка с существующими данными'));
-$form->button(__('Структура'), 'create', false);
-$form->button(__('Данные'), 'data', false);
+$form->block('<input type="submit" name="create" value="' . __('Структура') . '" class="tiny ui blue button" />');
+$form->block('<input type="submit" name="data" value="' . __('Данные') . '" class="tiny ui blue button" />');
 $form->display();
 
 $doc->ret(__('Управление'), './');
