@@ -21,13 +21,13 @@ if (@function_exists('ini_set')) {
 /**
  * @const H путь к корневой директории сайта
  */
-if (file_exists($_SERVER ['DOCUMENT_ROOT'] . '/sys/plugins/classes/dcms.class.php')) {
+if (file_exists($_SERVER ['DOCUMENT_ROOT'] . '/sys/classes/dcms.class.php')) {
     define('H', $_SERVER ['DOCUMENT_ROOT']); // корневая директория сайта
 } else {
     /* Если $_SERVER ['DOCUMENT_ROOT'] не является корневой директорией сайта, то будем искать ее вручную */
 
     $rel_path = '';
-    $searched_file = 'sys/plugins/classes/dcms.class.php';
+    $searched_file = 'sys/classes/dcms.class.php';
     for ($i = 0; $i < 10; $i++) {
         if (file_exists($rel_path . $searched_file)) {
             $abs_path = realpath($rel_path . $searched_file);
@@ -140,7 +140,7 @@ if (function_exists('iconv')) {
  * @param string $class_name имя класса
  */
 function dcmsAutoload($class_name) {
-    $path = H . '/sys/plugins/classes/' . strtolower($class_name) . '.class.php';
+    $path = H . '/sys/classes/' . strtolower($class_name) . '.class.php';
     if (file_exists($path)) {
         include_once ($path);
     }
@@ -148,13 +148,7 @@ function dcmsAutoload($class_name) {
 
 spl_autoload_register('dcmsAutoload');
 
-include_once (H . '/sys/plugins/classes/cache.class.php');
-
-require_once (H . '/sys/lib/Twig/Autoloader.php');
-Twig_Autoloader::register();
-
-$loader = new Twig_Loader_Filesystem(H . '/sys/templates');
-$twig = new Twig_Environment($loader);
+include_once (H . '/sys/classes/cache.class.php');
 
 /**
  * Генератор пароля
