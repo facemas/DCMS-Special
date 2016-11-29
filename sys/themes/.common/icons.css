@@ -1,0 +1,65 @@
+.DCMS_icon{
+display: inline-block;
+overflow: hidden;
+background-image: url(/sys/themes/.common/icons.png);
+}
+.DCMS_icon.forum_dot_theme_dot_1_dot_0{
+width: 16px;
+height: 16px;
+background-position: -0px -0px;
+}
+.DCMS_icon.forum_dot_theme_dot_0_dot_1{
+width: 16px;
+height: 16px;
+background-position: -16px -0px;
+}
+.DCMS_icon.forum_dot_theme_dot_1_dot_1{
+width: 16px;
+height: 16px;
+background-position: -32px -0px;
+}
+.DCMS_icon.special{
+width: 16px;
+height: 16px;
+background-position: -48px -0px;
+}
+.DCMS_icon.verify{
+width: 16px;
+height: 16px;
+background-position: -64px -0px;
+}
+.DCMS_icon.forum_dot_theme_dot_0_dot_0{
+width: 16px;
+height: 16px;
+background-position: -80px -0px;
+}
+.DCMS_icon.bb_dot_secure{
+width: 16px;
+height: 16px;
+background-position: -96px -0px;
+}
+.DCMS_icon.bb_dot_change{
+width: 16px;
+height: 16px;
+background-position: -112px -0px;
+}
+.DCMS_icon.bb_dot_del{
+width: 16px;
+height: 16px;
+background-position: -128px -0px;
+}
+.DCMS_icon.bb_dot_fix{
+width: 16px;
+height: 16px;
+background-position: -144px -0px;
+}
+.DCMS_icon.bb_dot_notice{
+width: 16px;
+height: 16px;
+background-position: -160px -0px;
+}
+.DCMS_icon.bb_dot_add{
+width: 16px;
+height: 16px;
+background-position: -176px -0px;
+}

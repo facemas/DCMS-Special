@@ -1,0 +1,14 @@
+[title]Другие bbcode[/title]
+[hr]
+[fix ] : [fix] - fix
+[hr]
+[add ] : [add] - add
+[hr]
+[change ] : [change] - change
+[hr]
+[del ] : [del] - del
+[hr]
+[notice ] : [notice]- notice
+[hr]
+[secure ] : [secure] - secure
+[hr]

@@ -1,0 +1,5 @@
+Order Deny,Allow
+Deny from all
+<Files public.*>
+allow from all
+</Files>

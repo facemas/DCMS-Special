@@ -1,0 +1,8 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule ^bad_?browser(\.html?|\.php)$ badbrowser.php [L]
+</IfModule>
+
+# last upd: 13.07.2015

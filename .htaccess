@@ -1,0 +1,42 @@
+DirectoryIndex index.php index.html
+
+<IfModule mod_php.c>
+    # ограничения на выгрузку файлов
+    php_value upload_max_filesize 100M
+    php_value post_max_size 100M
+
+    ####################################################
+    # отключаем вывод ошибок
+    php_flag display_errors off
+    # так безопаснее
+    php_flag register_globals off
+    # убираем экранирование кавычек
+    php_flag magic_quotes_gpc off
+    # дописываем сессию к URL
+    php_value arg_separator.output &amp;
+    php_flag session.use_trans_sid on
+    php_flag session.cookie_lifetime off
+    # включаем встроенное сжатие
+    #php_flag zlib.output_compression on
+    # решение проблем с кодировкой
+    php_value default_charset UTF-8
+    ####################################################
+</IfModule>
+
+Options -Indexes
+
+# переопределяем страницы ошибок
+ErrorDocument 400 /error.php?err=400
+ErrorDocument 401 /error.php?err=401
+ErrorDocument 402 /error.php?err=402
+ErrorDocument 403 /error.php?err=403
+ErrorDocument 404 /error.php?err=404
+ErrorDocument 500 /error.php?err=500
+ErrorDocument 502 /error.php?err=502
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    RewriteRule ^([^/]+)$ pages/$1 [L,QSA]
+</IfModule>

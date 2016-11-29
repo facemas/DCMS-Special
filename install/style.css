@@ -1,0 +1,108 @@
+body{
+    font-family: Tahoma;
+    font-size: small;
+    background-color: #f9fcff;
+    color: #243E99;
+    padding: 0px;
+    max-width: 320px;
+    margin: 1px auto;
+}
+
+a {
+    color: #243E60;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input[type="submit"] {
+    margin-top: 5px;
+    border-radius: 4px;
+    color: #424242;
+    background-color: #EDEFF3;
+    border: 1px #C3CAE2 solid;
+    border-bottom-color: #B6B6B6;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5), inset 1px 1px 1px rgba(255, 255, 255, 0.5);
+    min-width: 75px;
+    text-shadow: 0 1px #FFF;
+    padding: 3px 6px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    color: #000;
+    background-color: #EEF3FF;
+    border-bottom: 1px #BCC7D6 solid;
+}
+
+input[type="submit"]:disabled {
+    color: #555555;
+    background-color: #F3F3F3;
+    border-bottom: 1px #C7C7C7 solid;
+}
+
+label{
+    line-height: 24px;
+    cursor: pointer;
+}
+
+label:hover{
+    color: #000;
+}
+
+label > input[type="radio"]{
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+label > img{
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+textarea {
+    width: 98%;
+    max-width: 98%;
+    min-width: 98%;
+    height: 4pc;
+    min-height: 4pc;
+    margin: auto;
+}
+
+h1{
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #E0E6FF;
+    font-size: medium;
+    font-weight: bold;
+    border-bottom: 1px #B8CAD8 solid;
+    text-shadow: 0px 1px 0px #FFFFFF;
+}
+
+div.page_foot {
+    text-align: right;
+    margin-top: 2px;
+    border-top: 1px #A8C1CE solid;
+    padding: 2px;
+    background-color: #E0E6FF;
+}
+
+form.form_header{
+    background-color: #E6E6E6;
+    margin: 0;
+    padding: 2px;
+}
+
+form.form_content{
+
+}
+
+div.form_content{
+    margin: 10px 5px;
+    padding: 10px 5px;
+    border-left: 4px solid #CCC;
+}
