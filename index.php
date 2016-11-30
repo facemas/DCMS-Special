@@ -14,3 +14,8 @@ foreach ($widgets as $widget_name => $show) {
     $widget->display(); // отображаем
 }
 
+$event_provider = new sys\dcms\EventProvider();
+$event_provider->push()
+$event_provider->run();
+
+$event_provider = new sys\dcms\EventProvider();
