@@ -8,8 +8,6 @@ $avatar_file_name = $user->id . '.jpg';
 $avatars_path = FILES . '/.avatars'; // папка с аватарами
 $avatars_dir = new files($avatars_path);
 
-
-
 if (!empty($_FILES ['file'])) {
     if ($_FILES ['file'] ['error']) {
         $doc->err(__('Ошибка при загрузке'));
@@ -67,11 +65,11 @@ if ($path = $user->getAvatar($doc->img_max_width())) {
     }
 
     echo "<div class='listing post' style='padding: 5px;'>";
-    echo "<img class='photo' src='" . $path . "' alt='" . __('Мой аватар') . "' /><br />\n";
+    echo "<img class='ui image' src='" . $path . "' alt='" . __('Мой аватар') . "' /><br />\n";
     echo "</div>";
 
     $form = new form('?' . passgen());
-    $form->button(__('Удалить'), 'delete');
+    $form->block('<input type="submit" name="delete" value="' . __('Удалить текущий') . '" class="tiny ui grey button" />');
     $form->display();
 }
 

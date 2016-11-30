@@ -64,10 +64,12 @@ if ($path = $fon->getScreen($doc->img_max_width())) {
         }
     }
 
-    echo "<img class='photo' src='" . $path . "' alt='" . __('Фон профиля') . "' style='max-width: 300px;'/><br />\n";
+    echo "<div class='listing post' style='padding: 5px;'>";
+    echo "<img class='ui image' src='" . $path . "' alt='" . __('Фон профиля') . "' /><br />\n";
+    echo "</div>";
 
     $form = new form('?' . passgen());
-    $form->button(__('Удалить текущий фон'), 'delete');
+    $form->block('<input type="submit" name="delete" value="' . __('Удалить текущий фон') . '" class="tiny ui grey button" />');
     $form->display();
 }
 
