@@ -45,6 +45,14 @@ class table_structure {
         }
     }
 
+    public function loadFromJsonFile($path) {
+        $json = file_get_contents($path);
+        $data = json_decode($json, true);
+        $this->clear();
+        $this->_properties = $data['properties'];
+        $this->_structure = $data['structure'];
+    }
+
     /**
      * получение структуры таблицы из подключенной базы
      * @param string $table Имя таблицы
@@ -111,6 +119,17 @@ class table_structure {
      */
     function saveToIniFile($path) {
         return ini::save($path, array_merge($this->_structure, array('~TABLE~PROPERTIES~' => $this->_properties)), true);
+    }
+
+    public function saveToJsonFile($path) {
+        $data = array(
+            'structure' => $this->_structure,
+            'properties' => $this->_properties
+        );
+
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+        file_put_contents($path, $json);
     }
 
     /**
@@ -276,4 +295,5 @@ class table_structure {
 
         return $sql;
     }
+
 }
