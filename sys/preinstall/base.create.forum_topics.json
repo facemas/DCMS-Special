@@ -1,0 +1,85 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`time_create`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время создания'"
+        },
+        "`time_last`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время обновления (для сортировки)'"
+        },
+        "`id_category`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Категория форума'"
+        },
+        "`name`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Название'"
+        },
+        "`keywords`": {
+            "type": "varchar(1024)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Ключевые слова'"
+        },
+        "`description`": {
+            "type": "text",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Описание раздела'"
+        },
+        "`group_show`": {
+            "type": "smallint(6)",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Права для просмотра раздела'"
+        },
+        "`group_write`": {
+            "type": "smallint(6)",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Права для создания тем в разделе'"
+        },
+        "`group_edit`": {
+            "type": "smallint(6)",
+            "default_and_null": "NOT NULL DEFAULT '4'",
+            "ai": "",
+            "comment": "COMMENT 'Права для редактирования'"
+        },
+        "`theme_view`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Отображать темы в списке новых и обновленных'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "KEY `id_category`": {
+            "fields": "`id_category`"
+        },
+        "KEY `group_show`": {
+            "fields": "`group_show`"
+        }
+    },
+    "properties": {
+        "name": "forum_topics",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Разделы форума'"
+    }
+}

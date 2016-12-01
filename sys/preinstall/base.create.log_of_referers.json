@@ -1,0 +1,31 @@
+{
+    "structure": {
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`id_site`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Идентификатор сайта'"
+        },
+        "`full_url`": {
+            "type": "text",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Полный URL'"
+        },
+        "KEY `id_site`": {
+            "fields": "`id_site`"
+        }
+    },
+    "properties": {
+        "name": "log_of_referers",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Рефералы'"
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_ank`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`read`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": ""
+        },
+        "`count`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": ""
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "my_guests",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Гости пользователя'"
+    }
+}

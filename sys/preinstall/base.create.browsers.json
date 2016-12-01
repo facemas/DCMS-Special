@@ -1,0 +1,37 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`type`": {
+            "type": "enum('light','mobile','full')",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`name`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "UNIQUE KEY `name`": {
+            "fields": "`name`"
+        },
+        "KEY `type`": {
+            "fields": "`type`"
+        }
+    },
+    "properties": {
+        "name": "browsers",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Браузеры'"
+    }
+}

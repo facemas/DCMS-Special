@@ -1,0 +1,67 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`position`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Позиция'"
+        },
+        "`name`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Название'"
+        },
+        "`group_show`": {
+            "type": "smallint(5) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Группа пользователей, которым можно видеть категорию'"
+        },
+        "`group_write`": {
+            "type": "smallint(5) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '4'",
+            "ai": "",
+            "comment": "COMMENT 'Группа пользователей, которым можно создавать разделы'"
+        },
+        "`group_edit`": {
+            "type": "smallint(5) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '5'",
+            "ai": "",
+            "comment": "COMMENT 'Группа пользователей, которым можно изменять параметры категории'"
+        },
+        "`description`": {
+            "type": "varchar(1024)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Описание'"
+        },
+        "`keywords`": {
+            "type": "varchar(1024)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Ключевые слова'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "KEY `position`": {
+            "fields": "`position`"
+        },
+        "KEY `group_show`": {
+            "fields": "`group_show`"
+        }
+    },
+    "properties": {
+        "name": "forum_categories",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Форум - категории'"
+    }
+}

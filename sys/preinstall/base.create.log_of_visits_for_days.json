@@ -1,0 +1,55 @@
+{
+    "structure": {
+        "`time_day`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время на начало суток'"
+        },
+        "`hits_full`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "`hosts_full`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "`hits_light`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "`hosts_light`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "`hits_mobile`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "`hosts_mobile`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "UNIQUE KEY `time_day`": {
+            "fields": "`time_day`"
+        }
+    },
+    "properties": {
+        "name": "log_of_visits_for_days",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Лог посещений по дням'"
+    }
+}

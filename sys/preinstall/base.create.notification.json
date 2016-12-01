@@ -1,0 +1,52 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Пользователь (получатель)'"
+        },
+        "`id_sender`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Отправитель'"
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время отправки'"
+        },
+        "`is_read`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Метка о прочтении'"
+        },
+        "`mess`": {
+            "type": "varchar(1024)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Сообщение'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "KEY `id_user`": {
+            "fields": "`id_user`, `id_sender`"
+        }
+    },
+    "properties": {
+        "name": "notification",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Уведомления'"
+    }
+}

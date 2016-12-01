@@ -1,0 +1,34 @@
+{
+    "structure": {
+        "`id_blog`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "KEY `id_blog`": {
+            "fields": "`id_blog`"
+        },
+        "KEY `id_blog_2`": {
+            "fields": "`id_blog`, `id_user`"
+        }
+    },
+    "properties": {
+        "name": "blog_views",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Просмотры блога'"
+    }
+}

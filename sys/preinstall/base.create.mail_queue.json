@@ -1,0 +1,37 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`to`": {
+            "type": "varchar(128)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`title`": {
+            "type": "varchar(128)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`content`": {
+            "type": "text",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "mail_queue",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Очередь отправляемых писем'"
+    }
+}

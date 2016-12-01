@@ -1,0 +1,316 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": "COMMENT 'Уникальный идентификатор'"
+        },
+        "`vk_id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`vk_first_name`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`vk_last_name`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`group`": {
+            "type": "smallint(6)",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Группа. Определяет уровень доступа'"
+        },
+        "`login`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Логин'"
+        },
+        "`password`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Хэш пароля'"
+        },
+        "`a_code`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Код активации'"
+        },
+        "`recovery_password`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Ключ для восстановления пароля'"
+        },
+        "`sex`": {
+            "type": "enum('1','0')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Пол'"
+        },
+        "`reg_date`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Дата регистрации'"
+        },
+        "`reg_mail`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'E-mail, указанный при регистрации'"
+        },
+        "`last_visit`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Последнее посещение'"
+        },
+        "`avatar`": {
+            "type": "int(1)",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Наличие аватара'"
+        },
+        "`count_visit`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Количество посещений'"
+        },
+        "`conversions`": {
+            "type": "bigint(20) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Количество переходов'"
+        },
+        "`time_shift`": {
+            "type": "tinyint(4)",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Сдвиг времени'"
+        },
+        "`skype`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Skype логин'"
+        },
+        "`email`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Email для анкеты'"
+        },
+        "`name`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Реальное имя'"
+        },
+        "`surname`": {
+            "type": "varchar(100)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Фамилия'"
+        },
+        "`middle_name`": {
+            "type": "varchar(100)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Отчество'"
+        },
+        "`ank_d_r`": {
+            "type": "tinyint(2) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'День рождения'"
+        },
+        "`ank_m_r`": {
+            "type": "tinyint(2) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Месяц рождения'"
+        },
+        "`ank_g_r`": {
+            "type": "smallint(4) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Год рождения'"
+        },
+        "`balls`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Баллы (показатель активности)'"
+        },
+        "`vip_time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Время действия VIP статуса'"
+        },
+        "`rating`": {
+            "type": "float",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Рейтинг пользователя'"
+        },
+        "`mail_new_count`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Количество новых писем'"
+        },
+        "`not_new_count`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Количество новых уведомлений'"
+        },
+        "`friend_new_count`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Количество запросов дружбы'"
+        },
+        "`vis_email`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Показывать Email'"
+        },
+        "`vis_friends`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Отображение списка друзей'"
+        },
+        "`vis_skype`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'отображение логина Skype'"
+        },
+        "`vis_verify`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'отображение верификации'"
+        },
+        "`description`": {
+            "type": "varchar(256)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'О себе'"
+        },
+        "`notice_mention`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'уведомления об упоминании'"
+        },
+        "`notification_forum`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'уведомление на форуме'"
+        },
+        "`language`": {
+            "type": "varchar(32)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Языковой пакет'"
+        },
+        "`mail_only_friends`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "`theme_light`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'light тема'"
+        },
+        "`theme_full`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'full тема'"
+        },
+        "`items_per_page_light`": {
+            "type": "tinyint(3) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '7'",
+            "ai": "",
+            "comment": "COMMENT 'Количество пунктов на одну страницу'"
+        },
+        "`items_per_page_full`": {
+            "type": "tinyint(3) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '30'",
+            "ai": "",
+            "comment": "COMMENT 'Количество пунктов на одну страницу'"
+        },
+        "`theme_mobile`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'тема для i устройств'"
+        },
+        "`items_per_page_mobile`": {
+            "type": "tinyint(3) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '15'",
+            "ai": "",
+            "comment": "COMMENT 'Количество пунктов на одну страницу'"
+        },
+        "`last_time_login`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время посл. изменения логина'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "UNIQUE KEY `login`": {
+            "fields": "`login`"
+        },
+        "KEY `sex`": {
+            "fields": "`sex`"
+        },
+        "KEY `a_code`": {
+            "fields": "`a_code`"
+        },
+        "KEY `reg_date`": {
+            "fields": "`reg_date`"
+        },
+        "KEY `group`": {
+            "fields": "`group`"
+        },
+        "KEY `balls`": {
+            "fields": "`balls`"
+        },
+        "KEY `vk_id`": {
+            "fields": "`vk_id`"
+        }
+    },
+    "properties": {
+        "name": "users",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT=''"
+    }
+}

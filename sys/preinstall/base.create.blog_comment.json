@@ -1,0 +1,46 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(11) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`blog`": {
+            "type": "int(11) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`mess`": {
+            "type": "text",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Сообщение'"
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время создания комментария'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "UNIQUE KEY `id`": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "blog_comment",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Комментарии к блогу'"
+    }
+}

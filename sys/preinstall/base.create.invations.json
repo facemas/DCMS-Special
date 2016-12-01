@@ -1,0 +1,49 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Хозяин пригласительного'"
+        },
+        "`id_invite`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Приглашенный'"
+        },
+        "`code`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'код пригласительного'"
+        },
+        "`time_reg`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время регистрации по пригласительному'"
+        },
+        "`email`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Email, на который отправлен пригласительный'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "invations",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Пригласительные'"
+    }
+}

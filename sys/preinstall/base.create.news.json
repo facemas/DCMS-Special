@@ -1,0 +1,55 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`title`": {
+            "type": "varchar(128)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`text`": {
+            "type": "text",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`sended`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Пометка о рассылке'"
+        },
+        "`id_vote`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "news",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Новости сайта'"
+    }
+}

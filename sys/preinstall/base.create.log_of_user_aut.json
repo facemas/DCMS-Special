@@ -1,0 +1,73 @@
+{
+    "structure": {
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Пользователь'"
+        },
+        "`method`": {
+            "type": "enum('cookie','post','get','vk')",
+            "default_and_null": "NOT NULL DEFAULT 'post'",
+            "ai": "",
+            "comment": "COMMENT 'Метод авторизации'"
+        },
+        "`iplong`": {
+            "type": "bigint(20)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'IP Адрес'"
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время'"
+        },
+        "`id_browser`": {
+            "type": "int(11)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Идентификатор браузера'"
+        },
+        "`status`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Статус'"
+        },
+        "`browser_ua`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Название браузера'"
+        },
+        "`browser_ua`": {
+            "type": "varchar(256)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'User agent'"
+        },
+        "`domain`": {
+            "type": "varchar(20)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Домен'"
+        },
+        "`count`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Кол-во'"
+        },
+        "KEY `id_user`": {
+            "fields": "`id_user`, `iplong`"
+        }
+    },
+    "properties": {
+        "name": "log_of_user_aut",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Лог авторизации'"
+    }
+}

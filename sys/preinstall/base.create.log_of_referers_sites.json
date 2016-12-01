@@ -1,0 +1,46 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`domain`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`time`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`count`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Количество переходов'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "UNIQUE KEY `domain`": {
+            "fields": "`domain`"
+        },
+        "KEY `time`": {
+            "fields": "`time`"
+        },
+        "KEY `count`": {
+            "fields": "`count`"
+        }
+    },
+    "properties": {
+        "name": "log_of_referers_sites",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT=''"
+    }
+}

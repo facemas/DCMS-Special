@@ -1,0 +1,58 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`menu_key`": {
+            "type": "varchar(255)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`id_parent`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`position`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`title`": {
+            "type": "varchar(255)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`url`": {
+            "type": "varchar(255)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`data`": {
+            "type": "blob",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "KEY `key`": {
+            "fields": "`menu_key`"
+        }
+    },
+    "properties": {
+        "name": "menu",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Меню'"
+    }
+}

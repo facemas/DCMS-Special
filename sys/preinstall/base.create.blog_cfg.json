@@ -1,0 +1,31 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(1)",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`file`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`create`": {
+            "type": "enum('0', '1')",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": ""
+        },
+        "UNIQUE KEY `id`": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "blog_cfg",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT=''"
+    }
+}

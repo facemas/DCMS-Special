@@ -1,0 +1,43 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`msg`": {
+            "type": "text",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Комментарий'"
+        },
+        "`time`": {
+            "type": "int(11)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Время'"
+        },
+        "`id_avatar`": {
+            "type": "int(11)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'ID аватара'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        }
+    },
+    "properties": {
+        "name": "avatar_comments",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Комментарии к аватару'"
+    }
+}

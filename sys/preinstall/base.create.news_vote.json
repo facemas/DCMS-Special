@@ -1,0 +1,118 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_autor`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Создатель'"
+        },
+        "`group_view`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '0'",
+            "ai": "",
+            "comment": "COMMENT 'Группа, которой доступен просмотр'"
+        },
+        "`group_vote`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Группа, которой доступно внесение голоса'"
+        },
+        "`active`": {
+            "type": "enum('1','0')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Признак активности'"
+        },
+        "`id_news`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Новость'"
+        },
+        "`name`": {
+            "type": "varchar(1024)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Предмет голосования'"
+        },
+        "`v1`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 1'"
+        },
+        "`v2`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа  2'"
+        },
+        "`v3`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 3'"
+        },
+        "`v4`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 4'"
+        },
+        "`v5`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 5'"
+        },
+        "`v6`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 6'"
+        },
+        "`v7`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 7'"
+        },
+        "`v8`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 8'"
+        },
+        "`v9`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 9'"
+        },
+        "`v10`": {
+            "type": "varchar(32)",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Вариант ответа 10'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "KEY `id_news`": {
+            "fields": "`id_news`"
+        }
+    },
+    "properties": {
+        "name": "news_vote",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT='Голосования к новостям'"
+    }
+}

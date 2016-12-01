@@ -1,0 +1,76 @@
+{
+    "structure": {
+        "`id`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "AUTO_INCREMENT",
+            "comment": ""
+        },
+        "`id_user`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`id_adm`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": ""
+        },
+        "`link`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'ссылка на нарушение'"
+        },
+        "`code`": {
+            "type": "varchar(64)",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Нарушение'"
+        },
+        "`comment`": {
+            "type": "text",
+            "default_and_null": "NOT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Комментарий'"
+        },
+        "`time_start`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Начало действия бана'"
+        },
+        "`time_end`": {
+            "type": "int(10) unsigned",
+            "default_and_null": "DEFAULT NULL",
+            "ai": "",
+            "comment": "COMMENT 'Конец действия бана'"
+        },
+        "`access_view`": {
+            "type": "enum('0','1')",
+            "default_and_null": "NOT NULL DEFAULT '1'",
+            "ai": "",
+            "comment": "COMMENT 'Гостевой доступ'"
+        },
+        "PRIMARY KEY": {
+            "fields": "`id`"
+        },
+        "KEY `id_user`": {
+            "fields": "`id_user`"
+        },
+        "KEY `code`": {
+            "fields": "`code`"
+        },
+        "KEY `link`": {
+            "fields": "`link`"
+        }
+    },
+    "properties": {
+        "name": "ban",
+        "engine": "ENGINE=MyISAM",
+        "auto_increment": "AUTO_INCREMENT=",
+        "comment": "COMMENT=''"
+    }
+}
