@@ -19,6 +19,7 @@ $post->title = __('Все новости');
 $post->counter = $db->query(" SELECT COUNT(*) FROM `news` ")->fetchColumn();
 
 
+
 $week = mktime(0, 0, 0, date('n'), -7);
 $q = $db->prepare("SELECT * FROM `news` WHERE `time` > ? ORDER BY `id` DESC LIMIT 1");
 $q->execute(Array($week));

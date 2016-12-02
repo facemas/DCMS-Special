@@ -6,6 +6,10 @@ $doc->title = __($dcms->title); // локализированое названи
 $doc->head = 'home';
 $widgets = (array) ini::read(H . '/sys/ini/widgets.ini'); // получаем список виджетов
 
+\sys\dcms\EventProvider::make()->registerEvent('test.event',[
+    'type'  =>  'newsview',
+    'time'  =>  time()
+]);
 foreach ($widgets as $widget_name => $show) {
     if (!$show) {
         continue; // если стоит отметка о скрытии, то пропускаем
@@ -14,8 +18,5 @@ foreach ($widgets as $widget_name => $show) {
     $widget->display(); // отображаем
 }
 
-$event_provider = new sys\dcms\EventProvider();
-$event_provider->push()
-$event_provider->run();
 
-$event_provider = new sys\dcms\EventProvider();
+

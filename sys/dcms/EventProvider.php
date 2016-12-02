@@ -3,9 +3,12 @@
 namespace sys\dcms;
 
 use ArrayObject;
+use sys\dcms\Config\Config;
+
 
 class EventProvider
 {
+    use Traits\Singleton;
     /**
      * @var \ArrayObject
      */
@@ -16,33 +19,49 @@ class EventProvider
      */
     private $log_events;
 
-    public function __construct()
+    /*
+
+    private static $i;
+
+    public static function make()
     {
-        if ($this->self) {
-            return $this->self;
+        if (!static::$i) {
+            static::$i = new static;
         }
+        return static::$i;
+    }*/
 
-        $this->self = $this;
-    }
-
-    public function push(EventContract $event)
+    protected function __construct()
     {
-        $this->events->append($event);
-
-        return $this;
+        $this->events = new ArrayObject();
     }
+    
 
-    public function run()
+
+    public function registerEvent($event_key_code, array $params = [])
     {
-        foreach ($this->events as $event)
-        {
-            $event = new $event;
+        $config = Config::make()->get('events');
 
-            if (method_exists($event, 'handle')) {
-                $time_start = microtime(true);
-                $event->handle();
-                $this->logTime($time_start);
+        var_dump($config);
+        if (isset($config[$event_key_code])) {
+            try {
+                $this->run($config[$event_key_code]);
+
+                var_dump($this->getLogs());
+            }catch (\Exception $e) {
+               throw $e;
             }
+        }
+    }
+
+    private function run($events)
+    {
+        foreach ($events as $event)
+        {
+            $event = new \$event;
+            $time_start = microtime(true);
+            var_dump($event->handle());
+            $this->logTime($time_start);
         }
     }
 
@@ -54,6 +73,11 @@ class EventProvider
     public function getLogs()
     {
         return $this->log_events;
+    }
+
+    public function getEvents()
+    {
+        return $this->events;
     }
 
 }

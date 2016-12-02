@@ -141,10 +141,10 @@ if (function_exists('iconv')) {
  */
 function dcmsAutoload($class_name) {
 
-    if (preg_match('/\\/',$class_name)) {
+    if (preg_match('/\\\/',$class_name)) {
         $class = str_replace('\\','/',$class_name);
 
-        $path = $_SERVER['DOCUMENT_ROOT'] . $class . '.php';
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $class . '.php';
 
         if (file_exists($path)) {
             require_once $path;
