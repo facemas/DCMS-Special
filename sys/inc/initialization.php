@@ -140,6 +140,19 @@ if (function_exists('iconv')) {
  * @param string $class_name имя класса
  */
 function dcmsAutoload($class_name) {
+
+    if (preg_match('/\\\/',$class_name)) {
+        $class = str_replace('\\','/',$class_name);
+
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $class . '.php';
+
+        if (file_exists($path)) {
+            require_once $path;
+        } else {
+            throw new Exception("Can not find class $class_name in $path");
+        }
+    }
+
     $path = H . '/sys/plugins/classes/' . strtolower($class_name) . '.class.php';
     if (file_exists($path)) {
         include_once ($path);
